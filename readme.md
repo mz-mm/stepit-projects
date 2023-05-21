@@ -1,1 +1,3 @@
-Repository for Step IT project
+### Projects
+- Sea Battle
+- Todo app
