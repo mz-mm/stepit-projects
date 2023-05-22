@@ -3,8 +3,6 @@
 #include "utils/setup/setup.h"
 #include "utils/game/game.h"
 
-#include <iostream>
-
 int main() {
     const int shipCount = 5;
 
