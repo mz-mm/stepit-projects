@@ -1,3 +1,4 @@
 ### Projects
-- Sea Battle
-- Todo app
+[<kbd style="padding: 10px 20px; border: 1px solid black; border-radius: 5px; background-color: #;">Sea Battle 🚢</kbd>](https://github.com/mzdevI/stepit-projects/tree/c%2B%2B/sea-battle)
+[<kbd style="padding: 10px 20px; border: 1px solid black; border-radius: 5px; background-color: #;">Todo app 📝</kbd>](https://github.com/mzdevI/stepit-projects/tree/c%2B%2B/todo-app)
+
