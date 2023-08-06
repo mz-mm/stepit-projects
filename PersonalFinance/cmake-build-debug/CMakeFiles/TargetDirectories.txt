@@ -1,0 +1,3 @@
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/PersonalFinance/cmake-build-debug/CMakeFiles/PersonalFinance.dir
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/PersonalFinance/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/PersonalFinance/cmake-build-debug/CMakeFiles/rebuild_cache.dir

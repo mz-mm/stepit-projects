@@ -1,0 +1,5 @@
+
+TOP 3 Expenses/Categories:
+Category: Groceries	Total Amount: 200
+Category: Food	Total Amount: 50
+Category: Entertainment	Total Amount: 30

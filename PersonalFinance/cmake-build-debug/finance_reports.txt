@@ -1,0 +1,5 @@
+Expense Report:
+Category: Groceries	Amount: 200	Account Type: Credit Card	Date: 01/08/2023
+Category: Entertainment	Amount: 20	Account Type: Debit Wallet	Date: 01/09/2023
+Category: Food	Amount: 50	Account Type: Debit Wallet	Date: 01/09/2023
+Category: Entertainment	Amount: 10	Account Type: Debit Wallet	Date: 01/09/2023
