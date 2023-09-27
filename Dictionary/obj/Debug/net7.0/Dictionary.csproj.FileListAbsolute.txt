@@ -1,0 +1,15 @@
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/bin/Debug/net7.0/Dictionary
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/bin/Debug/net7.0/Dictionary.deps.json
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/bin/Debug/net7.0/Dictionary.runtimeconfig.json
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/bin/Debug/net7.0/Dictionary.dll
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/bin/Debug/net7.0/Dictionary.pdb
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/Debug/net7.0/Dictionary.csproj.AssemblyReference.cache
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/Debug/net7.0/Dictionary.GeneratedMSBuildEditorConfig.editorconfig
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/Debug/net7.0/Dictionary.AssemblyInfoInputs.cache
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/Debug/net7.0/Dictionary.AssemblyInfo.cs
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/Debug/net7.0/Dictionary.csproj.CoreCompileInputs.cache
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/Debug/net7.0/Dictionary.dll
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/Debug/net7.0/refint/Dictionary.dll
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/Debug/net7.0/Dictionary.pdb
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/Debug/net7.0/Dictionary.genruntimeconfig.cache
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/Debug/net7.0/ref/Dictionary.dll

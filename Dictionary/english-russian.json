@@ -1,0 +1,29 @@
+[
+  {
+    "from": "english",
+    "to": "russian",
+    "words": [
+      {
+        "word": "hello",
+        "sub": "привет",
+        "def": [
+          "greeting"
+        ]
+      },
+      {
+        "word": "house",
+        "sub": "дом",
+        "def": [
+          "residence"
+        ]
+      },
+      {
+        "word": "read",
+        "sub": "читать",
+        "def": [
+          "activity"
+        ]
+      }
+    ]
+  }
+]
