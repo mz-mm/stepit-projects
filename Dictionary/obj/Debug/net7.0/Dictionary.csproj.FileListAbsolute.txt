@@ -13,3 +13,5 @@
 /Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/Debug/net7.0/Dictionary.pdb
 /Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/Debug/net7.0/Dictionary.genruntimeconfig.cache
 /Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/Debug/net7.0/ref/Dictionary.dll
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/bin/Debug/net7.0/CsvHelper.dll
+/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/Debug/net7.0/Dictionary.csproj.CopyComplete
