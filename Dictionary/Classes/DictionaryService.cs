@@ -15,7 +15,7 @@ public class DictionaryService
     public DictionaryService(string currentDir, string fromTranslation, string toTranslation)
     {
         if (fromTranslation == toTranslation)
-            throw new Exception("fromTranslation and toTranslation should not be the same");
+            throw new ArgumentException("fromTranslation and toTranslation should not be the same");
 
         _path = currentDir + $"{fromTranslation.ToLower()}-{toTranslation.ToLower()}.csv";
         using var fileStream = new FileStream(_path, FileMode.CreateNew);
@@ -33,7 +33,7 @@ public class DictionaryService
         // Turns each row in the csv file into a WordDictionary objects and converts that into a list
         foreach (var dict in csvReader.GetRecords<WordDictionary>().ToList())
         {
-            _wordDictionary.Add(dict.Word, new Translation(dict.TranslatedWord, dict.Definiation.Split(";").ToList()));
+            _wordDictionary.Add(dict.Word, new Translation(dict.TranslatedWord, dict.Definition.Split(";").ToList()));
         }
     }
 
@@ -49,24 +49,21 @@ public class DictionaryService
     {
         _wordDictionary.Remove(oldWord);
         _wordDictionary.Add(newWord, translation);
-        HelperAddWordToDictionary(new KeyValuePair<string, Translation>(newWord, _wordDictionary[newWord]));
+        HelperRewriteDictionary(_wordDictionary);
     }
 
 
     public void DeleteWordFromDictionary(string word)
     {
         _wordDictionary.Remove(word);
-
-        foreach (var dict in _wordDictionary)
-        {
-            HelperAddWordToDictionary(dict);
-        }
+        HelperRewriteDictionary(_wordDictionary);
     }
 
 
     // Helper function to write to the .csv file
     private void HelperAddWordToDictionary(KeyValuePair<string, Translation> dict)
     {
+        
         using var fileStream = new FileStream(_path, FileMode.Append);
         using var streamWriter = new StreamWriter(fileStream);
         using var csvWriter = new CsvWriter(streamWriter, CultureInfo.CurrentCulture);
@@ -75,6 +72,22 @@ public class DictionaryService
         csvWriter.WriteField(dict.Value.TranslationWord);
         csvWriter.WriteField(string.Join(";", dict.Value.Definitions));
         csvWriter.NextRecord();
+    }
+    
+    private void HelperRewriteDictionary(SortedDictionary<string, Translation> dictionary)
+    {
+        
+        using var fileStream = new FileStream(_path, FileMode.Create);
+        using var streamWriter = new StreamWriter(fileStream);
+        using var csvWriter = new CsvWriter(streamWriter, CultureInfo.CurrentCulture);
+
+        foreach (var dict in dictionary)
+        {
+            csvWriter.WriteField(dict.Key);
+            csvWriter.WriteField(dict.Value.TranslationWord);
+            csvWriter.WriteField(string.Join(";", dict.Value.Definitions));
+            csvWriter.NextRecord();
+        }
     }
 
 
