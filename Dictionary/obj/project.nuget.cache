@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "TQ4pooDTngeTi30fQgu81lU549lBoVIO1zctWWl05UMgqe25dlGNR/EKSFMc16l3JPf/c5ZGPpDbOlW4x8T+vg==",
+  "dgSpecHash": "3pawSVLU0nvpP5X3HhllLJsgYqNg5Dlxwg44SzNu7cl2rAxIK+nesdPCU2Wb0xlRzeKvTV7ymekbphS56kf9CQ==",
   "success": true,
-  "projectFilePath": "/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/Dictionary.csproj",
+  "projectFilePath": "C:\\Users\\Muhammed\\Developer\\stepit-projects\\Dictionary\\Dictionary.csproj",
   "expectedPackageFiles": [
-    "/Users/muhammedmammadhuseynov/.nuget/packages/csvhelper/30.0.1/csvhelper.30.0.1.nupkg.sha512"
+    "C:\\Users\\Muhammed\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512"
   ],
   "logs": []
 }

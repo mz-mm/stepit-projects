@@ -11,6 +11,10 @@ public class Menu
     {
         _currentDir = currentDir;
         _dictionaries = dictionaries;
+    }
+
+    public void Run()
+    {
         LoadDictionaries();
         MenuUi();
     }
@@ -107,7 +111,7 @@ public class Menu
 
                         var searchedWord = Console.ReadLine();
                         var definition = _dictionaries[_loadedDictionaries[dictionaryChoice]][searchedWord];
-                        
+
                         Console.WriteLine(definition.TranslationWord);
 
                         for (var i = 0; i < definition.Definitions.Count; i++)
