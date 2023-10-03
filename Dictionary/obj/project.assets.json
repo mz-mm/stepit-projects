@@ -49,24 +49,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Muhammed\\.nuget\\packages\\": {}
+    "/Users/muhammedmammadhuseynov/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Muhammed\\Developer\\stepit-projects\\Dictionary\\Dictionary.csproj",
+      "projectUniqueName": "/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/Dictionary.csproj",
       "projectName": "Dictionary",
-      "projectPath": "C:\\Users\\Muhammed\\Developer\\stepit-projects\\Dictionary\\Dictionary.csproj",
-      "packagesPath": "C:\\Users\\Muhammed\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Muhammed\\Developer\\stepit-projects\\Dictionary\\obj\\",
+      "projectPath": "/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/Dictionary.csproj",
+      "packagesPath": "/Users/muhammedmammadhuseynov/.nuget/packages/",
+      "outputPath": "/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Muhammed\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/muhammedmammadhuseynov/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -106,7 +107,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\Muhammed\\.dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
       }
     }
   }
