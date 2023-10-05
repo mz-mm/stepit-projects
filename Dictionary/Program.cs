@@ -1,7 +1,7 @@
 ﻿using Dictionary;
 
 var config = new Config(
-    currentDir: "/Users/muhammedmammadhuseynov/Developer/stepit-projects/Dictionary/Data/", 
+    currentDir: "../../../Data/", 
     dictionaries: new SortedDictionary<string, DictionaryService>()
     );
 

@@ -5,7 +5,7 @@ public class DictionaryUI
     private readonly Dictionary<string, Action> _menuEditOptions = new();
     private readonly Config _config;
     private int _dictionaryChoice;
-    
+
     public DictionaryUI(Config config, int dictionaryChoice)
     {
         _config = config;
@@ -19,16 +19,14 @@ public class DictionaryUI
         _config = config;
         CreateDictionary();
     }
-    
-    
-    
+
     private void ConfigMenuOptions()
     {
         _menuEditOptions.Add("Add a word to dictionary", AddDictionaryWord);
         _menuEditOptions.Add("Edit word in dictionary", EditDictionaryWord);
         _menuEditOptions.Add("Remove word in dictionary", RemoveDictionaryWord);
     }
-    
+
     private void Ui()
     {
         while (true)
@@ -68,20 +66,21 @@ public class DictionaryUI
                     Console.Clear();
 
                     Console.WriteLine("0. Back");
-                    for (var i = 1; i < _menuEditOptions.Count+1; i++)
+                    for (var i = 1; i < _menuEditOptions.Count + 1; i++)
                     {
-                        Console.WriteLine($"{i}. {_menuEditOptions.Keys.ElementAt(i-1)}");
+                        Console.WriteLine($"{i}. {_menuEditOptions.Keys.ElementAt(i - 1)}");
                     }
-                    
+
                     if (!int.TryParse(Console.ReadLine(), out choice))
                     {
                         Console.WriteLine("Invalid input. Please enter a valid choice.");
                         continue;
                     }
-                    
+
                     if (choice == 0) break;
 
-                    if (_menuEditOptions.TryGetValue(_menuEditOptions.Keys.ElementAt(choice-1), out var selectedOption))
+                    if (_menuEditOptions.TryGetValue(_menuEditOptions.Keys.ElementAt(choice - 1),
+                            out var selectedOption))
                     {
                         selectedOption.Invoke();
                     }
@@ -89,7 +88,7 @@ public class DictionaryUI
                     {
                         Console.WriteLine("Invalid choice. Please select a valid option.");
                     }
-                    
+
                     break;
 
                 default:
@@ -107,7 +106,6 @@ public class DictionaryUI
 
         Console.WriteLine("Enter dictionary language to translate to");
         var toTranslation = Console.ReadLine();
-
 
         if (fromTranslation != null && toTranslation != null)
         {
@@ -152,15 +150,15 @@ public class DictionaryUI
         for (var i = 0; i < definition.Definitions.Count; i++)
         {
             Console.WriteLine($"{definition.Definitions[i]} [{i}]");
-        } 
+        }
     }
-    
+
     private void AddDictionaryWord()
     {
         Console.Clear();
-        var word = PromptUserInput(
+        var word = UserInput.Prompt(
             $"Enter word to add to {_config.LoadedDictionariesNames[_dictionaryChoice]}: ");
-        var translation = PromptUserInput("Enter translation: ");
+        var translation = UserInput.Prompt("Enter translation: ");
 
         Console.Write("How many definitions does the word have: ");
         var definitionsCount = int.Parse(Console.ReadLine());
@@ -169,7 +167,7 @@ public class DictionaryUI
 
         for (var i = 0; i < definitionsCount; i++)
         {
-            var item = PromptUserInput($"Enter definition [{i}]: ");
+            var item = UserInput.Prompt($"Enter definition [{i}]: ");
             definitions.Add(item);
         }
 
@@ -181,10 +179,10 @@ public class DictionaryUI
     {
         Console.Clear();
         var oldWord =
-            PromptUserInput($"Enter word to edit in {_config.LoadedDictionariesNames[_dictionaryChoice]}: ");
-        var newWord = PromptUserInput($"Enter new word to replace: ");
+            UserInput.Prompt($"Enter word to edit in {_config.LoadedDictionariesNames[_dictionaryChoice]}: ");
+        var newWord = UserInput.Prompt($"Enter new word to replace: ");
 
-        var translation = PromptUserInput("Enter new translation: ");
+        var translation = UserInput.Prompt("Enter new translation: ");
 
         Console.Write("How many definitions does the word have: ");
         var definitionsCount = int.Parse(Console.ReadLine());
@@ -193,7 +191,7 @@ public class DictionaryUI
 
         for (var i = 0; i < definitionsCount; i++)
         {
-            var item = PromptUserInput($"Enter definition [{i}]: ");
+            var item = UserInput.Prompt($"Enter definition [{i}]: ");
             definitions.Add(item);
         }
 
@@ -204,26 +202,8 @@ public class DictionaryUI
     private void RemoveDictionaryWord()
     {
         Console.Clear();
-        var word = PromptUserInput(
+        var word = UserInput.Prompt(
             $"Enter word to delete in {_config.LoadedDictionariesNames[_dictionaryChoice]}: ");
         _config.Dictionaries[_config.LoadedDictionariesNames[_dictionaryChoice]].DeleteWordFromDictionary(word);
-    }
-
-    private static string PromptUserInput(string message)
-    {
-        string userInput;
-        do
-        {
-            Console.Clear();
-            Console.Write(message);
-            userInput = Console.ReadLine();
-
-            if (userInput == null)
-            {
-                Console.WriteLine("Input cannot be null.");
-            }
-        } while (userInput == null);
-
-        return userInput;
     }
 }
