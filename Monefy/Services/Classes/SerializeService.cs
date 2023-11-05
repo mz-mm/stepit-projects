@@ -1,6 +1,7 @@
 ﻿using Monefy.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Monefy.Services.Classes;
 
 public class SerializeService : ISerializeService
 {
-    public void Serialize<T>(string path, List<T> List)
+    public void Serialize<T>(string path, ObservableCollection<T> List)
     {
         using var fileStream = new FileStream(path, FileMode.Truncate);
         JsonSerializer.Serialize(fileStream, List);

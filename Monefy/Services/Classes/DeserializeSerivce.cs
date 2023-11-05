@@ -1,6 +1,7 @@
 ﻿using Monefy.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Monefy.Services.Classes;
 
 public class DeserializeSerivce : IDeserializeService
 {
-    public List<T> Deserialize<T>(string path)
+    public ObservableCollection<T> Deserialize<T>(string path)
     {
         try
         {
@@ -19,7 +20,7 @@ public class DeserializeSerivce : IDeserializeService
             using var streamReader = new StreamReader(fileStream);
 
             var json = streamReader.ReadToEnd();
-            var result = JsonSerializer.Deserialize<List<T>>(json);
+            var result = JsonSerializer.Deserialize<ObservableCollection<T>>(json);
 
             if (result != null)
             {
@@ -27,12 +28,12 @@ public class DeserializeSerivce : IDeserializeService
             }
             else
             {
-                return new List<T>();
+                return new ObservableCollection<T>();
             }
         }
         catch (JsonException ex)
         {
-            return new List<T>();
+            return new ObservableCollection<T>();
         }
     }
 }

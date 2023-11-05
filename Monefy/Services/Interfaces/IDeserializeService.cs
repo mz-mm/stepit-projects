@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,6 @@ namespace Monefy.Services.Interfaces;
 
 public interface IDeserializeService
 {
-    public List<T> Deserialize<T>(string path); 
+    public ObservableCollection<T> Deserialize<T>(string path); 
 
 }

@@ -3,6 +3,8 @@ using Monefy.Models.Interfaces;
 using Monefy.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +16,16 @@ public class TransactionService : ITransactionsService
     private IDeserializeService _deserializeService;
     private ISerializeService _serializeService;
 
-    private List<ITransaction> _transactions;
+    private ObservableCollection<ITransaction> _transactions;
+    public ObservableCollection<ITransaction> Transactions
+    {
+        get => _transactions;
+        set
+        {
+            _transactions = value;
+            OnPropertyChanged(nameof(Transactions));
+        }
+    }
     private const string TransactionDatabasePath = "TransactionDB.json";
 
     public TransactionService(IDeserializeService deserializeService, ISerializeService serializeService)
@@ -44,22 +55,32 @@ public class TransactionService : ITransactionsService
     }
 
     // Get all transactions
-    public List<ITransaction> GetAllTransactions()
+    public ObservableCollection<ITransaction> GetAllTransactions()
     {
-        _transactions.Sort((transactionOne, transactionTwo) => transactionOne.Date.CompareTo(transactionTwo.Date));
-        return _transactions;
+        var sortedTransactions = new ObservableCollection<ITransaction>(_transactions.OrderBy(t => t.Date));
+        return sortedTransactions;
     }
 
     // Get all expense transactions
-    public List<ExpenseTransaction> GetAllExepenseTransaction()
+    public ObservableCollection<ExpenseTransaction> GetAllExepenseTransaction()
     {
-        return _transactions.OfType<ExpenseTransaction>().ToList();
+        var expenseTransactions = new ObservableCollection<ExpenseTransaction>(_transactions.OfType<ExpenseTransaction>());
+        return expenseTransactions;
     }
+
 
     // Get all income transactions
-    public List<IncomeTransaction> GetAllIncomeTransactions()
+    public ObservableCollection<IncomeTransaction> GetAllIncomeTransactions()
     {
-        return _transactions.OfType<IncomeTransaction>().ToList();
+        var incomeTransactions = new ObservableCollection<IncomeTransaction>(_transactions.OfType<IncomeTransaction>());
+        return incomeTransactions;
     }
 
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }

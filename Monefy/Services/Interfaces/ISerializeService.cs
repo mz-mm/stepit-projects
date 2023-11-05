@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,5 @@ namespace Monefy.Services.Interfaces;
 
 public interface ISerializeService
 {
-    public void Serialize<T>(string path, List<T> List);
+    public void Serialize<T>(string path, ObservableCollection<T> List);
 }
