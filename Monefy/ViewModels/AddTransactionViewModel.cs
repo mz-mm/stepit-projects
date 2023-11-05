@@ -24,8 +24,10 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
     private List<string> _availableCategories;
 
     private readonly INavigationService _navigationService;
+    private readonly ITransactionsService _transactionsService;
 
     public event PropertyChangedEventHandler PropertyChanged;
+
 
     public string Description
     {
@@ -38,6 +40,7 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
         get => _amount;
         set => Set(ref _amount, value);
     }
+
 
     public bool IsExpenseChecked
     {
@@ -97,9 +100,11 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
         }
     }
 
-    public AddTransactionViewModel(INavigationService navigationService)
+    public AddTransactionViewModel(INavigationService navigationService, ITransactionsService transactionsService)
     {
         _navigationService = navigationService;
+        _transactionsService = transactionsService;
+
         UpdateAvailableCategories();
     }
 
@@ -138,7 +143,7 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
                 IncomeCategory incomeCategory;
                 Enum.TryParse(_selectedCategory, out incomeCategory);
 
-                App.Container.GetInstance<TransactionService>().AddTransaction(
+                _transactionsService.AddTransaction(
                     new IncomeTransaction(
                         description: _description,
                         amount: Convert.ToDouble(_amount),
@@ -151,7 +156,7 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
                 ExpenseCategory expenseCategory;
                 Enum.TryParse(_selectedCategory, out expenseCategory);
 
-                App.Container.GetInstance<TransactionService>().AddTransaction(
+                _transactionsService.AddTransaction(
                     new ExpenseTransaction(
                         description: _description,
                         amount: Convert.ToDouble(_amount),

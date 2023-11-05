@@ -47,7 +47,6 @@ public class HomeViewModel : ViewModelBase
         _navigationService = navigationService;
     }
 
-
     public ButtonCommand AddTransactionCommand
     {
         get => new(() =>

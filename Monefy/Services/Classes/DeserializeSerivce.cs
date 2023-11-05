@@ -1,11 +1,11 @@
 ﻿using Monefy.Services.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Monefy.Services.Classes;
@@ -20,7 +20,7 @@ public class DeserializeSerivce : IDeserializeService
             using var streamReader = new StreamReader(fileStream);
 
             var json = streamReader.ReadToEnd();
-            var result = JsonSerializer.Deserialize<ObservableCollection<T>>(json);
+            var result = JsonConvert.DeserializeObject<ObservableCollection<T>>(json);
 
             if (result != null)
             {

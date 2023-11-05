@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\muhammedmammadhuseyn\Developer\stepit-projects\Monefy\obj\Debug\net6.0-windows\
+C:\Users\mamma_ms85\stepit-projects\Monefy\obj\Debug\net6.0-windows\
 Monefy
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\muhammedmammadhuseyn\Developer\stepit-projects\Monefy\App.xaml
+C:\Users\mamma_ms85\stepit-projects\Monefy\App.xaml
 4-798260431
 
 30-375110011
-199-150935595
+200-293293760
 Views\AddTransactionView.xaml;Views\AnalyticsView.xaml;Views\HomeView.xaml;Views\MainView.xaml;
 
-True
+False
 

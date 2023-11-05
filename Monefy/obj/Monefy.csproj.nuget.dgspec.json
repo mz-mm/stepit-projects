@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\muhammedmammadhuseyn\\Developer\\stepit-projects\\Monefy\\Monefy.csproj": {}
+    "C:\\Users\\mamma_ms85\\stepit-projects\\Monefy\\Monefy.csproj": {}
   },
   "projects": {
-    "C:\\Users\\muhammedmammadhuseyn\\Developer\\stepit-projects\\Monefy\\Monefy.csproj": {
+    "C:\\Users\\mamma_ms85\\stepit-projects\\Monefy\\Monefy.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\muhammedmammadhuseyn\\Developer\\stepit-projects\\Monefy\\Monefy.csproj",
+        "projectUniqueName": "C:\\Users\\mamma_ms85\\stepit-projects\\Monefy\\Monefy.csproj",
         "projectName": "Monefy",
-        "projectPath": "C:\\Users\\muhammedmammadhuseyn\\Developer\\stepit-projects\\Monefy\\Monefy.csproj",
-        "packagesPath": "C:\\Users\\muhammedmammadhuseyn\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\muhammedmammadhuseyn\\Developer\\stepit-projects\\Monefy\\obj\\",
+        "projectPath": "C:\\Users\\mamma_ms85\\stepit-projects\\Monefy\\Monefy.csproj",
+        "packagesPath": "C:\\Users\\mamma_ms85\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mamma_ms85\\stepit-projects\\Monefy\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\muhammedmammadhuseyn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mamma_ms85\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -48,6 +52,10 @@
               "target": "Package",
               "version": "[5.4.1.1, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
             "SimpleInjector": {
               "target": "Package",
               "version": "[5.4.1, )"
@@ -72,7 +80,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

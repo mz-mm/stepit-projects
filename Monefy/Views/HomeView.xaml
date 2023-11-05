@@ -31,23 +31,14 @@
                 <Button Command="{Binding AddTransactionCommand}" Height="40" Grid.Column="3" Margin="0,0,0,0">Add Transaction</Button>
             </Grid>
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <ListView>
+                <ListView ItemsSource="{Binding Transactions}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Column 1" Width="100">
-                                <!-- Define your item content for Column 1 here -->
+                            <GridViewColumn>
+                                <Label Content="{Binding Transactions.Description>}"/>
                             </GridViewColumn>
-                            <GridViewColumn Header="Column 2" Width="150">
-                                <!-- Define your item content for Column 2 here -->
-                            </GridViewColumn>
-                            <!-- Add more columns as needed -->
                         </GridView>
                     </ListView.View>
-
-                    <!-- Define your list view items here -->
-                    <ListViewItem>Item 1</ListViewItem>
-                    <ListViewItem>Item 2</ListViewItem>
-                    <!-- Add more items as needed -->
                 </ListView>
             </ScrollViewer>
         </StackPanel>
