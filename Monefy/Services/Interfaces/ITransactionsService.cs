@@ -1,5 +1,4 @@
-﻿using Monefy.Models.Classes;
-using Monefy.Models.Interfaces;
+﻿using Monefy.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,21 +10,18 @@ namespace Monefy.Services.Interfaces;
 
 public interface ITransactionsService
 {
-    public ObservableCollection<ITransaction> Transactions { get; set; }
+    public ObservableCollection<Transaction> Transactions { get; set; }
 
     // Add a transaction
-    public ITransaction AddTransaction(ITransaction transaction);
+    public Transaction AddTransaction(Transaction transaction);
 
     // remove a transaction
-    public ITransaction RemoveTransaction(ITransaction transaction);
-
-    // Get all transactions
-    public ObservableCollection<ITransaction> GetAllTransactions();
+    public Transaction RemoveTransaction(Transaction transaction);
 
     // Get all expense transactions
-    public ObservableCollection<ExpenseTransaction> GetAllExepenseTransaction();
+    public List<Transaction> GetAllExepenseTransaction();
 
     // Get all income transactions
-    public ObservableCollection<IncomeTransaction> GetAllIncomeTransactions();
+    public List<Transaction> GetAllIncomeTransactions();
 
 }

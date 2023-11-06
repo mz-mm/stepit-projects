@@ -1,4 +1,4 @@
-﻿using Monefy.Models.Interfaces;
+﻿using Monefy.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

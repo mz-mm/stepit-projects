@@ -7,10 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Monefy.Services.Classes;
-using Monefy.Models.Classes;
-using Monefy.Models.Interfaces;
 using System.DirectoryServices;
 using Monefy.Services.Interfaces;
+using Monefy.Models;
 
 namespace Monefy.ViewModels;
 
@@ -144,7 +143,7 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
                 Enum.TryParse(_selectedCategory, out incomeCategory);
 
                 _transactionsService.AddTransaction(
-                    new IncomeTransaction(
+                    new Transaction(
                         description: _description,
                         amount: Convert.ToDouble(_amount),
                         category: incomeCategory
@@ -157,7 +156,7 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
                 Enum.TryParse(_selectedCategory, out expenseCategory);
 
                 _transactionsService.AddTransaction(
-                    new ExpenseTransaction(
+                    new Transaction(
                         description: _description,
                         amount: Convert.ToDouble(_amount),
                         category: expenseCategory

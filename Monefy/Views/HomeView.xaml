@@ -35,12 +35,21 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn>
-                                <Label Content="{Binding Description>}"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="{Binding Description}"/>
+                                            <Label Content="{Binding Category}"/>
+                                            <Label Content="{Binding Amount}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>
             </ScrollViewer>
+
         </StackPanel>
     </Grid>
 </UserControl>

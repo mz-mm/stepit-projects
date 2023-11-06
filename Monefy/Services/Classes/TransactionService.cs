@@ -1,13 +1,12 @@
-﻿using Monefy.Models.Classes;
-using Monefy.Models.Interfaces;
+﻿using MaterialDesignThemes.Wpf;
+using Monefy.Enums;
+using Monefy.Models;
 using Monefy.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monefy.Services.Classes;
 
@@ -16,8 +15,8 @@ public class TransactionService : ITransactionsService
     private IDeserializeService _deserializeService;
     private ISerializeService _serializeService;
 
-    private ObservableCollection<ITransaction> _transactions;
-    public ObservableCollection<ITransaction> Transactions
+    private ObservableCollection<Transaction> _transactions;
+    public ObservableCollection<Transaction> Transactions
     {
         get => _transactions;
         set
@@ -33,10 +32,10 @@ public class TransactionService : ITransactionsService
         _deserializeService = deserializeService;
         _serializeService = serializeService;
 
-        _transactions = _deserializeService.Deserialize<ITransaction>(TransactionDatabasePath) ?? new ObservableCollection<ITransaction>();
+        _transactions = _deserializeService.Deserialize<Transaction>(TransactionDatabasePath) ?? new ObservableCollection<Transaction>();
     }
 
-    public ITransaction AddTransaction(ITransaction transaction)
+    public Transaction AddTransaction(Transaction transaction)
     {
         _transactions.Add(transaction);
         _serializeService.Serialize(TransactionDatabasePath, _transactions);
@@ -44,7 +43,7 @@ public class TransactionService : ITransactionsService
         return transaction;
     }
 
-    public ITransaction RemoveTransaction(ITransaction transaction)
+    public Transaction RemoveTransaction(Transaction transaction)
     {
         _transactions.Remove(transaction);
         _serializeService.Serialize(TransactionDatabasePath, _transactions);
@@ -52,25 +51,31 @@ public class TransactionService : ITransactionsService
         return transaction;
     }
 
-    public ObservableCollection<ITransaction> GetAllTransactions()
+    public ObservableCollection<Transaction> GetAllTransactions()
     {
-        var sortedTransactions = new ObservableCollection<ITransaction>(_transactions.OrderBy(t => t.Date));
-        return sortedTransactions;
+     
+        return new ObservableCollection<Transaction>(_transactions.OrderBy(t => t.Date));
     }
 
-    public ObservableCollection<ExpenseTransaction> GetAllExepenseTransaction()
+    public List<Transaction> GetAllExepenseTransaction()
     {
-        var expenseTransactions = new ObservableCollection<ExpenseTransaction>(_transactions.OfType<ExpenseTransaction>());
+        var expenseTransactions = _transactions.Where(item =>
+        {
+            return Enum.TryParse(item.Category, out ExpenseCategory category);
+        }).ToList();
+
         return expenseTransactions;
     }
 
-
-    public ObservableCollection<IncomeTransaction> GetAllIncomeTransactions()
+    public List<Transaction> GetAllIncomeTransactions()
     {
-        var incomeTransactions = new ObservableCollection<IncomeTransaction>(_transactions.OfType<IncomeTransaction>());
+        var incomeTransactions = _transactions.Where(item =>
+        {
+            return Enum.TryParse(item.Category, out ExpenseCategory category);
+        }).ToList();
+
         return incomeTransactions;
     }
-
 
     public event PropertyChangedEventHandler PropertyChanged;
 

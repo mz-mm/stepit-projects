@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
-using Monefy.Models.Interfaces;
+using Monefy.Models;
 using Monefy.Services.Classes;
 using Monefy.Services.Interfaces;
 using System;
@@ -13,9 +13,9 @@ namespace Monefy.ViewModels;
 public class HomeViewModel : ViewModelBase
 {
     private readonly INavigationService _navigationService;
-    private ObservableCollection<ITransaction> _transactions;
+    private ObservableCollection<Transaction> _transactions;
 
-    public ObservableCollection<ITransaction> Transactions
+    public ObservableCollection<Transaction> Transactions
     {
         get => _transactions;
         set
