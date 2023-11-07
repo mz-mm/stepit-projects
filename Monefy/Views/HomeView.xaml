@@ -14,8 +14,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1">
-            <Label FontSize="14" FontWeight="Medium">Total Amount</Label>
+            <Label FontSize="14" FontWeight="Medium">Current Balance</Label>
             <Label FontSize="42" FontWeight="Medium">USD$ 3.050,00</Label>
+
             <Grid Margin="0,0,0,28">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -25,14 +26,25 @@
                 </Grid.ColumnDefinitions>
 
                 <Border Height="40" Grid.Column="0" Margin="0,0,12,0" Background="#FAFAFA" CornerRadius="4" >
-                    <TextBox Margin="8,0,8,4"></TextBox>
+                    <DockPanel Margin="12">
+                        <md:PackIcon VerticalAlignment="Center" Kind="Magnify" Width="18" Height="18" Margin="0,0,8,0"/>
+                        <TextBox VerticalAlignment="Center" Style="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" ></TextBox>
+                    </DockPanel>
                 </Border>
-                <Button Height="40" Grid.Column="1" Margin="0,0,12,0">Earnings</Button>
-                <Button Height="40" Grid.Column="2" Margin="0,0,12,0">Spendings</Button>
-                <Button Command="{Binding AddTransactionCommand}" Height="40" Grid.Column="3" Margin="0,0,0,0">Add Transaction</Button>
 
+                <Button  Height="40" Grid.Column="1" Margin="0,0,12,0">Earnings</Button>
+
+                <Button Height="40" Grid.Column="2" Margin="0,0,12,0">Spendings</Button>
+
+                <Button Command="{Binding AddTransactionCommand}" Style="{StaticResource MaterialDesignRaisedSecondaryDarkButton}" Height="40" Grid.Column="3" Margin="0,0,0,0" >
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Foreground="White" Width="24" Height="24" VerticalAlignment="Center" Kind="Plus"/>
+                        <Label Foreground="White" VerticalAlignment="Center" Content="New Transaction"/>
+                    </StackPanel>
+                </Button>
             </Grid>
-            <ScrollViewer Height="570" VerticalScrollBarVisibility="Auto">
+
+            <ScrollViewer Height="570" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
                 <ListView ItemsSource="{Binding Transactions}">
                     <ListView.View>
                         <GridView>
@@ -40,10 +52,12 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <DockPanel Width="910">
-                                            <md:PackIcon VerticalAlignment="Center" Margin="0,0,12,0" Width="30" Height="30" Kind="{Binding Icon}"/>
+                                            <Border Margin="0,0,12,0" Background="#E6E6E6" CornerRadius="8">
+                                                <md:PackIcon Foreground="#4A4B51" VerticalAlignment="Center" Margin="8" Width="30" Height="30" Kind="{Binding Icon}"/>
+                                            </Border>
                                             <StackPanel>
                                                 <Label FontSize="16" FontWeight="Normal"  Content="{Binding Description}"/>
-                                                <Label FontSize="10" Foreground="Gray" Content="{Binding Date}"/>
+                                                <Label FontSize="12" Foreground="Gray" Content="{Binding Date}"/>
                                             </StackPanel>
                                             <Label VerticalAlignment="Center" FontSize="18" FontWeight="Medium" HorizontalAlignment="Right" Content="{Binding Amount}"/>
                                         </DockPanel>
@@ -54,6 +68,7 @@
                     </ListView.View>
                 </ListView>
             </ScrollViewer>
+
         </StackPanel>
     </Grid>
 </UserControl>
