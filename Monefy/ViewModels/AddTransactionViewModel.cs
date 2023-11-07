@@ -111,7 +111,6 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
     {
         if (IsExpenseChecked)
         {
-            // needs fixing
             AvailableCategories = Enum.GetValues(typeof(ExpenseCategory))
                        .Cast<ExpenseCategory>()
                        .Select(category => category.ToString())
