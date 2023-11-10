@@ -136,42 +136,48 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
         get => new(
         () =>
         {
-            if (_isIncomeChecked)
+            if (IsIncomeChecked)
             {
                 IncomeCategory incomeCategory;
-                Enum.TryParse(_selectedCategory, out incomeCategory);
+                Enum.TryParse(SelectedCategory, out incomeCategory);
 
                 _transactionsService.AddTransaction(
                     new Transaction(
-                        description: _description,
-                        amount: Convert.ToDouble(_amount),
+                        description: Description,
+                        amount: Convert.ToDouble(Amount),
                         category: incomeCategory
                     )
                 );
             }
-            else if (_isExpenseChecked)
+            else if (IsExpenseChecked)
             {
                 ExpenseCategory expenseCategory;
-                Enum.TryParse(_selectedCategory, out expenseCategory);
+                Enum.TryParse(SelectedCategory, out expenseCategory);
 
                 _transactionsService.AddTransaction(
                     new Transaction(
-                        description: _description,
-                        amount: Convert.ToDouble(_amount),
+                        description: Description,
+                        amount: Convert.ToDouble(Amount),
                         category: expenseCategory
                     )
                 );
             }
+
+            Description = null;
+            Amount = null;
+            IsIncomeChecked = false;
+            IsExpenseChecked = false;
+            SelectedCategory = null;
 
             _navigationService.NavigateTo<HomeViewModel>();
         },
         () =>
         {
             return 
-                !string.IsNullOrEmpty( _description ) &&
-                Convert.ToDouble(_amount) > 0 &&
-                (_isExpenseChecked || _isIncomeChecked) &&
-                !string.IsNullOrEmpty(_selectedCategory);
+                !string.IsNullOrEmpty( Description ) &&
+                Convert.ToDouble(Amount) > 0 &&
+                (IsExpenseChecked || IsIncomeChecked) &&
+                !string.IsNullOrEmpty(SelectedCategory);
         }
         );
     }
@@ -180,6 +186,12 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
     {
         get => new(() =>
         {
+            Description = null;
+            Amount = null;
+            IsIncomeChecked = false;
+            IsExpenseChecked = false;
+            SelectedCategory = null;
+
             _navigationService.NavigateTo<HomeViewModel>();
         });
     }

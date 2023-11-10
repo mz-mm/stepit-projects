@@ -24,7 +24,6 @@ public class HomeViewModel : ViewModelBase
         }
     }
 
-
     private double _currentBalance;
     public double CurrentBalance
     {

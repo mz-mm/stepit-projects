@@ -1,5 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using Monefy.Enums;
+﻿using Monefy.Enums;
 using Monefy.Models;
 using Monefy.Services.Interfaces;
 using System;
@@ -22,7 +21,7 @@ public class TransactionService : ITransactionsService
         set
         {
             _transactions = value;
-            OnPropertyChanged(nameof(Transactions));
+            OnPropertyChanged(nameof(Transaction));
         }
     }
     private const string TransactionDatabasePath = "TransactionDB.json";
@@ -33,33 +32,40 @@ public class TransactionService : ITransactionsService
         _serializeService = serializeService;
 
         _transactions = _deserializeService.Deserialize<Transaction>(TransactionDatabasePath) ?? new ObservableCollection<Transaction>();
+        _transactions = new ObservableCollection<Transaction>(Transactions.OrderBy(t => t.Date));
     }
 
     public Transaction AddTransaction(Transaction transaction)
     {
         _transactions.Add(transaction);
+
+        var sortedTransactions = new ObservableCollection<Transaction>(_transactions.OrderBy(t => t.Date));
+
+        _transactions.Clear();
+
+        foreach (var sortedTransaction in sortedTransactions)
+        {
+            _transactions.Add(sortedTransaction);
+        }
+
         _serializeService.Serialize(TransactionDatabasePath, _transactions);
+
+        OnPropertyChanged(nameof(Transactions));
 
         return transaction;
     }
 
     public Transaction RemoveTransaction(Transaction transaction)
     {
-        _transactions.Remove(transaction);
-        _serializeService.Serialize(TransactionDatabasePath, _transactions);
+        Transactions.Remove(transaction);
+        _serializeService.Serialize(TransactionDatabasePath, Transactions);
 
         return transaction;
     }
 
-    public ObservableCollection<Transaction> GetAllTransactions()
-    {
-     
-        return new ObservableCollection<Transaction>(_transactions.OrderBy(t => t.Date));
-    }
-
     public List<Transaction> GetAllExepenseTransaction()
     {
-        var expenseTransactions = _transactions.Where(item =>
+        var expenseTransactions = Transactions.Where(item =>
         {
             return Enum.TryParse(item.Category, out ExpenseCategory category);
         }).ToList();
@@ -69,7 +75,7 @@ public class TransactionService : ITransactionsService
 
     public List<Transaction> GetAllIncomeTransactions()
     {
-        var incomeTransactions = _transactions.Where(item =>
+        var incomeTransactions = Transactions.Where(item =>
         {
             return Enum.TryParse(item.Category, out ExpenseCategory category);
         }).ToList();
