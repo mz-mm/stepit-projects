@@ -31,24 +31,24 @@ public class TransactionService : ITransactionsService
         _deserializeService = deserializeService;
         _serializeService = serializeService;
 
-        _transactions = _deserializeService.Deserialize<Transaction>(TransactionDatabasePath) ?? new ObservableCollection<Transaction>();
-        _transactions = new ObservableCollection<Transaction>(Transactions.OrderBy(t => t.Date));
+        Transactions = _deserializeService.Deserialize<Transaction>(TransactionDatabasePath) ?? new ObservableCollection<Transaction>();
+        Transactions = new ObservableCollection<Transaction>(Transactions.OrderBy(t => t.Date));
     }
 
     public Transaction AddTransaction(Transaction transaction)
     {
-        _transactions.Add(transaction);
+        Transactions.Add(transaction);
 
-        var sortedTransactions = new ObservableCollection<Transaction>(_transactions.OrderBy(t => t.Date));
+        var sortedTransactions = new ObservableCollection<Transaction>(Transactions.OrderBy(t => t.Date));
 
-        _transactions.Clear();
+        Transactions.Clear();
 
         foreach (var sortedTransaction in sortedTransactions)
         {
-            _transactions.Add(sortedTransaction);
+            Transactions.Add(sortedTransaction);
         }
 
-        _serializeService.Serialize(TransactionDatabasePath, _transactions);
+        _serializeService.Serialize(TransactionDatabasePath, Transactions);
 
         OnPropertyChanged(nameof(Transactions));
 
@@ -63,24 +63,25 @@ public class TransactionService : ITransactionsService
         return transaction;
     }
 
-    public List<Transaction> GetAllExepenseTransaction()
+    public ObservableCollection<Transaction> GetAllIncomeTransactions()
     {
-        var expenseTransactions = Transactions.Where(item =>
-        {
-            return Enum.TryParse(item.Category, out ExpenseCategory category);
-        }).ToList();
+        var incomeTransactions = new ObservableCollection<Transaction>
+        (
+            Transactions.Where(t => Enum.TryParse(t.Category, out IncomeCategory category))
+        );
 
-        return expenseTransactions;
-    }
-
-    public List<Transaction> GetAllIncomeTransactions()
-    {
-        var incomeTransactions = Transactions.Where(item =>
-        {
-            return Enum.TryParse(item.Category, out ExpenseCategory category);
-        }).ToList();
 
         return incomeTransactions;
+    }
+
+    public ObservableCollection<Transaction> GetAllExepenseTransaction()
+    {
+        var expenseTransactions = new ObservableCollection<Transaction>
+        (
+            Transactions.Where(t => Enum.TryParse(t.Category, out ExpenseCategory category))
+        );
+
+        return expenseTransactions;
     }
 
     public event PropertyChangedEventHandler PropertyChanged;

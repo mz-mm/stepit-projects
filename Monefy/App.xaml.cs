@@ -28,7 +28,7 @@ public partial class App : Application
         Container.RegisterSingleton<ISerializeService, SerializeService>();
         Container.RegisterSingleton<ITransactionsService, TransactionService>();
         
-        Container.RegisterSingleton<HomeViewModel>();
+        Container.RegisterSingleton<TransactionsViewModel>();
         Container.RegisterSingleton<AddTransactionViewModel>();
         Container.RegisterSingleton<AnalyticsViewModel>();
         Container.RegisterSingleton<MainViewModel>();

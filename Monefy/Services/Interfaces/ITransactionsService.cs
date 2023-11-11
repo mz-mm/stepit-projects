@@ -15,9 +15,8 @@ public interface ITransactionsService
     public Transaction RemoveTransaction(Transaction transaction);
 
     // Get all expense transactions
-    public List<Transaction> GetAllExepenseTransaction();
+    public ObservableCollection<Transaction> GetAllExepenseTransaction();
 
     // Get all income transactions
-    public List<Transaction> GetAllIncomeTransactions();
-
+    public ObservableCollection<Transaction> GetAllIncomeTransactions();
 }

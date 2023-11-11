@@ -4,10 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Monefy.Services.Classes;
-using System.DirectoryServices;
 using Monefy.Services.Interfaces;
 using Monefy.Models;
 
@@ -15,32 +12,26 @@ namespace Monefy.ViewModels;
 
 public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
 {
-    private string _description;
-    private string _amount;
-    private bool _isExpenseChecked;
-    private bool _isIncomeChecked;
-    private string? _selectedCategory;
-    private List<string> _availableCategories;
 
     private readonly INavigationService _navigationService;
     private readonly ITransactionsService _transactionsService;
 
-    public event PropertyChangedEventHandler PropertyChanged;
 
-
+    private string _description;
     public string Description
     {
         get => _description;
         set => Set(ref _description, value);
     }
 
+    private string _amount;
     public string Amount
     {
         get => _amount;
         set => Set(ref _amount, value);
     }
 
-
+    private bool _isExpenseChecked;
     public bool IsExpenseChecked
     {
         get => _isExpenseChecked; 
@@ -57,6 +48,7 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
         }
     }
 
+    private bool _isIncomeChecked;
     public bool IsIncomeChecked
     {
         get { return _isIncomeChecked; }
@@ -73,6 +65,7 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
         }
     }
 
+    private string? _selectedCategory;
     public string SelectedCategory
     {
         get { return _selectedCategory; }
@@ -86,6 +79,7 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
         }
     }
 
+    private List<string> _availableCategories;
     public List<string> AvailableCategories
     {
         get { return _availableCategories; }
@@ -169,7 +163,7 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
             IsExpenseChecked = false;
             SelectedCategory = null;
 
-            _navigationService.NavigateTo<HomeViewModel>();
+            _navigationService.NavigateTo<TransactionsViewModel>();
         },
         () =>
         {
@@ -192,10 +186,11 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
             IsExpenseChecked = false;
             SelectedCategory = null;
 
-            _navigationService.NavigateTo<HomeViewModel>();
+            _navigationService.NavigateTo<TransactionsViewModel>();
         });
     }
 
+    public event PropertyChangedEventHandler PropertyChanged;
 
     protected void OnPropertyChanged(string propertyName)
     {

@@ -30,7 +30,7 @@ namespace Monefy.ViewModels
         {
             _messenger = messenger;
             _navigationService = navigationService;
-            CurrentView = App.Container.GetInstance<HomeViewModel>();
+            CurrentView = App.Container.GetInstance<TransactionsViewModel>();
 
             _messenger.Register<NavigationMessage>(this, message =>
             {
@@ -42,7 +42,7 @@ namespace Monefy.ViewModels
         {
             get => new(() =>
             {
-                _navigationService.NavigateTo<HomeViewModel>();
+                _navigationService.NavigateTo<TransactionsViewModel>();
             });
         }
 

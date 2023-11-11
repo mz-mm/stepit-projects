@@ -14,4 +14,8 @@
     <PackageReference Include="SimpleInjector" Version="5.4.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Include="App.xaml" />
+  </ItemGroup>
+
 </Project>
