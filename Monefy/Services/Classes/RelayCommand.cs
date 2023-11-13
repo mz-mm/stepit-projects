@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace Monefy.Services.Classes;
 
-public class ButtonCommand : ICommand
+public class RelayCommand : ICommand
 {
     private readonly Action _funcToExecute;
     private readonly Func<bool> _funcToCheck = () => true;
@@ -14,13 +14,13 @@ public class ButtonCommand : ICommand
         remove { CommandManager.RequerySuggested -= value; }
     }
 
-    public ButtonCommand(Action funcToExecute)
+    public RelayCommand(Action funcToExecute)
     {
         _funcToExecute = funcToExecute;
     }
 
 
-    public ButtonCommand(Action funcToExecute, Func<bool> funcToCheck)
+    public RelayCommand(Action funcToExecute, Func<bool> funcToCheck)
     {
         _funcToExecute = funcToExecute;
         _funcToCheck = funcToCheck;

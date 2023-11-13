@@ -3,11 +3,6 @@ using GalaSoft.MvvmLight.Messaging;
 using Monefy.Messages;
 using Monefy.Services.Classes;
 using Monefy.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monefy.ViewModels
 {
@@ -38,7 +33,7 @@ namespace Monefy.ViewModels
             });
         }
 
-        public ButtonCommand HomeCommand
+        public RelayCommand HomeCommand
         {
             get => new(() =>
             {
@@ -46,7 +41,7 @@ namespace Monefy.ViewModels
             });
         }
 
-        public ButtonCommand AnalyticsCommand
+        public RelayCommand AnalyticsCommand
         {
             get => new(() =>
             {

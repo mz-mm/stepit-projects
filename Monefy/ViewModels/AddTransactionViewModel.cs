@@ -125,7 +125,7 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
         SelectedCategory = null;
     }
 
-    public ButtonCommand AddTransactionCommand
+    public RelayCommand AddTransactionCommand
     {
         get => new(
         () =>
@@ -176,7 +176,7 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
         );
     }
 
-    public ButtonCommand CancelCommand
+    public RelayCommand CancelCommand
     {
         get => new(() =>
         {

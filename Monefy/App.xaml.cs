@@ -20,7 +20,6 @@ public partial class App : Application
 
     public void Register()
     {
-
         Container.RegisterSingleton<IMessenger , Messenger>();
         Container.RegisterSingleton<INavigationService, NavigationService>();
 

@@ -6,7 +6,6 @@ using Monefy.Services.Interfaces;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Http.Headers;
 
 namespace Monefy.ViewModels;
 public class TransactionsViewModel : ViewModelBase
@@ -16,7 +15,7 @@ public class TransactionsViewModel : ViewModelBase
 
     private TransactionType? _currentTransactionFilter;
 
-    private ObservableCollection<Transaction> _transactions;
+    private ObservableCollection<Transaction>? _transactions;
     public ObservableCollection<Transaction> Transactions
     {
         get => _transactions;
@@ -24,56 +23,6 @@ public class TransactionsViewModel : ViewModelBase
         {
             Set(ref _transactions, value);
         }
-    }
-
-    private string _searchQuery;
-    public string SearchQuery
-    {
-        get => _searchQuery;
-        set
-        {
-            Set(ref _searchQuery, value);
-            UpdateFilteredTransactions();
-        }
-    }
-
-    private void UpdateFilteredTransactions()
-    {
-        IEnumerable<Transaction> filteredTransactions;
-
-        if (!string.IsNullOrWhiteSpace(SearchQuery))
-        {
-            switch (_currentTransactionFilter)
-            {
-                case TransactionType.Income:
-                    filteredTransactions = _transactionsService.GetAllIncomeTransactions().Where(t => t.Description.Contains(SearchQuery));
-                    break;
-                case TransactionType.Expense:
-                    filteredTransactions = _transactionsService.GetAllExepenseTransaction().Where(t => t.Description.Contains(SearchQuery));
-                    break;
-                default:
-                    filteredTransactions = _transactionsService.Transactions.Where(t => t.Description.Contains(SearchQuery));
-                    break;
-            }
-        }
-        else
-        {
-            switch (_currentTransactionFilter)
-            {
-                case TransactionType.Income:
-                    filteredTransactions = _transactionsService.GetAllIncomeTransactions();
-                    break;
-
-                case TransactionType.Expense:
-                    filteredTransactions = _transactionsService.GetAllExepenseTransaction();
-                    break;
-                default:
-                    filteredTransactions = _transactionsService.Transactions;
-                    break;
-            }
-        }
-
-        Transactions = new ObservableCollection<Transaction>(filteredTransactions);
     }
 
     private string _clearButtonVisibility = "Hidden";
@@ -105,6 +54,17 @@ public class TransactionsViewModel : ViewModelBase
         set => Set(ref _currentExpense, value);
     }
 
+    private string? _searchQuery;
+    public string SearchQuery
+    {
+        get => _searchQuery;
+        set
+        {
+            Set(ref _searchQuery, value);
+            UpdateFilteredTransactions();
+        }
+    }
+
     public TransactionsViewModel(ITransactionsService transactionsService, INavigationService navigationService)
     {
         _transactionsService = transactionsService;
@@ -112,7 +72,47 @@ public class TransactionsViewModel : ViewModelBase
         Transactions = _transactionsService.Transactions;
     }
 
-    public ButtonCommand GetIncomeTransactions
+    private void UpdateFilteredTransactions()
+    {
+        IEnumerable<Transaction> filteredTransactions;
+
+        if (!string.IsNullOrWhiteSpace(SearchQuery))
+        {
+            switch (_currentTransactionFilter)
+            {
+                case TransactionType.Income:
+                    filteredTransactions = _transactionsService.GetAllIncomeTransactions().Where(t => t.Description.ToLower().Contains(SearchQuery));
+                    break;
+                case TransactionType.Expense:
+                    filteredTransactions = _transactionsService.GetAllExepenseTransaction().Where(t => t.Description.ToLower().Contains(SearchQuery));
+                    break;
+                default:
+                    filteredTransactions = _transactionsService.Transactions.Where(t => t.Description.ToLower().Contains(SearchQuery));
+                    break;
+            }
+        }
+        else
+        {
+            switch (_currentTransactionFilter)
+            {
+                case TransactionType.Income:
+                    filteredTransactions = _transactionsService.GetAllIncomeTransactions();
+                    break;
+
+                case TransactionType.Expense:
+                    filteredTransactions = _transactionsService.GetAllExepenseTransaction();
+                    break;
+                default:
+                    filteredTransactions = _transactionsService.Transactions;
+                    break;
+            }
+        }
+
+        Transactions = new ObservableCollection<Transaction>(filteredTransactions);
+    }
+
+
+    public RelayCommand GetIncomeTransactions
     {
         get => new(() =>
         {
@@ -131,7 +131,7 @@ public class TransactionsViewModel : ViewModelBase
         });
     }
 
-    public ButtonCommand GetExpenseTransactions
+    public RelayCommand GetExpenseTransactions
     {
         get => new(() =>
         {
@@ -150,7 +150,7 @@ public class TransactionsViewModel : ViewModelBase
         });
     }
 
-    public ButtonCommand ClearCommand
+    public RelayCommand ClearCommand
     {
         get => new(() =>
         {
@@ -161,7 +161,7 @@ public class TransactionsViewModel : ViewModelBase
         });
     }
 
-    public ButtonCommand AddTransactionCommand
+    public RelayCommand AddTransactionCommand
     {
         get => new(() =>
         {
