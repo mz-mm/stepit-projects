@@ -7,15 +7,25 @@ using Monefy.Enums;
 using System.Linq;
 using System.Collections.ObjectModel;
 using Monefy.Models;
+using Monefy.Services.Classes;
 
 namespace Monefy.ViewModels;
 
 public class AnalyticsViewModel : ViewModelBase
 {
-    public SeriesCollection ChartData { get; } = new SeriesCollection();
+    private DateTime _currentDate;
+    public DateTime CurrentDate 
+    {
+        get => _currentDate;
+        set => Set(ref _currentDate, value);
+    }
+
+    public SeriesCollection ChartData { get; set; }
 
     public AnalyticsViewModel(ITransactionsService transactionsService)
     {
+        CurrentDate = DateTime.Today;
+        ChartData = new SeriesCollection();
         UpdateChartData(transactionsService.GetAllExepenseTransaction());
 
         transactionsService.Transactions.CollectionChanged += (sender, e) =>
@@ -26,7 +36,7 @@ public class AnalyticsViewModel : ViewModelBase
 
     private void UpdateChartData(ObservableCollection<Transaction> transactions)
     {
-        ChartData.Clear();
+        ChartData = new SeriesCollection();
 
         foreach (var category in Enum.GetValues(typeof(ExpenseCategory)).Cast<ExpenseCategory>().Select(category => category.ToString()))
         {
@@ -39,11 +49,27 @@ public class AnalyticsViewModel : ViewModelBase
                     {
                         Title = category,
                         Values = new ChartValues<double> { filteredTransactions.Sum(t => t.Amount) },
-                        LabelPoint = point => string.Format("{0:C}", point.Y)
+                        Tag = filteredTransactions.Sum(t => t.Amount).ToString(),
+                        DataLabels = true
                     }
                 );
             }
         }
+    }
+
+    public RelayCommand DayBackCommand
+    {
+        get => new(() =>
+        {
+            CurrentDate.AddDays(-1);
+        });
+    }
+    public RelayCommand DayForwardCommand
+    {
+        get => new(() =>
+        {
+            CurrentDate.AddDays(1);
+        });
     }
 }
 

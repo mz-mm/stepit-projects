@@ -12,5 +12,5 @@ public enum ExpenseCategory
     Utilities,
     Groceries,
     Transportation,
-    Entertaiment
+    Entertaiment,
 }
