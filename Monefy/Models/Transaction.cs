@@ -12,8 +12,8 @@ public class Transaction
     public DateTime Date { get; set; }
     public string Category { get; set; }
     public string Icon { get; set; }
-    public string TransactionIcon { get; set; }
-    public string TransactionColor { get; set; }
+    public string TransactionTypeIcon { get; set; }
+    public string TransactionTypeColor { get; set; }
 
     [JsonConstructor]
     public Transaction(TransactionType transactionType, string description, DateTime date, double amount, string category, string icon, string transactionIcone, string transactionColor)
@@ -24,8 +24,8 @@ public class Transaction
         Date = date;
         Category = category;
         Icon = icon;
-        TransactionIcon = transactionIcone;
-        TransactionColor = transactionColor;
+        TransactionTypeIcon = transactionIcone;
+        TransactionTypeColor = transactionColor;
     }
 
     // Transaction as Expense transaction
@@ -34,9 +34,9 @@ public class Transaction
         TypeTransaction = TransactionType.Expense;
         Description = description;
         Amount = amount;
-        Date = DateTime.Now;
-        TransactionIcon = "Minus";
-        TransactionColor = "Black";
+        Date = DateTime.Today;
+        TransactionTypeIcon = "Minus";
+        TransactionTypeColor = "Black";
         Category = category.ToString();
 
         switch (category)
@@ -70,8 +70,8 @@ public class Transaction
         Description = description;
         Amount = amount;
         Date = DateTime.Now;
-        TransactionIcon = "Plus";
-        TransactionColor = "#3CC64A";
+        TransactionTypeIcon = "Plus";
+        TransactionTypeColor = "#3CC64A";
         Category = category.ToString();
 
         switch (category)

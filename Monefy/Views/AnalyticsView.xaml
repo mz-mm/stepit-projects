@@ -7,16 +7,25 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Monefy.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="850" d:DesignWidth="1200">
+             d:DesignHeight="830" d:DesignWidth="1200">
     <Grid>
-        <StackPanel>
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+        <StackPanel Margin="12">
+
+            <StackPanel Margin="0,0,0,12" HorizontalAlignment="Center"  Orientation="Horizontal">
                 <DatePicker Margin="0,0,8,0"/>
-                <Button Command="{Binding DayBackCommand}" Content="{md:PackIcon Kind=ArrowLeft}"/>
-                <Label Content="{Binding CurrentDate}"/>
-                <Button Command="{Binding DayForwardCommand}" Content="{md:PackIcon Kind=ArrowRight}"/>
+                <Button Command="{Binding TodayCommand}" Margin="0,0,8,0" Content="Today"/>
+                <Button Command="{Binding AllCommand}" Content="All"/>
             </StackPanel>
-            <lvc:PieChart InnerRadius="50" Height="750" Series="{Binding ChartData}" IsEnabled="False" Width="500" LegendLocation="Bottom" Hoverable="False"/>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" >
+                <Button Command="{Binding DayBackCommand}" Style="{StaticResource MaterialDesignOutlinedButton}"  Content="{md:PackIcon Kind=ArrowLeft}"/>
+                <Border CornerRadius="2" BorderThickness="1" BorderBrush="Black" Margin="12,0,12,0" >
+                    <Label VerticalAlignment="Center" Margin="4"  FontWeight="Medium" Content="{Binding CurrentDate}" />
+                </Border>
+                <Button Command="{Binding DayForwardCommand}" Margin="0,0,8,0" Style="{StaticResource MaterialDesignOutlinedButton}" Content="{md:PackIcon Kind=ArrowRight}"/>
+            </StackPanel>
         </StackPanel>
+        <lvc:PieChart VerticalAlignment="Center" InnerRadius="80" Height="560" Width="450" Series="{Binding ChartData}" IsEnabled="False"  LegendLocation="Bottom" Hoverable="False" Margin="0,0,0,64"/>
+        <Label Visibility="{Binding DataVisibily}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Medium">No data to show</Label>
     </Grid>
 </UserControl>

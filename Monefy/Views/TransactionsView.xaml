@@ -73,15 +73,15 @@
                                     <DataTemplate>
                                         <DockPanel Width="910">
                                             <Border Margin="0,0,12,0" Padding="2,0,2,0" BorderThickness="1" BorderBrush="#4A4B51" Background="#F3F3F3" CornerRadius="8">
-                                                <md:PackIcon Foreground="#4A4B51" VerticalAlignment="Center" Margin="8" Width="30" Height="30" Kind="{Binding Icon}"/>
+                                                <md:PackIcon Foreground="Black" VerticalAlignment="Center" Margin="8" Width="30" Height="30" Kind="{Binding Icon}"/>
                                             </Border>
                                             <StackPanel>
                                                 <Label FontSize="16" FontWeight="Normal"  Content="{Binding Description}"/>
                                                 <Label FontSize="12" Foreground="Gray" Content="{Binding Date}"/>
                                             </StackPanel>
                                             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                                                <md:PackIcon VerticalAlignment="Center" Margin="0,0,2,0" Foreground="{Binding TransactionColor}" Kind="{Binding TransactionIcon}"/>
-                                                <Label VerticalAlignment="Center" FontSize="18" FontWeight="Medium" HorizontalAlignment="Right" Foreground="{Binding TransactionColor}" Content="{Binding Amount}"/>
+                                                <md:PackIcon VerticalAlignment="Center" Margin="0,0,2,0" Foreground="{Binding TransactionTypeColor}" Kind="{Binding TransactionTypeIcon}"/>
+                                                <Label VerticalAlignment="Center" FontSize="18" FontWeight="Medium" HorizontalAlignment="Right" Foreground="{Binding TransactionTypeColor}" Content="{Binding Amount}"/>
                                             </StackPanel>
                                         </DockPanel>
                                     </DataTemplate>
