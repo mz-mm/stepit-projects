@@ -25,7 +25,89 @@
                 <Button Command="{Binding DayForwardCommand}" Margin="0,0,8,0" Style="{StaticResource MaterialDesignOutlinedButton}" Content="{md:PackIcon Kind=ArrowRight}"/>
             </StackPanel>
         </StackPanel>
-        <lvc:PieChart VerticalAlignment="Center" InnerRadius="80" Height="560" Width="450" Series="{Binding ChartData}" IsEnabled="False"  LegendLocation="Bottom" Hoverable="False" Margin="0,0,0,64"/>
+
+        <!--Diagram with Categories-->
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+
+            <!--Left Category-->
+            <ItemsControl Height="420" Width="52" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding CategoryLeft}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="1" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black" Margin="0,12,0,12">
+                            <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon}" />
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+
+                <!--Top Category-->
+                <Grid Height="52">
+                    <ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding CategoryTop}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black"  Margin="6,0,6,0">
+                                    <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon}" />
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+
+                <!--Chart-->
+                <lvc:PieChart VerticalAlignment="Center" InnerRadius="60" Height="250" Width="250" Series="{Binding ChartData}" IsEnabled="False" Hoverable="False" Margin="32"/>
+
+                <!--Bottom Category-->
+                <Grid Height="52">
+                    <ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding CategoryBottom}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Rows="1"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black"  Margin="6,0,6,0">
+                                    <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon}" />
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+
+            </StackPanel>
+
+            <!--Right Category-->
+            <ItemsControl Height="420" Width="52" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding CategoryRight}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="1"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black" Margin="0,12,0,12">
+                            <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon}" />
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </StackPanel>
+        <!--Diagram with Categories-->
+
         <Label Visibility="{Binding DataVisibily}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Medium">No data to show</Label>
+
     </Grid>
 </UserControl>

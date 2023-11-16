@@ -35,32 +35,10 @@ public class Transaction
         Description = description;
         Amount = amount;
         Date = DateTime.Today;
-        TransactionTypeIcon = "Minus";
-        TransactionTypeColor = "Black";
+        TransactionTypeIcon = Expense.TransactionTypeIcon;
+        TransactionTypeColor = Expense.TransactionTypeColor;
         Category = category.ToString();
-
-        switch (category)
-        {
-            case ExpenseCategory.Entertaiment:
-                Icon = "Popcorn";
-                break;
-
-            case ExpenseCategory.Groceries:
-                Icon = "Shopping";
-                break;
-
-            case ExpenseCategory.Rent:
-                Icon = "Building";
-                break;
-
-            case ExpenseCategory.Utilities:
-                Icon = "Wrench";
-                break;
-
-            case ExpenseCategory.Transportation:
-                Icon = "Transportation";
-                break;
-        }
+        Icon = Expense.GetIcon(category);
     }
 
     // Transaction as Income transaction
@@ -70,23 +48,9 @@ public class Transaction
         Description = description;
         Amount = amount;
         Date = DateTime.Now;
-        TransactionTypeIcon = "Plus";
-        TransactionTypeColor = "#3CC64A";
+        TransactionTypeIcon = Income.TransactionTypeIcon;
+        TransactionTypeColor = Income.TransactionTypeColor;
         Category = category.ToString();
-
-        switch (category)
-        {
-            case IncomeCategory.Salary:
-                Icon = "Bank";
-                break;
-
-            case IncomeCategory.Investment:
-                Icon = "TrendingUp";
-                break;
-
-            case IncomeCategory.Gift:
-                Icon = "Gift";
-                break;
-        }
+        Icon = Income.GetIcon(category);
     }
 }

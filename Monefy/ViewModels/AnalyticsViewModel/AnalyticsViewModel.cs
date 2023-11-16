@@ -1,17 +1,12 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
-using LiveCharts.Wpf;
 using LiveCharts;
 using Monefy.Services.Interfaces;
-using Monefy.Enums;
-using System.Linq;
-using System.Collections.ObjectModel;
-using Monefy.Models;
 using Monefy.Services.Classes;
 
 namespace Monefy.ViewModels;
 
-public class AnalyticsViewModel : ViewModelBase
+public partial class AnalyticsViewModel : ViewModelBase
 {
     private ITransactionsService _transactionsService;
 
@@ -33,15 +28,6 @@ public class AnalyticsViewModel : ViewModelBase
         }
     }
 
-    private SeriesCollection _chartData;
-    public SeriesCollection ChartData
-    {
-        get => _chartData;
-        set
-        {
-            Set(ref _chartData, value);
-        }
-    }
 
     public AnalyticsViewModel(ITransactionsService transactionsService)
     {
@@ -51,6 +37,7 @@ public class AnalyticsViewModel : ViewModelBase
         _chartData = new SeriesCollection();
 
         UpdateChartData(_transactionsService.GetAllExepenseTransaction(), DateTime.Today);
+        CategoryIconSetup();
 
         transactionsService.Transactions.CollectionChanged += (sender, e) =>
         {
@@ -58,44 +45,6 @@ public class AnalyticsViewModel : ViewModelBase
         };
     }
 
-    private void UpdateChartData(ObservableCollection<Transaction> transactions, DateTime? dateTime = null)
-    {
-        if (_chartData == null)
-        {
-            _chartData = new SeriesCollection();
-        }
-        else
-        {
-            _chartData.Clear();
-        }
-
-        foreach (var category in Enum.GetValues(typeof(ExpenseCategory)).Cast<ExpenseCategory>().Select(category => category.ToString()))
-        {
-            var filteredTransactions = (dateTime.HasValue)
-                                     ? transactions.Where(t => t.Category == category && t.Date == dateTime.Value)
-                                     : transactions.Where(t => t.Category == category);
-
-            if (filteredTransactions.Any())
-            {
-                ChartData.Add(
-                    new PieSeries
-                    {
-                        Title = category,
-                        Values = new ChartValues<double> { filteredTransactions.Sum(t => t.Amount) },
-                        Tag = filteredTransactions.Sum(t => t.Amount).ToString(),
-                        DataLabels = true
-                    }
-                );
-            }
-        }
-
-        DataVisibily = ChartData.Any() ? "Hidden" : "Visible";
-
-        if (dateTime.HasValue && CurrentDate != dateTime.Value)
-        {
-            CurrentDate = dateTime.Value;
-        }
-    }
 
     public RelayCommand DayBackCommand
     {

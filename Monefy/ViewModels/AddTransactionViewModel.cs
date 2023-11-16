@@ -105,20 +105,15 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
     {
         if (IsExpenseChecked)
         {
-            AvailableCategories = Enum.GetValues(typeof(ExpenseCategory))
-                       .Cast<ExpenseCategory>()
-                       .Select(category => category.ToString())
-                       .ToList();
+            AvailableCategories = Expense.GetCategories().ToList();
         }
         else if (IsIncomeChecked)
         {
-            AvailableCategories = Enum.GetValues(typeof(IncomeCategory))
-                       .Cast<IncomeCategory>()
-                       .Select(category => category.ToString())
-                       .ToList();
+            AvailableCategories = Income.GetCategories().ToList();
         }
         else
         {
+            // Should set it not clickable
             AvailableCategories = new List<string>();
         }
 
@@ -132,27 +127,21 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
         {
             if (IsIncomeChecked)
             {
-                IncomeCategory incomeCategory;
-                Enum.TryParse(SelectedCategory, out incomeCategory);
-
                 _transactionsService.AddTransaction(
                     new Transaction(
                         description: Description,
                         amount: Convert.ToDouble(Amount),
-                        category: incomeCategory
+                        category: Income.TryParse(SelectedCategory) 
                     )
                 );
             }
             else if (IsExpenseChecked)
             {
-                ExpenseCategory expenseCategory;
-                Enum.TryParse(SelectedCategory, out expenseCategory);
-
                 _transactionsService.AddTransaction(
                     new Transaction(
                         description: Description,
                         amount: Convert.ToDouble(Amount),
-                        category: expenseCategory
+                        category: Expense.TryParse(SelectedCategory)
                     )
                 );
             }
