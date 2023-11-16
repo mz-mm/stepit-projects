@@ -25,14 +25,14 @@ public static class Income
                        .Select(category => category.ToString());
     }
 
-    public static string GetIcon(IncomeCategory category)
+    public static Icon GetIcon(IncomeCategory category)
     {
         return category switch
         {
-            IncomeCategory.Salary => "Bank",
-            IncomeCategory.Investment => "TrendingUp",
-            IncomeCategory.Gift => "Gift",
-            _ => "Dot",
+            IncomeCategory.Salary => new Icon("Bank", "#3498db"),
+            IncomeCategory.Investment => new Icon("TrendingUp", "#2ecc71"),
+            IncomeCategory.Gift => new Icon("Gift", "#e67e22"),
+            _ => new Icon("Category", "#95a5a6"),
         };
     }
 }

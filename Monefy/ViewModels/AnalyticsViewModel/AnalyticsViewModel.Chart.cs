@@ -8,12 +8,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Monefy.ViewModels;
 
 public partial class AnalyticsViewModel
 {
-    private SeriesCollection _chartData;
+    private SeriesCollection _chartData = new();
     public SeriesCollection ChartData
     {
         get => _chartData;
@@ -25,16 +26,10 @@ public partial class AnalyticsViewModel
 
     private void UpdateChartData(ObservableCollection<Transaction> transactions, DateTime? dateTime = null)
     {
-        if (_chartData == null)
-        {
-            _chartData = new SeriesCollection();
-        }
-        else
-        {
-            _chartData.Clear();
-        }
+        ChartData?.Clear();
+        var currentCategories = new List<ExpenseCategory>();
 
-        foreach (var category in Enum.GetValues(typeof(ExpenseCategory)).Cast<ExpenseCategory>().Select(category => category.ToString()))
+        foreach (var category in Expense.GetCategories())
         {
             var filteredTransactions = (dateTime.HasValue)
                                      ? transactions.Where(t => t.Category == category && t.Date == dateTime.Value)
@@ -42,13 +37,16 @@ public partial class AnalyticsViewModel
 
             if (filteredTransactions.Any())
             {
-                ChartData.Add(
+                currentCategories.Add(Expense.TryParse(category));
+
+                ChartData?.Add(
                     new PieSeries
                     {
                         Title = category,
                         Values = new ChartValues<double> { filteredTransactions.Sum(t => t.Amount) },
                         Tag = filteredTransactions.Sum(t => t.Amount).ToString(),
-                        DataLabels = true
+                        Fill = Expense.GetIcon(Expense.TryParse(category)).Color,
+                        DataLabels = true,
                     }
                 );
             }

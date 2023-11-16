@@ -49,12 +49,8 @@
         <Border Background="#FAFAFA" BorderBrush="DimGray" BorderThickness="2" CornerRadius="20" Width="80" HorizontalAlignment="Left" Height="150">
             <Grid>
                 <StackPanel Margin="12" VerticalAlignment="Center">
-                    <Button Command="{Binding HomeCommand}" Style="{StaticResource MaterialDesignIconButton}" Margin="0,0,0,16">
-                        <md:PackIcon Kind="Home"/>
-                    </Button>
-                    <Button Command="{Binding AnalyticsCommand}" Style="{StaticResource MaterialDesignIconButton}">
-                        <md:PackIcon Kind="Analytics"/>
-                    </Button>
+                    <Button Command="{Binding HomeCommand}" Style="{StaticResource MaterialDesignIconButton}" Margin="0,0,0,16" Content="{md:PackIcon Kind=Home}"/>
+                    <Button Command="{Binding AnalyticsCommand}" Style="{StaticResource MaterialDesignIconButton}" Content="{md:PackIcon Kind=Analytics}"/>
                 </StackPanel>
             </Grid>
         </Border>

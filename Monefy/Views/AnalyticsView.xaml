@@ -8,6 +8,7 @@
              xmlns:local="clr-namespace:Monefy.Views"
              mc:Ignorable="d" 
              d:DesignHeight="830" d:DesignWidth="1200">
+
     <Grid>
         <StackPanel Margin="12">
 
@@ -30,7 +31,7 @@
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
 
             <!--Left Category-->
-            <ItemsControl Height="420" Width="52" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding CategoryLeft}">
+            <ItemsControl Visibility="{Binding CategoryVisibility}" Height="420" Width="52" VerticalAlignment="Bottom" ItemsSource="{Binding CategoryLeft}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="1" />
@@ -38,8 +39,8 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black" Margin="0,12,0,12">
-                            <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon}" />
+                        <Border CornerRadius="4" BorderThickness="0" BorderBrush="Black" Margin="0,0,0,12">
+                            <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon.Name}" Foreground="{Binding Icon.Color}" />
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -48,48 +49,44 @@
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
 
                 <!--Top Category-->
-                <Grid Height="52">
-                    <ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding CategoryTop}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black"  Margin="6,0,6,0">
-                                    <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon}" />
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Grid>
+                <ItemsControl Visibility="{Binding CategoryVisibility}" ItemsSource="{Binding CategoryTop}" Height="52">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Rows="1"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="4" BorderThickness="0" BorderBrush="Black"  Margin="6,0,6,0">
+                                <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon.Name}" Foreground="{Binding Icon.Color}"/>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
                 <!--Chart-->
                 <lvc:PieChart VerticalAlignment="Center" InnerRadius="60" Height="250" Width="250" Series="{Binding ChartData}" IsEnabled="False" Hoverable="False" Margin="32"/>
 
                 <!--Bottom Category-->
-                <Grid Height="52">
-                    <ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding CategoryBottom}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Rows="1"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black"  Margin="6,0,6,0">
-                                    <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon}" />
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Grid>
+                <ItemsControl Visibility="{Binding CategoryVisibility}" Height="52" ItemsSource="{Binding CategoryBottom}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Rows="1"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="4" BorderThickness="0" BorderBrush="Black"  Margin="6,0,6,0">
+                                <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon.Name}" Foreground="{Binding Icon.Color}"/>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
             </StackPanel>
 
             <!--Right Category-->
-            <ItemsControl Height="420" Width="52" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding CategoryRight}">
+            <ItemsControl Visibility="{Binding CategoryVisibility}" Height="420" Width="52" VerticalAlignment="Top" ItemsSource="{Binding CategoryRight}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="1"/>
@@ -97,8 +94,8 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black" Margin="0,12,0,12">
-                            <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon}" />
+                        <Border CornerRadius="4" BorderThickness="0" BorderBrush="Black" Margin="0,0,0,12">
+                            <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon.Name}" Foreground="{Binding Icon.Color}"/>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

@@ -14,7 +14,12 @@ public partial class AnalyticsViewModel : ViewModelBase
     public string DataVisibily
     {
         get => _dataVisibily;
-        set => Set(ref _dataVisibily, value);
+        set
+        {
+            Set(ref _dataVisibily, value);
+            CategoryVisibility = value == "Visible" ? "Hidden" : "Visible";
+        }
+
     }
 
     private DateTime _currentDate;
@@ -36,8 +41,8 @@ public partial class AnalyticsViewModel : ViewModelBase
         CurrentDate = DateTime.Today;
         _chartData = new SeriesCollection();
 
+        UpdateCategoryIcons();
         UpdateChartData(_transactionsService.GetAllExepenseTransaction(), DateTime.Today);
-        CategoryIconSetup();
 
         transactionsService.Transactions.CollectionChanged += (sender, e) =>
         {

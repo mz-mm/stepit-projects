@@ -1,4 +1,5 @@
-﻿using Monefy.Enums;
+﻿using LiveCharts.Wpf;
+using Monefy.Enums;
 using Monefy.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,14 @@ namespace Monefy.ViewModels;
 public partial class AnalyticsViewModel
 {
     private const int CategoryCount = 4;
+
+    private string _categoryVisibility = "hidden";
+    public string CategoryVisibility
+    {
+        get => _categoryVisibility;
+        set => Set(ref _categoryVisibility, value);
+    }
+
 
     private ObservableCollection<Category> _categoryLeft = new();
     public ObservableCollection<Category> CategoryLeft
@@ -42,7 +51,7 @@ public partial class AnalyticsViewModel
     }
 
 
-    public void CategoryIconSetup()
+    public void UpdateCategoryIcons()
     {
         var categories = Expense.GetCategoriesWithIcon();
 

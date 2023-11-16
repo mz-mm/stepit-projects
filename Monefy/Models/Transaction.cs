@@ -11,12 +11,12 @@ public class Transaction
     public double Amount { get; set; }
     public DateTime Date { get; set; }
     public string Category { get; set; }
-    public string Icon { get; set; }
+    public Icon Icon { get; set; }
     public string TransactionTypeIcon { get; set; }
     public string TransactionTypeColor { get; set; }
 
     [JsonConstructor]
-    public Transaction(TransactionType transactionType, string description, DateTime date, double amount, string category, string icon, string transactionIcone, string transactionColor)
+    public Transaction(TransactionType transactionType, string description, DateTime date, double amount, string category, Icon icon, string transactionIcone, string transactionColor)
     {
         TypeTransaction = transactionType;
         Description = description;

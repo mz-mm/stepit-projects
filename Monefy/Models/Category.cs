@@ -3,8 +3,9 @@
 public class Category
 {
     public string Name { get; set; }
-    public string Icon { get; set; }
-    public Category(string name, string icon)
+    public Icon Icon { get; set; }
+
+    public Category(string name, Icon icon)
     {
         Name = name;
         Icon = icon;
