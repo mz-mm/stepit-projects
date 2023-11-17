@@ -77,4 +77,6 @@ public partial class AnalyticsViewModel
             }
         }
     }
+
+
 }

@@ -8,7 +8,7 @@ namespace Monefy.Models;
 public static class Income
 {
     public static string TransactionTypeIcon = "Plus";
-    public static string TransactionTypeColor = "#3CC64As";
+    public static string TransactionTypeColor = "#3CC64A";
 
     public static IncomeCategory TryParse(string category)
     {

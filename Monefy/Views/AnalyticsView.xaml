@@ -39,9 +39,11 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border CornerRadius="4" BorderThickness="0" BorderBrush="Black" Margin="0,0,0,12">
-                            <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon.Name}" Foreground="{Binding Icon.Color}" />
-                        </Border>
+                        <Grid Margin="0,0,0,12">
+                            <Border Width="52" Height="52" CornerRadius="4" BorderThickness="1" VerticalAlignment="Top" BorderBrush="{Binding Icon.Color}">
+                                <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center"  Kind="{Binding Icon.Name}" Foreground="{Binding Icon.Color}" />
+                            </Border>
+                        </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -57,7 +59,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border CornerRadius="4" BorderThickness="0" BorderBrush="Black"  Margin="6,0,6,0">
+                            <Border Width="52" Height="52" CornerRadius="4" BorderThickness="1" Margin="6,0,6,0" VerticalAlignment="Top" BorderBrush="{Binding Icon.Color}">
                                 <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon.Name}" Foreground="{Binding Icon.Color}"/>
                             </Border>
                         </DataTemplate>
@@ -76,7 +78,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border CornerRadius="4" BorderThickness="0" BorderBrush="Black"  Margin="6,0,6,0">
+                            <Border Width="52" Height="52" CornerRadius="4" BorderThickness="1" Margin="6,0,6,0" VerticalAlignment="Top" BorderBrush="{Binding Icon.Color}">
                                 <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon.Name}" Foreground="{Binding Icon.Color}"/>
                             </Border>
                         </DataTemplate>
@@ -94,9 +96,11 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border CornerRadius="4" BorderThickness="0" BorderBrush="Black" Margin="0,0,0,12">
-                            <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4" Kind="{Binding Icon.Name}" Foreground="{Binding Icon.Color}"/>
-                        </Border>
+                        <Grid Margin="0,0,0,12">
+                            <Border Width="52" Height="52" CornerRadius="4" BorderThickness="1" VerticalAlignment="Top" BorderBrush="{Binding Icon.Color}">
+                                <md:PackIcon Width="42" Height="42" VerticalAlignment="Center" HorizontalAlignment="Center"  Kind="{Binding Icon.Name}" Foreground="{Binding Icon.Color}" />
+                            </Border>
+                        </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
