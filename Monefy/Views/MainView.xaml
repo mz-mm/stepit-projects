@@ -40,18 +40,20 @@
                     </StackPanel>
                 </Border>
 
+                <UserControl Grid.Row="1" Content="{Binding CurrentView, UpdateSourceTrigger=PropertyChanged}"/>
                 <Grid Grid.Row="1" Margin="120,0,120,0">
-                    <UserControl Content="{Binding CurrentView, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
             </Grid>
         </Border>
 
-        <Border Background="#FAFAFA" BorderBrush="DimGray" BorderThickness="2" CornerRadius="20" Width="80" HorizontalAlignment="Left" Height="150">
+        <Border Background="#FAFAFA" BorderBrush="DimGray" BorderThickness="2" CornerRadius="20" Width="80" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Grid>
-                <StackPanel Margin="12" VerticalAlignment="Center">
-                    <Button Command="{Binding HomeCommand}" Style="{StaticResource MaterialDesignIconButton}" Margin="0,0,0,16" Content="{md:PackIcon Kind=Home}"/>
-                    <Button Command="{Binding AnalyticsCommand}" Style="{StaticResource MaterialDesignIconButton}" Content="{md:PackIcon Kind=Analytics}"/>
+                <StackPanel Margin="12,12,12,0" VerticalAlignment="Center">
+                    <Button Command="{Binding TrasactionsCommand}" Style="{StaticResource MaterialDesignIconButton}" Margin="0,0,0,12" Content="{md:PackIcon Kind=Exchange}"/>
+                    <Button Command="{Binding AnalyticsCommand}" Style="{StaticResource MaterialDesignIconButton}" Margin="0,0,0,12" Content="{md:PackIcon Kind=Analytics}"/>
+                    <Button Command="{Binding SettingsCommand}" Style="{StaticResource MaterialDesignIconButton}" Margin="0,0,0,12" Content="{md:PackIcon Kind=Settings}"/>
                 </StackPanel>
             </Grid>
         </Border>
-    </Grid></Window>
+    </Grid>
+</Window>

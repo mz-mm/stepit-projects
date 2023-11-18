@@ -3,6 +3,7 @@ using System;
 using LiveCharts;
 using Monefy.Services.Interfaces;
 using Monefy.Services.Classes;
+using System.Linq;
 
 namespace Monefy.ViewModels;
 
@@ -21,6 +22,14 @@ public partial class AnalyticsViewModel : ViewModelBase
         }
 
     }
+
+    private double _currentExpense;
+    public double CurrentExpense
+    {
+        get => _currentExpense;
+        set => Set(ref _currentExpense, value);
+    }
+
 
     private DateTime _currentDate;
     public DateTime CurrentDate 
@@ -42,6 +51,7 @@ public partial class AnalyticsViewModel : ViewModelBase
         _chartData = new SeriesCollection();
 
         UpdateCategoryIcons();
+        UpdateCurrentExpense(CurrentDate);
         UpdateChartData(_transactionsService.GetAllExepenseTransaction(), DateTime.Today);
 
         transactionsService.Transactions.CollectionChanged += (sender, e) =>
@@ -50,12 +60,25 @@ public partial class AnalyticsViewModel : ViewModelBase
         };
     }
 
+    private void UpdateCurrentExpense(DateTime? dateTime = null)
+    {
+        if (dateTime == null)
+        {
+            CurrentExpense = _transactionsService.GetAllExepenseTransaction().Sum(t => t.Amount);
+        }
+        else
+        {
+            CurrentExpense = _transactionsService.GetAllExepenseTransaction().Where(t => t.Date == dateTime).Sum(t => t.Amount);
+        }
+    }
+
 
     public RelayCommand DayBackCommand
     {
         get => new(() =>
         {
             CurrentDate = CurrentDate.AddDays(-1);
+            UpdateCurrentExpense(CurrentDate);
         });
     }
 
@@ -64,6 +87,7 @@ public partial class AnalyticsViewModel : ViewModelBase
         get => new(() =>
         {
             CurrentDate = CurrentDate.AddDays(1);
+            UpdateCurrentExpense(CurrentDate);
         });
     }
 
@@ -72,6 +96,7 @@ public partial class AnalyticsViewModel : ViewModelBase
         get => new(() => 
         {
             UpdateChartData(_transactionsService.GetAllExepenseTransaction());
+            UpdateCurrentExpense();
         });
     }
 

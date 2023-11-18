@@ -6,8 +6,9 @@
              xmlns:local="clr-namespace:Monefy.Views"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="850" d:DesignWidth="1200">
+
+    <Grid Background="White" Margin="120,0,120,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
             <RowDefinition/>
@@ -61,7 +62,10 @@
                 </Button>
             </Grid>
 
-            <Button Command="{Binding ClearCommand}" Visibility="{Binding ClearButtonVisibility}" HorizontalAlignment="Left" Margin="0,0,0,12" Style="{StaticResource MaterialDesignOutlinedButton}" >Clear</Button>
+            <StackPanel Orientation="Horizontal" Margin="0,-8,0,0">
+                <ComboBox VerticalAlignment="Center" Margin="12,0,24,0"/>
+                <Button VerticalAlignment="Center" Command="{Binding ClearCommand}" Visibility="{Binding ClearButtonVisibility}" HorizontalAlignment="Left" Margin="0,12,0,12" Style="{StaticResource MaterialDesignOutlinedButton}">Clear Filter</Button>
+            </StackPanel>
 
             
             <ScrollViewer Height="540" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">

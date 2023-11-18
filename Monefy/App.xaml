@@ -16,14 +16,13 @@
                 <View:TransactionsView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type ViewModel:AddTransactionViewModel}">
+         <DataTemplate DataType="{x:Type ViewModel:AddTransactionViewModel}">
                 <View:AddTransactionView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type ViewModel:AnalyticsViewModel}">
                 <View:AnalyticsView/>
             </DataTemplate>
-
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />

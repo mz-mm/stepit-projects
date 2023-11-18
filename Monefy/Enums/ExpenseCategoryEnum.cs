@@ -14,4 +14,6 @@ public enum ExpenseCategory
     Education,
     Dining,
     Gifts,
+    Test,
+    Test2,
 }

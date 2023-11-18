@@ -32,8 +32,8 @@ namespace Monefy.ViewModels
                 CurrentView = message.ViewModelType;
             });
         }
-
-        public RelayCommand HomeCommand
+        
+        public RelayCommand TrasactionsCommand
         {
             get => new(() =>
             {

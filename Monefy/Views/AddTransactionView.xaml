@@ -6,8 +6,9 @@
              xmlns:local="clr-namespace:Monefy.Views"
              mc:Ignorable="d" 
              MouseDown="View_MouseDown"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Name="grid" Focusable="True">
+             d:DesignHeight="850" d:DesignWidth="1200">
+
+    <Grid Background="White" Margin="120,0,120,0" Name="grid" Focusable="True">
         <StackPanel Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200">
             <Label FontSize="22" FontWeight="Medium" Margin="0,0,0,12">Add Transaction</Label>
 
