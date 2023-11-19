@@ -14,19 +14,9 @@ namespace Monefy.ViewModels;
 
 public partial class AnalyticsViewModel
 {
-    private SeriesCollection _chartData = new();
-    public SeriesCollection ChartData
-    {
-        get => _chartData;
-        set
-        {
-            Set(ref _chartData, value);
-        }
-    }
-
     private void UpdateChartData(ObservableCollection<Transaction> transactions, DateTime? dateTime = null)
     {
-        ChartData?.Clear();
+        ChartData = new();
         var currentCategories = new List<ExpenseCategory>();
 
         foreach (var category in Expense.GetCategories())
@@ -39,7 +29,7 @@ public partial class AnalyticsViewModel
             {
                 currentCategories.Add(Expense.TryParse(category));
 
-                ChartData?.Add(
+                ChartData.Add(
                     new PieSeries
                     {
                         Title = category,

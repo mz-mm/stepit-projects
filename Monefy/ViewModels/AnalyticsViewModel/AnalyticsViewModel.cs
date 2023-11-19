@@ -42,22 +42,34 @@ public partial class AnalyticsViewModel : ViewModelBase
         }
     }
 
+    private SeriesCollection _chartData;
+    public SeriesCollection ChartData
+    {
+        get => _chartData;
+        set
+        {
+            Set(ref _chartData, value);
+        }
+    }
+
+
 
     public AnalyticsViewModel(ITransactionsService transactionsService)
     {
         _transactionsService = transactionsService;
 
         CurrentDate = DateTime.Today;
-        _chartData = new SeriesCollection();
 
         UpdateCategoryIcons();
         UpdateCurrentExpense(CurrentDate);
+
         UpdateChartData(_transactionsService.GetAllExepenseTransaction(), DateTime.Today);
 
         transactionsService.Transactions.CollectionChanged += (sender, e) =>
         {
             UpdateChartData(_transactionsService.GetAllExepenseTransaction(), DateTime.Today);
         };
+
     }
 
     private void UpdateCurrentExpense(DateTime? dateTime = null)

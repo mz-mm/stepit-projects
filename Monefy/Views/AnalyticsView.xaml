@@ -118,7 +118,7 @@
             </StackPanel>
             <!--Diagram with Categories-->
 
-            <Label Visibility="{Binding DataVisibily}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Medium" Foreground="White">No data to show</Label>
+            <Label Visibility="{Binding DataVisibily}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Medium" Foreground="Black">No data to show</Label>
 
         </Grid>
 </UserControl>
