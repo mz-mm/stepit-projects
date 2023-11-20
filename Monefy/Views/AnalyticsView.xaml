@@ -12,11 +12,14 @@
         <Grid Background="White" Margin="120,0,120,0">
             <StackPanel Margin="12">
                 <StackPanel Margin="0,0,0,12" HorizontalAlignment="Center"  Orientation="Horizontal">
+                <ComboBox Margin="0,0,12,0" ItemsSource="{Binding Intervals}" SelectedItem="{Binding CurrentInterval}"/>
 
-                    <Button Command="{Binding AllCommand}" Margin="0,0,12,0" Content="All"/>
+                <Button Command="{Binding AllCommand}" Margin="0,0,12,0" Content="All"/>
+
                     <Button Command="{Binding TodayCommand}" Margin="0,0,12,0" Content="Today"/>
 
                     <Button Command="{Binding DayBackCommand}" Style="{StaticResource MaterialDesignOutlinedButton}"  Content="{md:PackIcon Kind=ArrowLeft}"/>
+
                     <Border CornerRadius="2" BorderThickness="1" BorderBrush="Black" Margin="12,0,12,0" >
                         <Label VerticalAlignment="Center" Margin="4"  FontWeight="Medium" Foreground="Black" Content="{Binding CurrentDate}" />
                     </Border>

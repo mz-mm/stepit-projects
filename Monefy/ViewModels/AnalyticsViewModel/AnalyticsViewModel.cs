@@ -4,6 +4,10 @@ using LiveCharts;
 using Monefy.Services.Interfaces;
 using Monefy.Services.Classes;
 using System.Linq;
+using System.Windows.Documents;
+using System.Collections.Generic;
+using Monefy.Enums;
+using System.Collections.ObjectModel;
 
 namespace Monefy.ViewModels;
 
@@ -30,9 +34,8 @@ public partial class AnalyticsViewModel : ViewModelBase
         set => Set(ref _currentExpense, value);
     }
 
-
     private DateTime _currentDate;
-    public DateTime CurrentDate 
+    public DateTime CurrentDate
     {
         get => _currentDate;
         set
@@ -41,6 +44,17 @@ public partial class AnalyticsViewModel : ViewModelBase
             UpdateChartData(_transactionsService.GetAllExepenseTransaction(), _currentDate);
         }
     }
+
+    // Gets all intervals
+    public List<string> Intervals { get; set; } = new(Enum.GetValues(typeof(Interval)).Cast<Interval>().Select(t => t.ToString()));
+
+    private string _currentInterval = Interval.Days.ToString();
+    public string CurrentInterval
+    {
+        get => _currentInterval;
+        set => Set(ref _currentInterval, value);
+    }
+
 
     private SeriesCollection _chartData;
     public SeriesCollection ChartData
@@ -53,6 +67,17 @@ public partial class AnalyticsViewModel : ViewModelBase
     }
 
 
+    private void UpdateCurrentExpense(DateTime? dateTime = null)
+    {
+        if (dateTime == null)
+        {
+            CurrentExpense = _transactionsService.GetAllExepenseTransaction().Sum(t => t.Amount);
+        }
+        else
+        {
+            CurrentExpense = _transactionsService.GetAllExepenseTransaction().Where(t => t.Date == dateTime).Sum(t => t.Amount);
+        }
+    }
 
     public AnalyticsViewModel(ITransactionsService transactionsService)
     {
@@ -71,19 +96,6 @@ public partial class AnalyticsViewModel : ViewModelBase
         };
 
     }
-
-    private void UpdateCurrentExpense(DateTime? dateTime = null)
-    {
-        if (dateTime == null)
-        {
-            CurrentExpense = _transactionsService.GetAllExepenseTransaction().Sum(t => t.Amount);
-        }
-        else
-        {
-            CurrentExpense = _transactionsService.GetAllExepenseTransaction().Where(t => t.Date == dateTime).Sum(t => t.Amount);
-        }
-    }
-
 
     public RelayCommand DayBackCommand
     {
@@ -105,7 +117,7 @@ public partial class AnalyticsViewModel : ViewModelBase
 
     public RelayCommand AllCommand
     {
-        get => new(() => 
+        get => new(() =>
         {
             UpdateChartData(_transactionsService.GetAllExepenseTransaction());
             UpdateCurrentExpense();
