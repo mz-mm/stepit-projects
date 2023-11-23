@@ -22,7 +22,6 @@ public partial class AnalyticsViewModel : ViewModelBase
             Set(ref _dataVisibily, value);
             CategoryVisibility = value == "Visible" ? "Hidden" : "Visible";
         }
-
     }
 
     private double _currentExpense;
@@ -32,8 +31,8 @@ public partial class AnalyticsViewModel : ViewModelBase
         set => Set(ref _currentExpense, value);
     }
 
-    private DateTime _currentDate;
-    public DateTime CurrentDate
+    private string _currentDate;
+    public string CurrentDate
     {
         get => _currentDate;
         set
@@ -56,13 +55,19 @@ public partial class AnalyticsViewModel : ViewModelBase
 
             if (_currentInterval == Interval.Days.ToString())
             {
-                CurrentDate = DateTime.Now;
+                CurrentDate = DateTime.Today.ToString("dd/MM/yyyy");
             }
 
             else if (_currentInterval == Interval.Weeks.ToString())
             {
-                CurrentDate = DateTime.Now;
+                CurrentDate = DateTime.Today.ToString("dd/MM/yyyy");
             }
+
+            else if (_currentInterval == Interval.Month.ToString())
+            {
+                CurrentDate = DateTime.Today.ToString("MM/yyyy");
+            }
+
         }
     }
 
@@ -78,7 +83,7 @@ public partial class AnalyticsViewModel : ViewModelBase
     }
 
 
-    private void UpdateCurrentExpense(DateTime? dateTime = null)
+    private void UpdateCurrentExpense(string? dateTime = null)
     {
         if (dateTime == null)
         {
@@ -86,7 +91,7 @@ public partial class AnalyticsViewModel : ViewModelBase
         }
         else
         {
-            CurrentExpense = _transactionsService.GetAllExepenseTransaction().Where(t => t.Date == dateTime).Sum(t => t.Amount);
+            CurrentExpense = _transactionsService.GetAllExepenseTransaction().Where(t => t.Date == DateTime.Parse(dateTime)).Sum(t => t.Amount);
         }
     }
 
@@ -94,25 +99,37 @@ public partial class AnalyticsViewModel : ViewModelBase
     {
         _transactionsService = transactionsService;
 
-        CurrentDate = DateTime.Today;
+        CurrentDate = DateTime.Today.ToString("dd/MM/yyyy");
 
         UpdateCategoryIcons();
         UpdateCurrentExpense(CurrentDate);
 
-        UpdateChartData(_transactionsService.GetAllExepenseTransaction(), DateTime.Today);
+        UpdateChartData(_transactionsService.GetAllExepenseTransaction(), DateTime.Today.ToString("dd/MM/yyyy"));
 
         transactionsService.Transactions.CollectionChanged += (sender, e) =>
         {
-            UpdateChartData(_transactionsService.GetAllExepenseTransaction(), DateTime.Today);
+            UpdateChartData(_transactionsService.GetAllExepenseTransaction(), DateTime.Today.ToString("dd/MM/yyyy"));
         };
-
     }
 
     public RelayCommand DayBackCommand
     {
         get => new(() =>
         {
-            CurrentDate = CurrentDate.AddDays(-1);
+            if (_currentInterval == Interval.Days.ToString())
+            {
+                CurrentDate = DateTime.Parse(CurrentDate).AddDays(-1).ToString("dd/MM/yyyy");
+            }
+
+            else if (_currentInterval == Interval.Weeks.ToString())
+            {
+                CurrentDate = DateTime.Parse(CurrentDate).AddDays(-7).ToString("dd/MM/yyyy");
+            }
+
+            else if (_currentInterval == Interval.Month.ToString())
+            {
+                CurrentDate = DateTime.Parse(CurrentDate).AddMonths(-1).ToString("MM/yyyy");
+            }
             UpdateCurrentExpense(CurrentDate);
         });
     }
@@ -121,7 +138,21 @@ public partial class AnalyticsViewModel : ViewModelBase
     {
         get => new(() =>
         {
-            CurrentDate = CurrentDate.AddDays(1);
+            if (_currentInterval == Interval.Days.ToString())
+            {
+                CurrentDate = DateTime.Parse(CurrentDate).AddDays(1).ToString("dd/MM/yyyy");
+            }
+
+            else if (_currentInterval == Interval.Weeks.ToString())
+            {
+                CurrentDate = DateTime.Parse(CurrentDate).AddDays(7).ToString("dd/MM/yyyy");
+            }
+
+            else if (_currentInterval == Interval.Month.ToString())
+            {
+                CurrentDate = DateTime.Parse(CurrentDate).AddMonths(1).ToString("MM/yyyy");
+            }
+
             UpdateCurrentExpense(CurrentDate);
         });
     }
@@ -139,7 +170,7 @@ public partial class AnalyticsViewModel : ViewModelBase
     {
         get => new(() =>
         {
-            UpdateChartData(_transactionsService.GetAllExepenseTransaction(), DateTime.Today);
+            UpdateChartData(_transactionsService.GetAllExepenseTransaction(), DateTime.Today.ToString("dd/MM/yyyy"));
         });
     }
 }

@@ -12,7 +12,7 @@
         <Grid Background="White" Margin="120,0,120,0">
             <StackPanel Margin="12">
                 <StackPanel Margin="0,0,0,12" HorizontalAlignment="Center"  Orientation="Horizontal">
-                <ComboBox Margin="0,0,12,0" ItemsSource="{Binding Intervals}" SelectedItem="{Binding CurrentInterval}"/>
+                <ComboBox Margin="0,0,12,0" ItemsSource="{Binding Intervals, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding CurrentInterval}"/>
 
                 <Button Command="{Binding AllCommand}" Margin="0,0,12,0" Content="All"/>
 

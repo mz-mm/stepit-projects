@@ -6,21 +6,22 @@ using Monefy.Services.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 
 namespace Monefy.ViewModels;
 
 public partial class AnalyticsViewModel
 {
-    private void UpdateChartData(ObservableCollection<Transaction> transactions, DateTime? dateTime = null)
+    private void UpdateChartData(ObservableCollection<Transaction> transactions, string? dateTime = null)
     {
         ChartData = new();
         var currentCategories = new List<ExpenseCategory>();
 
         foreach (var category in Expense.GetCategories())
         {
-            var filteredTransactions = (dateTime.HasValue)
-                                     ? _transactionsService.GetTransactionByInterval(EnumService.TryParseString<Interval>(CurrentInterval), (DateTime)dateTime).Where(t => t.Category == category)
+            var filteredTransactions = (dateTime != null)
+                                     ? _transactionsService.GetTransactionByInterval(EnumService.TryParseString<Interval>(CurrentInterval), DateTime.Parse(dateTime)).Where(t => t.Category == category)
                                      : transactions.Where(t => t.Category == category);
 
             if (filteredTransactions.Any())
@@ -42,9 +43,9 @@ public partial class AnalyticsViewModel
 
         DataVisibily = ChartData.Any() ? "Hidden" : "Visible";
 
-        if (dateTime.HasValue && CurrentDate != dateTime.Value)
+        if (dateTime != null && CurrentDate != dateTime)
         {
-            CurrentDate = dateTime.Value;
+            CurrentDate = dateTime;
         }
     }
 }
