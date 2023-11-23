@@ -1,4 +1,5 @@
 ﻿using Monefy.Enums;
+using Monefy.Services.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,6 @@ public class Expense
 {
     public static string TransactionTypeIcon = "Minus";
     public static string TransactionTypeColor = "Black";
-
-    public static ExpenseCategory TryParse(string category)
-    {
-
-        ExpenseCategory expenseCategory;
-        Enum.TryParse(category, out expenseCategory);
-
-        return expenseCategory;
-    }
 
     public static IEnumerable<string> GetCategories()
     {
@@ -50,7 +42,7 @@ public class Expense
     public static List<Category> GetCategoriesWithIcon()
     {
         return GetCategories() 
-            .Select(category => new Category(category.ToString(), GetIcon(TryParse(category))))
+            .Select(category => new Category(category.ToString(), GetIcon(EnumService.TryParseString<ExpenseCategory>(category))))
             .ToList();
     }
 

@@ -35,6 +35,7 @@ public class TransactionService : ITransactionsService
         Transactions = new ObservableCollection<Transaction>(Transactions.OrderBy(t => t.Date));
     }
 
+
     public Transaction AddTransaction(Transaction transaction)
     {
         Transactions.Add(transaction);
@@ -61,6 +62,28 @@ public class TransactionService : ITransactionsService
         _serializeService.Serialize(TransactionDatabasePath, Transactions);
 
         return transaction;
+    }
+
+
+    public ObservableCollection<Transaction> GetTransactionByInterval(Interval interval, DateTime date)
+    {
+        switch (interval)
+        {
+            case Interval.Days:
+                return new ObservableCollection<Transaction>(Transactions.Where(t => t.Date.Day == date.Day));
+
+            case Interval.Weeks:
+                var startOfWeek = date.Date.AddDays(-(int)date.DayOfWeek);
+                var endOfWeek = startOfWeek.AddDays(6);
+
+                return new ObservableCollection<Transaction>(Transactions.Where(t => t.Date.Date >= startOfWeek && t.Date.Date <= endOfWeek));
+
+            case Interval.Month:
+                return new ObservableCollection<Transaction>(Transactions.Where(t => t.Date.Month == date.Month));
+
+            default:
+                return new ObservableCollection<Transaction>(Transactions.Where(t => t.Date.Day == date.Day));
+        }
     }
 
     public ObservableCollection<Transaction> GetAllIncomeTransactions()

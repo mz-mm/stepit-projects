@@ -2,13 +2,11 @@
 using LiveCharts.Wpf;
 using Monefy.Enums;
 using Monefy.Models;
+using Monefy.Services.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
 
 namespace Monefy.ViewModels;
 
@@ -22,12 +20,12 @@ public partial class AnalyticsViewModel
         foreach (var category in Expense.GetCategories())
         {
             var filteredTransactions = (dateTime.HasValue)
-                                     ? transactions.Where(t => t.Category == category && t.Date == dateTime.Value)
+                                     ? _transactionsService.GetTransactionByInterval(EnumService.TryParseString<Interval>(CurrentInterval), (DateTime)dateTime).Where(t => t.Category == category)
                                      : transactions.Where(t => t.Category == category);
 
             if (filteredTransactions.Any())
             {
-                currentCategories.Add(Expense.TryParse(category));
+                currentCategories.Add(EnumService.TryParseString<ExpenseCategory>(category));
 
                 ChartData.Add(
                     new PieSeries
@@ -35,7 +33,7 @@ public partial class AnalyticsViewModel
                         Title = category,
                         Values = new ChartValues<double> { filteredTransactions.Sum(t => t.Amount) },
                         Tag = filteredTransactions.Sum(t => t.Amount).ToString(),
-                        Fill = Expense.GetIcon(Expense.TryParse(category)).Color,
+                        Fill = Expense.GetIcon(EnumService.TryParseString<ExpenseCategory>(category)).Color,
                         DataLabels = true,
                     }
                 );

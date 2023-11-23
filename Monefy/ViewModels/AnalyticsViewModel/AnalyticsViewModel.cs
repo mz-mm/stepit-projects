@@ -4,10 +4,8 @@ using LiveCharts;
 using Monefy.Services.Interfaces;
 using Monefy.Services.Classes;
 using System.Linq;
-using System.Windows.Documents;
 using System.Collections.Generic;
 using Monefy.Enums;
-using System.Collections.ObjectModel;
 
 namespace Monefy.ViewModels;
 
@@ -52,7 +50,20 @@ public partial class AnalyticsViewModel : ViewModelBase
     public string CurrentInterval
     {
         get => _currentInterval;
-        set => Set(ref _currentInterval, value);
+        set
+        {
+            Set(ref _currentInterval, value);
+
+            if (_currentInterval == Interval.Days.ToString())
+            {
+                CurrentDate = DateTime.Now;
+            }
+
+            else if (_currentInterval == Interval.Weeks.ToString())
+            {
+                CurrentDate = DateTime.Now;
+            }
+        }
     }
 
 

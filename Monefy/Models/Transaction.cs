@@ -53,4 +53,7 @@ public class Transaction
         Category = category.ToString();
         Icon = Income.GetIcon(category);
     }
+
+
+
 }

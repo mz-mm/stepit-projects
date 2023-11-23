@@ -10,14 +10,6 @@ public static class Income
     public static string TransactionTypeIcon = "Plus";
     public static string TransactionTypeColor = "#3CC64A";
 
-    public static IncomeCategory TryParse(string category)
-    {
-        IncomeCategory incomeCategory;
-        Enum.TryParse(category, out incomeCategory);
-
-        return incomeCategory;
-    }
-
     public static IEnumerable<string> GetCategories()
     {
         return Enum.GetValues(typeof(IncomeCategory))

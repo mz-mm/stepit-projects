@@ -131,7 +131,7 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
                     new Transaction(
                         description: Description,
                         amount: Convert.ToDouble(Amount),
-                        category: Income.TryParse(SelectedCategory) 
+                        category: EnumService.TryParseString<IncomeCategory>(SelectedCategory)
                     )
                 );
             }
@@ -141,7 +141,7 @@ public class AddTransactionViewModel : ViewModelBase, INotifyPropertyChanged
                     new Transaction(
                         description: Description,
                         amount: Convert.ToDouble(Amount),
-                        category: Expense.TryParse(SelectedCategory)
+                        category: EnumService.TryParseString<ExpenseCategory>(SelectedCategory)
                     )
                 );
             }
