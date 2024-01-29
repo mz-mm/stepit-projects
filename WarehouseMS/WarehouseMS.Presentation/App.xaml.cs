@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WarehouseMS.Infrastructure.Context;
@@ -15,12 +17,16 @@ public partial class App : Application
     public App()
     {
         AppHost = Host.CreateDefaultBuilder()
+            .ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                config.SetBasePath(Directory.GetCurrentDirectory());
+                config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            })
             .ConfigureServices((hostContext, services) =>
             {
                 services.AddDbContext<AppDbContext>(options =>
                 {
-                    // Configure your DbContext options here
-                    options.UseSqlServer("YourConnectionString");
+                    options.UseSqlServer(hostContext.Configuration.GetConnectionString("DefaultConnection"));
                 });
 
                 services.AddTransient<MainView>();
