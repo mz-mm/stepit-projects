@@ -8,7 +8,6 @@ namespace WarehouseMS.Domain.Services;
 
 public class ProductService : IProductService
 {
-
     private IProductRepository _productRepository;
     private IMapper _mapper;
 
@@ -49,7 +48,6 @@ public class ProductService : IProductService
 
         return _mapper.Map<GetProductDto>(result);
     }
-
 
     public async Task<bool> UpdateProductAsync(CreateProductDto product)
     {
