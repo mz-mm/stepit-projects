@@ -7,6 +7,6 @@ public interface IAuthService
 {
     Task<string> LoginAsync(LoginUserDto userCredentials);
     Task<bool> IsAuthenticatedAsync();
-    Task<bool> IsRole(UserRole userRole);
+    Task<bool> CheckUserRole(UserRole userRole);
     Task LogoutAsync();
 }
