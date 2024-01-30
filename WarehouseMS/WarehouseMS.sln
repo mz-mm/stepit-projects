@@ -5,9 +5,9 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarehouseMS.Presentation", "WarehouseMS.Presentation\WarehouseMS.Presentation.csproj", "{0EDE3DD3-C137-44B3-A134-19BFA9BD7C71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseMS.Domain", "WarehouseMS.Domain\WarehouseMS.Domain.csproj", "{D3713AE2-5B94-4DF9-9A22-3ED769B06035}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarehouseMS.Domain", "WarehouseMS.Domain\WarehouseMS.Domain.csproj", "{D3713AE2-5B94-4DF9-9A22-3ED769B06035}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseMS.Infrastructure", "WarehouseMS.Infrastructure\WarehouseMS.Infrastructure.csproj", "{DA53336C-B1ED-4614-A27D-C4DA3FB3359F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarehouseMS.Infrastructure", "WarehouseMS.Infrastructure\WarehouseMS.Infrastructure.csproj", "{DA53336C-B1ED-4614-A27D-C4DA3FB3359F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
