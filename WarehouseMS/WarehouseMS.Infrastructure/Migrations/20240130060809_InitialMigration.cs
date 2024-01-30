@@ -18,7 +18,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Icon = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Color = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 1, 29, 16, 53, 30, 573, DateTimeKind.Utc).AddTicks(8189))
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 1, 30, 6, 8, 9, 332, DateTimeKind.Utc).AddTicks(1695))
                 },
                 constraints: table =>
                 {
@@ -31,13 +31,12 @@ namespace WarehouseMS.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "01/29/2024 16:53:30")
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 1, 30, 6, 8, 9, 333, DateTimeKind.Utc).AddTicks(4986))
                 },
                 constraints: table =>
                 {
@@ -55,7 +54,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     Price = table.Column<decimal>(type: "decimal(14,2)", nullable: false),
                     StockQuantity = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 1, 29, 16, 53, 30, 573, DateTimeKind.Utc).AddTicks(8901)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 1, 30, 6, 8, 9, 332, DateTimeKind.Utc).AddTicks(8236)),
                     CategoryId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -86,7 +85,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OrderSendDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OrderRecievedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 1, 29, 16, 53, 30, 574, DateTimeKind.Utc).AddTicks(7132))
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 1, 30, 6, 8, 9, 332, DateTimeKind.Utc).AddTicks(2706))
                 },
                 constraints: table =>
                 {
@@ -101,8 +100,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                         name: "FK_Warehouses_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

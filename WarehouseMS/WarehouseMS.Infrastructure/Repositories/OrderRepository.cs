@@ -4,9 +4,9 @@ using WarehouseMS.Infrastructure.Interfaces;
 
 namespace WarehouseMS.Infrastructure.Repositories;
 
-public class WarehouseRepository : Repository<Warehouse>, IWarehouseRepository
+public class OrderRepository : Repository<Order>, IOrderRepository
 {
-    protected WarehouseRepository(AppDbContext context) : base(context)
+    protected OrderRepository(AppDbContext context) : base(context)
     {
     }
 }

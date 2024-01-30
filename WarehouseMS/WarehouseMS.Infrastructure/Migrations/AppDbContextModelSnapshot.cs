@@ -38,7 +38,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 1, 29, 16, 53, 30, 573, DateTimeKind.Utc).AddTicks(8189));
+                        .HasDefaultValue(new DateTime(2024, 1, 30, 6, 8, 9, 332, DateTimeKind.Utc).AddTicks(1695));
 
                     b.Property<string>("Icon")
                         .IsRequired()
@@ -53,6 +53,47 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 1, 30, 6, 8, 9, 332, DateTimeKind.Utc).AddTicks(2706));
+
+                    b.Property<DateTime>("OrderRecievedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OrderSendDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OrderStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrackingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Warehouses");
                 });
 
             modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.Product", b =>
@@ -72,7 +113,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 1, 29, 16, 53, 30, 573, DateTimeKind.Utc).AddTicks(8901));
+                        .HasDefaultValue(new DateTime(2024, 1, 30, 6, 8, 9, 332, DateTimeKind.Utc).AddTicks(8236));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -107,11 +148,10 @@ namespace WarehouseMS.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CreatedAt")
-                        .IsRequired()
+                    b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("01/29/2024 16:53:30");
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 1, 30, 6, 8, 9, 333, DateTimeKind.Utc).AddTicks(4986));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -135,55 +175,28 @@ namespace WarehouseMS.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.Warehouse", b =>
+            modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.Order", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasOne("WarehouseMS.Infrastructure.Context.Entities.Product", "Product")
+                        .WithMany("Orders")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.HasOne("WarehouseMS.Infrastructure.Context.Entities.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 1, 29, 16, 53, 30, 574, DateTimeKind.Utc).AddTicks(7132));
+                    b.Navigation("Product");
 
-                    b.Property<DateTime>("OrderRecievedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("OrderSendDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("OrderStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TrackingId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Warehouses");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.Product", b =>
@@ -201,25 +214,6 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.Warehouse", b =>
-                {
-                    b.HasOne("WarehouseMS.Infrastructure.Context.Entities.Product", "Product")
-                        .WithMany("Warehouses")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WarehouseMS.Infrastructure.Context.Entities.User", "User")
-                        .WithMany("Warehouses")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.Category", b =>
                 {
                     b.Navigation("Products");
@@ -227,12 +221,12 @@ namespace WarehouseMS.Infrastructure.Migrations
 
             modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.Product", b =>
                 {
-                    b.Navigation("Warehouses");
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.User", b =>
                 {
-                    b.Navigation("Warehouses");
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

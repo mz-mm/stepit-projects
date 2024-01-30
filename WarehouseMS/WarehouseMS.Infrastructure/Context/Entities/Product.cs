@@ -10,5 +10,5 @@ public class Product : BaseEntity
     public DateTime CreatedAt { get; set; }
 
     public Category Category { get; set; }
-    public ICollection<Warehouse> Warehouses { get; set; }
+    public ICollection<Order> Orders { get; set; }
 }

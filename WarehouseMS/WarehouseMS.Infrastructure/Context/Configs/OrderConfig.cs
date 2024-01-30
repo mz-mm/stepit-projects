@@ -4,9 +4,9 @@ using WarehouseMS.Infrastructure.Context.Entities;
 
 namespace WarehouseMS.Infrastructure.Context.Configs;
 
-public class WarehouseConfig : IEntityTypeConfiguration<Warehouse>
+public class OrderConfig : IEntityTypeConfiguration<Order>
 {
-    public void Configure(EntityTypeBuilder<Warehouse> builder)
+    public void Configure(EntityTypeBuilder<Order> builder)
     {
         builder.Property(w => w.UserId)
             .IsRequired();
@@ -20,16 +20,16 @@ public class WarehouseConfig : IEntityTypeConfiguration<Warehouse>
         builder.Property(w => w.OrderStatus)
             .IsRequired();
 
-        builder.Property(w => w.CreatedDate)
+        builder.Property(w => w.CreatedAt)
             .HasDefaultValue(DateTime.UtcNow);
 
         builder.HasOne(w => w.User)
-            .WithMany(u => u.Warehouses)
+            .WithMany(u => u.Orders)
             .HasForeignKey(w => w.UserId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(w => w.Product)
-            .WithMany(p => p.Warehouses)
+            .WithMany(p => p.Orders)
             .HasForeignKey(w => w.ProductId)
             .OnDelete(DeleteBehavior.Cascade);
     }

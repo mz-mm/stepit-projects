@@ -8,10 +8,6 @@ public class UserConfig : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.Property(x => x.Username)
-            .HasMaxLength(30)
-            .IsRequired();
-
         builder.Property(x => x.Password)
             .IsRequired();
 
@@ -32,7 +28,7 @@ public class UserConfig : IEntityTypeConfiguration<User>
         builder.Property(x => x.CreatedAt)
             .HasDefaultValue(DateTime.UtcNow);
 
-        builder.HasMany(x => x.Warehouses)
+        builder.HasMany(x => x.Orders)
             .WithOne(x => x.User)
             .HasForeignKey(x => x.UserId)
             .OnDelete(DeleteBehavior.NoAction);

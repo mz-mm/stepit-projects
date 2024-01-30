@@ -2,6 +2,6 @@
 
 namespace WarehouseMS.Infrastructure.Interfaces;
 
-public interface IWarehouseRepository : IRepository<Warehouse>
+public interface IOrderRepository : IRepository<Order>
 {
 }
