@@ -42,7 +42,7 @@ public class UserService : IUserService
     public async Task<GetUserDto> CreateUserAsync(CreateUserDto user)
     {
         var userEntity = _mapper.Map<User>(user);
-        var result = _userRepository.InsertAsync(userEntity);
+        var result = await _userRepository.InsertAsync(userEntity);
 
         return _mapper.Map<GetUserDto>(result);
     }

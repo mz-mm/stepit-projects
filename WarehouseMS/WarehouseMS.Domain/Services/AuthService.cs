@@ -2,13 +2,19 @@
 using WarehouseMS.Domain.Enums;
 using WarehouseMS.Domain.Exceptions;
 using WarehouseMS.Domain.Interfaces;
+using WarehouseMS.Infrastructure.Context.Entities;
 
 namespace WarehouseMS.Domain.Services;
 
 public class AuthService : IAuthService
 {
-    private GetUserDto _userIdentity;
+    private GetUserDto? _userIdentity;
     private readonly UserService _userService;
+
+    public AuthService(UserService userService)
+    {
+        _userService = userService;
+    }
 
     public async Task<bool> LoginAsync(LoginUserDto userCredentials)
     {
@@ -17,17 +23,15 @@ public class AuthService : IAuthService
         if (user is null)
             throw new ArgumentNullException(nameof(user));
 
-        var doesPasswordsMatch =
-            BCrypt.Net.BCrypt.Verify(user.Password, BCrypt.Net.BCrypt.HashPassword(userCredentials.Password));
-
-        if (doesPasswordsMatch == false)
+        if (BCrypt.Net.BCrypt.Verify(user.Password, BCrypt.Net.BCrypt.HashPassword(userCredentials.Password)))
             throw new PasswordNotMatchException();
+
+        _userIdentity = user;
 
         return true;
     }
 
-
-    public async Task<bool> IsAuthenticatedAsync()
+    public bool IsAuthenticatedAsync()
     {
         if (_userIdentity is null)
             throw new NotAuthenticatedException();
@@ -35,8 +39,11 @@ public class AuthService : IAuthService
         return true;
     }
 
-    public async Task<bool> CheckUserRole(UserRole userRole)
+    public bool CheckUserRole(UserRole userRole)
     {
+        if (_userIdentity is null)
+            throw new NotAuthenticatedException();
+
         return _userIdentity.Role == userRole;
     }
 

@@ -1,10 +1,15 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WarehouseMS.Domain.Interfaces;
+using WarehouseMS.Domain.Services;
 using WarehouseMS.Infrastructure.Context;
+using WarehouseMS.Infrastructure.Interfaces;
+using WarehouseMS.Infrastructure.Repositories;
 using WarehouseMS.Presentation.ViewModels;
 using WarehouseMS.Presentation.Views;
 
@@ -29,8 +34,21 @@ public partial class App : Application
                     options.UseSqlServer(hostContext.Configuration.GetConnectionString("DefaultConnection"));
                 });
 
+                services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
                 services.AddTransient<MainView>();
                 services.AddTransient<MainViewModel>();
+
+                services.AddScoped<IUserRepository, UserRepository>();
+                services.AddScoped<IProductRepository, ProductRepository>();
+                services.AddScoped<IOrderRepository, OrderRepository>();
+                services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+                services.AddScoped<IUserService, UserService>();
+                services.AddScoped<IProductService, ProductService>();
+                services.AddScoped<IOrderService, OrderService>();
+                services.AddScoped<ICategoryService, CategoryService>();
+                services.AddScoped<IAuthService, AuthService>();
             })
             .Build();
     }
