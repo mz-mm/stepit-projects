@@ -8,7 +8,7 @@ namespace WarehouseMS.Infrastructure.Repositories;
 public class Repository<T> : IRepository<T> where T : BaseEntity
 {
     private readonly AppDbContext _context;
-    private readonly DbSet<T> _entities;
+    protected readonly DbSet<T> _entities;
 
     protected Repository(AppDbContext context)
     {
