@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using AutoMapper;
+﻿using AutoMapper;
 using WarehouseMS.Domain.Dtos.OrderDtos;
 using WarehouseMS.Domain.Enums;
 using WarehouseMS.Domain.Interfaces;
@@ -55,7 +54,7 @@ public class OrderService : IOrderService
     {
         var order = await _orderRepository.GetByIdAsync(orderId);
 
-        if (order == null)
+        if (order is null)
             throw new ArgumentNullException(nameof(order));
 
         order.OrderStatus = newStatus.ToString();
@@ -67,11 +66,20 @@ public class OrderService : IOrderService
 
     public async Task<bool> UpdateOrderAsync(CreateOrderDto order)
     {
-        throw new NotImplementedException();
+        var orderEntity = _mapper.Map<Order>(order);
+        var result = await _orderRepository.UpdateAsync(orderEntity);
+
+        return result;
     }
 
-    public async Task<bool> CancelOrderAsync(int orderId)
+    public async Task<bool> DeleteOrderAsync(int orderId)
     {
-        throw new NotImplementedException();
+        var order = await _orderRepository.GetByIdAsync(orderId); 
+
+        if (order is null)
+            return false;
+
+        var result = await _orderRepository.DeleteAsync(order);
+        return result;
     }
 }

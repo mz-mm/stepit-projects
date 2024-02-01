@@ -12,5 +12,5 @@ public interface IOrderService
     Task<GetOrderDto> CreateOrderAsync(CreateOrderDto orderDetails);
     Task<bool> UpdateOrderStatusAsync(int orderId, OrderStatus newStatus);
     Task<bool> UpdateOrderAsync(CreateOrderDto order);
-    Task<bool> CancelOrderAsync(int orderId);
+    Task<bool> DeleteOrderAsync(int orderId);
 }

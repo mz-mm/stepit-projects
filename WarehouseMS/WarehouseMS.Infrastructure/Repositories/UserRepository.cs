@@ -1,4 +1,5 @@
-﻿using WarehouseMS.Infrastructure.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using WarehouseMS.Infrastructure.Context;
 using WarehouseMS.Infrastructure.Context.Entities;
 using WarehouseMS.Infrastructure.Interfaces;
 
@@ -9,4 +10,7 @@ public class UserRepository : Repository<User>, IUserRepository
     protected UserRepository(AppDbContext context) : base(context)
     {
     }
+
+    public async Task<User?> GetByEmailAsync(string email) =>
+        await _entities.AsNoTracking().SingleOrDefaultAsync(user => user.Email == email);
 }

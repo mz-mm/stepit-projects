@@ -29,6 +29,16 @@ public class UserService : IUserService
         return _mapper.Map<GetUserDto>(user);
     }
 
+    public async Task<GetUserDto?> GetUserByEmailAsync(string email)
+    {
+        var user = await _userRepository.GetByEmailAsync(email);
+
+        if (user is null)
+            throw new ArgumentNullException(nameof(user));
+
+        return _mapper.Map<GetUserDto>(user);
+    }
+
     public async Task<GetUserDto> CreateUserAsync(CreateUserDto user)
     {
         var userEntity = _mapper.Map<User>(user);
@@ -49,7 +59,7 @@ public class UserService : IUserService
     {
         var user = await _userRepository.GetByIdAsync(userId);
 
-        if (user != null)
+        if (user is null)
             return false;
 
         var result = await _userRepository.DeleteAsync(user);

@@ -61,7 +61,7 @@ public class ProductService : IProductService
     {
         var product = await _productRepository.GetByIdAsync(productId);
 
-        if (product != null)
+        if (product is null)
             return false;
 
         var result = await _productRepository.DeleteAsync(product);
