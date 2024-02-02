@@ -1,15 +1,18 @@
 ﻿using AutoMapper;
+using WarehouseMS.Domain.Attributes;
 using WarehouseMS.Domain.Dtos.UserDtos;
+using WarehouseMS.Domain.Enums;
 using WarehouseMS.Domain.Interfaces;
 using WarehouseMS.Infrastructure.Context.Entities;
 using WarehouseMS.Infrastructure.Interfaces;
 
 namespace WarehouseMS.Domain.Services;
 
+
 public class UserService : IUserService
 {
-    private IUserRepository _userRepository;
-    private IMapper _mapper;
+    private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
 
     public UserService(IUserRepository userRepository, IMapper mapper)
     {
@@ -42,6 +45,16 @@ public class UserService : IUserService
     public async Task<GetUserDto> CreateUserAsync(CreateUserDto user)
     {
         var userEntity = _mapper.Map<User>(user);
+        userEntity.Role = UserRole.Customer.ToString();
+        var result = await _userRepository.InsertAsync(userEntity);
+
+        return _mapper.Map<GetUserDto>(result);
+    }
+
+    public async Task<GetUserDto> CreateManagerAsync(CreateUserDto user)
+    {
+        var userEntity = _mapper.Map<User>(user);
+        userEntity.Role = UserRole.Manager.ToString();
         var result = await _userRepository.InsertAsync(userEntity);
 
         return _mapper.Map<GetUserDto>(result);
@@ -65,4 +78,4 @@ public class UserService : IUserService
         var result = await _userRepository.DeleteAsync(user);
         return result;
     }
-}
+    }

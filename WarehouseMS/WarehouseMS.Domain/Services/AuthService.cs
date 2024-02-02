@@ -2,16 +2,15 @@
 using WarehouseMS.Domain.Enums;
 using WarehouseMS.Domain.Exceptions;
 using WarehouseMS.Domain.Interfaces;
-using WarehouseMS.Infrastructure.Context.Entities;
 
 namespace WarehouseMS.Domain.Services;
 
 public class AuthService : IAuthService
 {
     private GetUserDto? _userIdentity;
-    private readonly UserService _userService;
+    private readonly IUserService _userService;
 
-    public AuthService(UserService userService)
+    public AuthService(IUserService userService)
     {
         _userService = userService;
     }
@@ -39,12 +38,17 @@ public class AuthService : IAuthService
         return true;
     }
 
-    public bool CheckUserRole(UserRole userRole)
+    public bool IsUserRole(UserRole userRole)
     {
         if (_userIdentity is null)
             throw new NotAuthenticatedException();
 
-        return _userIdentity.Role == userRole;
+        return userRole switch
+        {
+            UserRole.Any => true, // All users
+            UserRole.Admin => _userIdentity.Role is UserRole.Manager or UserRole.SystemAdmin, // Users of admin type
+            _ => _userIdentity.Role == userRole
+        };
     }
 
     public void LogoutAsync()

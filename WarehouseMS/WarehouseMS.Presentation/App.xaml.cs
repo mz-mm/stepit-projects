@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WarehouseMS.Domain.Attributes;
 using WarehouseMS.Domain.Interfaces;
 using WarehouseMS.Domain.Services;
 using WarehouseMS.Infrastructure.Context;
@@ -36,19 +37,20 @@ public partial class App : Application
 
                 services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-                services.AddTransient<MainView>();
-                services.AddTransient<MainViewModel>();
-
                 services.AddScoped<IUserRepository, UserRepository>();
                 services.AddScoped<IProductRepository, ProductRepository>();
                 services.AddScoped<IOrderRepository, OrderRepository>();
                 services.AddScoped<ICategoryRepository, CategoryRepository>();
 
+                services.AddScoped<IAuthService, AuthService>();
                 services.AddScoped<IUserService, UserService>();
                 services.AddScoped<IProductService, ProductService>();
                 services.AddScoped<IOrderService, OrderService>();
                 services.AddScoped<ICategoryService, CategoryService>();
-                services.AddScoped<IAuthService, AuthService>();
+
+                services.AddTransient<MainView>();
+                services.AddTransient<MainViewModel>();
+
             })
             .Build();
     }
@@ -56,6 +58,8 @@ public partial class App : Application
     protected override async void OnStartup(StartupEventArgs e)
     {
         await AppHost!.StartAsync();
+
+        RequireRoleAttribute.AuthService = AppHost.Services.GetRequiredService<IAuthService>();
 
         var mainWindow = AppHost.Services.GetRequiredService<MainView>();
         mainWindow.DataContext = AppHost.Services.GetRequiredService<MainViewModel>();

@@ -10,7 +10,7 @@ public class UserProfile : Profile
     public UserProfile()
     {
         CreateMap<User, GetUserDto>().ForMember(dest => dest.Role, opt => opt.MapFrom<StringToUserRoleResolver>());
-        CreateMap<CreateUserDto, User>().ForMember(dest => dest.Role, opt => opt.MapFrom<UserRoleToStringResolver>());
+        CreateMap<CreateUserDto, User>();
         CreateMap<LoginUserDto, User>();
     }
 }

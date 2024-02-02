@@ -2,6 +2,9 @@
 
 public enum UserRole
 {
+    Any,
+    Admin,
+
     Customer,
     Manager,
     SystemAdmin

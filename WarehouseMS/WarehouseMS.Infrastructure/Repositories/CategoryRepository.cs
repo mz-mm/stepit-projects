@@ -6,7 +6,7 @@ namespace WarehouseMS.Infrastructure.Repositories;
 
 public class CategoryRepository : Repository<Category>, ICategoryRepository
 {
-    protected CategoryRepository(AppDbContext context) : base(context)
+    public CategoryRepository(AppDbContext context) : base(context)
     {
     }
 }
