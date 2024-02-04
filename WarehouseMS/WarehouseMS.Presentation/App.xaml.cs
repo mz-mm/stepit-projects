@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,8 @@ using WarehouseMS.Domain.Services;
 using WarehouseMS.Infrastructure.Context;
 using WarehouseMS.Infrastructure.Interfaces;
 using WarehouseMS.Infrastructure.Repositories;
+using WarehouseMS.Presentation.Interfaces;
+using WarehouseMS.Presentation.Services;
 using WarehouseMS.Presentation.ViewModels;
 using WarehouseMS.Presentation.Views;
 
@@ -35,6 +38,9 @@ public partial class App : Application
                 });
 
                 services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+                services.AddTransient<IMessenger, Messenger>();
+                services.AddTransient<INavigationService, NavigationService>();
 
                 services.AddScoped<IUserRepository, UserRepository>();
                 services.AddScoped<IProductRepository, ProductRepository>();
