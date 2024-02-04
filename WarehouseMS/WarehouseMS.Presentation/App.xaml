@@ -2,15 +2,19 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WarehouseMS.Presentation"
-             xmlns:View="clr-namespace:WarehouseMS.Presentation.Views"
-             xmlns:ViewModel="clr-namespace:WarehouseMS.Presentation.ViewModels"
+             xmlns:Views="clr-namespace:WarehouseMS.Presentation.Views"
+             xmlns:ViewModels="clr-namespace:WarehouseMS.Presentation.ViewModels"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
              
     <Application.Resources>
         <ResourceDictionary>
 
-            <DataTemplate DataType="{x:Type ViewModel:MainViewModel}">
-                <View:MainView/>
+            <DataTemplate DataType="{x:Type ViewModels:MainViewModel}">
+                <Views:MainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:LoginViewModel}">
+                <Views:LoginView/>
             </DataTemplate>
 
             <ResourceDictionary.MergedDictionaries>

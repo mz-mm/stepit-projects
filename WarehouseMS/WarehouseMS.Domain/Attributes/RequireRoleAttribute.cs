@@ -2,6 +2,7 @@
 using PostSharp.Serialization;
 using WarehouseMS.Domain.Enums;
 using WarehouseMS.Domain.Interfaces;
+using WarehouseMS.Domain.Services;
 
 namespace WarehouseMS.Domain.Attributes;
 
@@ -10,7 +11,6 @@ namespace WarehouseMS.Domain.Attributes;
 public class RequireRoleAttribute : OnMethodBoundaryAspect
 {
     private UserRole _requiredRole;
-    public static IAuthService AuthService;
 
     public RequireRoleAttribute(UserRole requiredRole)
     {
@@ -19,7 +19,8 @@ public class RequireRoleAttribute : OnMethodBoundaryAspect
 
     public override void OnEntry(MethodExecutionArgs args)
     {
-        if (!AuthService.IsUserRole(_requiredRole))
+        var authService = ServiceLocator.GetService<IAuthService>();
+        if (authService != null && !authService.IsUserRole(_requiredRole))
         {
             throw new UnauthorizedAccessException("User does not have the required role.");
         }

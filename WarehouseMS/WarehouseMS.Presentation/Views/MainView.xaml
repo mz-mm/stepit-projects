@@ -31,7 +31,6 @@
                             <md:PackIcon Kind="Minimize"/>
                         </Button>
 
-
                         <Button 
                             Click="Close_Click"
                             Name="Close"

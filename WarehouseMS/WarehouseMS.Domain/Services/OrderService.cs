@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using WarehouseMS.Domain.Attributes;
 using WarehouseMS.Domain.Dtos.OrderDtos;
 using WarehouseMS.Domain.Enums;
 using WarehouseMS.Domain.Interfaces;
@@ -18,6 +19,7 @@ public class OrderService : IOrderService
         _mapper = mapper;
     }
 
+    [RequireRole(UserRole.Admin)]
     public async Task<IEnumerable<GetOrderDto>> GetAllOrdersAsync()
     {
         var orders = await _orderRepository.GetAllAsync();

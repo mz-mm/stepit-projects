@@ -40,4 +40,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Messages\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WarehouseMS.Domain.Attributes;
 using WarehouseMS.Domain.Interfaces;
 using WarehouseMS.Domain.Services;
 using WarehouseMS.Infrastructure.Context;
@@ -50,7 +49,9 @@ public partial class App : Application
 
                 services.AddTransient<MainView>();
                 services.AddTransient<MainViewModel>();
-
+                
+                services.AddTransient<LoginView>();
+                services.AddTransient<LoginViewModel>();
             })
             .Build();
     }
@@ -59,10 +60,10 @@ public partial class App : Application
     {
         await AppHost!.StartAsync();
 
-        RequireRoleAttribute.AuthService = AppHost.Services.GetRequiredService<IAuthService>();
+        ServiceLocator.Initialize(AppHost);
 
-        var mainWindow = AppHost.Services.GetRequiredService<MainView>();
-        mainWindow.DataContext = AppHost.Services.GetRequiredService<MainViewModel>();
+        var mainWindow = ServiceLocator.GetService<MainView>();
+        mainWindow.DataContext = ServiceLocator.GetService<MainViewModel>();
         mainWindow.Show();
 
         base.OnStartup(e);

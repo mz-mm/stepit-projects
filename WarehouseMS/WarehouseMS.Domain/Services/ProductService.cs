@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using WarehouseMS.Domain.Attributes;
 using WarehouseMS.Domain.Dtos.ProductDtos;
+using WarehouseMS.Domain.Enums;
 using WarehouseMS.Domain.Interfaces;
 using WarehouseMS.Infrastructure.Context.Entities;
 using WarehouseMS.Infrastructure.Interfaces;
