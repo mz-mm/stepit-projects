@@ -4,9 +4,47 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WarehouseMS.Presentation.Views"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
-    <Grid>
-        <Label>Order Management System</Label>
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="850" Width="1200">
+
+    <Grid >
+        <Border Background="White" CornerRadius="20" Width="1200" HorizontalAlignment="Right">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border MouseDown="Border_MouseDown" Grid.Row="0" Background="#FAFAFA" CornerRadius="20,20,0,0">
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,16,0">
+
+                        <Button 
+                            Click="Minimize_Click"
+                            Name="Minimize"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            <md:PackIcon Kind="Minimize"/>
+                        </Button>
+
+
+                        <Button 
+                            Click="Close_Click"
+                            Name="Close"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            <md:PackIcon Kind="Close"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <UserControl Grid.Row="1" Content="{Binding CurrentView, UpdateSourceTrigger=PropertyChanged}"/>
+                <Grid Grid.Row="1" Margin="120,0,120,0">
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

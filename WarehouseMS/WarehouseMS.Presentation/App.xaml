@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WarehouseMS.Presentation"
              xmlns:View="clr-namespace:WarehouseMS.Presentation.Views"
-             xmlns:ViewModel="clr-namespace:WarehouseMS.Presentation.ViewModels">
+             xmlns:ViewModel="clr-namespace:WarehouseMS.Presentation.ViewModels"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
              
     <Application.Resources>
         <ResourceDictionary>
@@ -12,6 +13,15 @@
                 <View:MainView/>
             </DataTemplate>
 
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+
+                <ui:ThemesDictionary Theme="Dark" />
+                <ui:ControlsDictionary />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
