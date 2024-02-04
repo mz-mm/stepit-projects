@@ -58,6 +58,9 @@ public partial class App : Application
                 
                 services.AddTransient<LoginView>();
                 services.AddTransient<LoginViewModel>();
+
+                services.AddTransient<SignupView>();
+                services.AddTransient<SignupViewModel>();
             })
             .Build();
     }

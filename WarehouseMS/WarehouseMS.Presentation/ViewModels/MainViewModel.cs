@@ -21,12 +21,12 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public MainViewModel(LoginViewModel loginViewModel, IMessenger messenger, INavigationService navigationService)
+    public MainViewModel(SignupViewModel signupViewModel, IMessenger messenger, INavigationService navigationService)
     {
         _messenger = messenger;
         _navigationService = navigationService;
 
-        CurrentView = loginViewModel;
+        CurrentView = signupViewModel;
 
         _messenger.Register<NavigationMessage>(this, message =>
         {

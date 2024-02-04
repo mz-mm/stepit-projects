@@ -20,7 +20,8 @@ public class RequireRoleAttribute : OnMethodBoundaryAspect
     public override void OnEntry(MethodExecutionArgs args)
     {
         var authService = ServiceLocator.GetService<IAuthService>();
-        if (authService != null && !authService.IsUserRole(_requiredRole))
+
+        if (!authService.IsUserRole(_requiredRole))
         {
             throw new UnauthorizedAccessException("User does not have the required role.");
         }
