@@ -13,7 +13,7 @@
         WindowStartupLocation="CenterScreen"
         Title="Warehouse Management System" Height="850" Width="1200">
 
-    <Grid >
+    <Grid>
         <Border Background="White" CornerRadius="20" Width="1200" HorizontalAlignment="Right">
             <Grid>
                 <Grid.RowDefinitions>
@@ -27,14 +27,16 @@
                         <Button 
                             Click="Minimize_Click"
                             Name="Minimize"
-                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            Style="{DynamicResource MaterialDesignFlatButton}"
+                            Foreground="Black">
                             <md:PackIcon Kind="Minimize"/>
                         </Button>
 
                         <Button 
                             Click="Close_Click"
                             Name="Close"
-                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            Style="{DynamicResource MaterialDesignFlatButton}"
+                            Foreground="Black">
                             <md:PackIcon Kind="Close"/>
                         </Button>
                     </StackPanel>

@@ -42,7 +42,7 @@
 
   <ItemGroup>
     <Folder Include="Messages\" />
-    <Folder Include="Services\" />
+    <Folder Include="Validators\" />
   </ItemGroup>
 
 </Project>

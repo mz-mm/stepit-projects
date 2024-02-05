@@ -11,6 +11,8 @@
             <Label Foreground="Black" FontSize="32" HorizontalAlignment="Center" Margin="0 0 0 -2">Sign up</Label>
             <TextBlock TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" FontSize="18" HorizontalAlignment="Center" Margin="0 0 0 24">Enter your credentials to create your account</TextBlock>
 
+            <Label Content="{Binding Error}" Visibility="{Binding ErrorVisibility}" Foreground="LightCoral" Margin="0 0 0 6"/>
+
             <Grid Margin="0 0 0 12">
                 <TextBox x:Name="FirstNameTextBox" ></TextBox>
                 <TextBlock IsHitTestVisible="False" Text="First Name" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="14,0,0,0" Foreground="DarkGray">
@@ -60,42 +62,20 @@
             </Grid>
 
             <Grid Margin="0 0 0 12">
-                <PasswordBox Name="PasswordBox" Style="{StaticResource {x:Type PasswordBox}}" />
-                <TextBlock IsHitTestVisible="False" Text="Password" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="14,0,0,0" Foreground="DarkGray">
-                    <TextBlock.Style>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Password, ElementName=PasswordBox}" Value="">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
+                <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" x:Name="PasswordBox"/>
+                <Label VerticalAlignment="Center" x:Name="PasswordPlaceholderLabel" Content="Password" Foreground="DarkGray" IsHitTestVisible="False" Margin="14 0 0 0 "/>
             </Grid>
 
             <Grid Margin="0 0 0 12">
-                <PasswordBox Name="ConfirmPasswordBox" Style="{StaticResource {x:Type PasswordBox}}" />
-                <TextBlock IsHitTestVisible="False" Text="Confirm Password" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="14,0,0,0" Foreground="DarkGray">
-                    <TextBlock.Style>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Password, ElementName=ConfirmPasswordBox}" Value="">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
+                <PasswordBox PasswordChanged="ConfirmPasswordBox_PasswordChanged" x:Name="ConfirmPasswordBox"/>
+                <Label VerticalAlignment="Center" x:Name="ConfirmPasswordPlaceholderLabel" Content="Confirm Password" Foreground="DarkGray" IsHitTestVisible="False" Margin="14 0 0 0 "/>
             </Grid>
 
-            <Button Style="{StaticResource {x:Type Button}}" Margin="0 0 0 24" Width="300" Background="#1199FF">Continue</Button>
+            <Button Command="{Binding Signup}" Style="{StaticResource {x:Type Button}}" Margin="0 0 0 24" Width="300" Background="#1199FF">Continue</Button>
 
             <Border Height="1" Background="#242222" Margin="0 0 0 12"></Border>
 
-            <Button Background="Transparent" BorderBrush="Transparent" FontSize="12"  HorizontalAlignment="Center" Margin="0 0 0 14">Already a member? Login</Button>
+            <Button Command="{Binding LoginCommand}"  Background="Transparent" BorderBrush="Transparent" FontSize="12"  HorizontalAlignment="Center" Margin="0 0 0 14">Already a member? Login</Button>
         </StackPanel>
     </Grid>
 </UserControl>

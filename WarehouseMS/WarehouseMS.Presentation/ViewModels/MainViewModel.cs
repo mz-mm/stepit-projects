@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
+using WarehouseMS.Domain.Services;
 using WarehouseMS.Presentation.Interfaces;
 using WarehouseMS.Presentation.Messages;
 
@@ -21,12 +22,12 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public MainViewModel(SignupViewModel signupViewModel, IMessenger messenger, INavigationService navigationService)
+    public MainViewModel(IMessenger messenger, INavigationService navigationService)
     {
         _messenger = messenger;
         _navigationService = navigationService;
 
-        CurrentView = signupViewModel;
+        CurrentView = ServiceLocator.GetService<LoginViewModel>();
 
         _messenger.Register<NavigationMessage>(this, message =>
         {

@@ -39,8 +39,8 @@ public partial class App : Application
 
                 services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-                services.AddTransient<IMessenger, Messenger>();
-                services.AddTransient<INavigationService, NavigationService>();
+                services.AddSingleton<IMessenger, Messenger>();
+                services.AddScoped<INavigationService, NavigationService>();
 
                 services.AddScoped<IUserRepository, UserRepository>();
                 services.AddScoped<IProductRepository, ProductRepository>();
@@ -71,8 +71,11 @@ public partial class App : Application
 
         ServiceLocator.Initialize(AppHost);
 
-        var mainWindow = ServiceLocator.GetService<MainView>();
-        mainWindow.DataContext = ServiceLocator.GetService<MainViewModel>();
+        var mainWindow = new MainView
+        {
+            DataContext = ServiceLocator.GetService<MainViewModel>()
+        };
+
         mainWindow.Show();
 
         base.OnStartup(e);

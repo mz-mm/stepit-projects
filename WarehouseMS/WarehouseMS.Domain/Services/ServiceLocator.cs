@@ -15,9 +15,7 @@ public class ServiceLocator
     public static T GetService<T>()
     {
         if (_host is null)
-        {
             throw new InvalidOperationException("ServiceLocator has not been initialized. Call Initialize method first.");
-        }
 
         return _host.Services.GetRequiredService<T>();
     }

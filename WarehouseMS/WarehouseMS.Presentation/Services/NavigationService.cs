@@ -15,9 +15,9 @@ public class NavigationService : INavigationService
     }
     public void NavigateTo<T>() where T : ViewModelBase
     {
-        _messenger.Send(new NavigationMessage()
-        {
-            ViewModelType = ServiceLocator.GetService<T>()
-        });
+        _messenger.Send(new NavigationMessage
+            {
+                ViewModelType = ServiceLocator.GetService<T>()
+            });
     }
 }

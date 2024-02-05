@@ -1,4 +1,5 @@
-﻿using WarehouseMS.Domain.Dtos.UserDtos;
+﻿using System.Security.Authentication;
+using WarehouseMS.Domain.Dtos.UserDtos;
 using WarehouseMS.Domain.Enums;
 using WarehouseMS.Domain.Exceptions;
 using WarehouseMS.Domain.Interfaces;
@@ -20,10 +21,10 @@ public class AuthService : IAuthService
         var user = await _userService.GetUserByEmailAsync(userCredentials.Email);
 
         if (user is null)
-            throw new ArgumentNullException(nameof(user));
+            throw new InvalidCredentialException("Incorrect email or password");
 
         if (BCrypt.Net.BCrypt.Verify(user.Password, BCrypt.Net.BCrypt.HashPassword(userCredentials.Password)))
-            throw new PasswordNotMatchException();
+            throw new InvalidCredentialException("Incorrect email or password");
 
         _userIdentity = user;
 

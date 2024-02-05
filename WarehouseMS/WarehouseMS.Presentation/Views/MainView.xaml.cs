@@ -18,7 +18,7 @@ public partial class MainView : Window
 
     private void Close_Click(object sender, RoutedEventArgs e)
     {
-        App.Current.Shutdown();
+        Application.Current.Shutdown();
     }
 
     private void Border_MouseDown(object sender, MouseButtonEventArgs e)
