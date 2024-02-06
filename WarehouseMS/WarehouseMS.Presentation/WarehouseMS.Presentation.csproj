@@ -35,14 +35,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Folder Include="Messages\" />
+    <Folder Include="Validators\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Messages\" />
-    <Folder Include="Validators\" />
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

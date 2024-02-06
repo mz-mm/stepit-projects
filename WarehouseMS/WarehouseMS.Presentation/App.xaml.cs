@@ -61,6 +61,9 @@ public partial class App : Application
 
                 services.AddTransient<SignupView>();
                 services.AddTransient<SignupViewModel>();
+
+                services.AddTransient<OrdersView>();
+                services.AddTransient<OrdersViewModel>();
             })
             .Build();
     }

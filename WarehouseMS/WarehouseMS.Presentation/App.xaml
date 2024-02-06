@@ -21,6 +21,10 @@
                 <Views:SignupView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type ViewModels:OrdersViewModel}">
+                <Views:OrdersView/>
+            </DataTemplate>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
