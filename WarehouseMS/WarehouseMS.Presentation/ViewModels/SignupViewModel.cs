@@ -5,6 +5,7 @@ using WarehouseMS.Domain.Dtos.UserDtos;
 using WarehouseMS.Domain.Interfaces;
 using WarehouseMS.Presentation.Interfaces;
 using WarehouseMS.Presentation.Services;
+using WarehouseMS.Presentation.Validators;
 
 namespace WarehouseMS.Presentation.ViewModels;
 
@@ -33,7 +34,7 @@ public class SignupViewModel : ViewModelBase
 
     private string _lastName;
 
-    public string LastNam
+    public string LastName
     {
         get => _lastName;
         set => Set(ref _lastName, value);
@@ -80,7 +81,12 @@ public class SignupViewModel : ViewModelBase
 
     public RelayCommand Signup =>
         new(SignupAuthUser,
-            () => true);
+            () =>
+                !string.IsNullOrWhiteSpace(Email) &&
+                !string.IsNullOrWhiteSpace(Password) &&
+                !string.IsNullOrWhiteSpace(FirstName) &&
+                !string.IsNullOrWhiteSpace(LastName)
+        );
 
     private async void SignupAuthUser()
     {
@@ -89,16 +95,20 @@ public class SignupViewModel : ViewModelBase
             if (Password != ConfirmPassword)
                 throw new InvalidCredentialException("Make sure to enter the same password");
 
+            FieldValidator.ValidateEmail(Email, exMessage: "Invalid Email");
+            FieldValidator.ValidatePassword(Password, exMessage: "Invalid Password");
+            FieldValidator.ValidateName(FirstName, exMessage: "Invalid First Name");
+            FieldValidator.ValidateName(LastName, exMessage: "Invalid Last Name");
+
             await _userService.CreateUserAsync(new CreateUserDto
             {
                 Email = Email,
                 FirstName = FirstName,
-                LastName = LastNam,
+                LastName = LastName,
                 Password = Password,
             });
 
             await _authService.LoginAsync(new LoginUserDto { Email = Email, Password = Password });
-
         }
         catch (Exception ex)
         {

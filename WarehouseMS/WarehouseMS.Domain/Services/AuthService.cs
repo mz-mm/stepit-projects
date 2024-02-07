@@ -31,7 +31,7 @@ public class AuthService : IAuthService
         return true;
     }
 
-    public bool IsAuthenticatedAsync()
+    public bool IsAuthenticated()
     {
         if (_userIdentity is null)
             throw new NotAuthenticatedException();
@@ -52,7 +52,7 @@ public class AuthService : IAuthService
         };
     }
 
-    public void LogoutAsync()
+    public void Logout()
     {
         _userIdentity = null;
     }

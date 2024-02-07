@@ -64,8 +64,8 @@ public class LoginViewModel : ViewModelBase
     {
         try
         {
-            LoginFieldValidator.IsEmailValid(Email);
-            LoginFieldValidator.IsPasswordValid(Password);
+            FieldValidator.ValidateEmail(Email);
+            FieldValidator.ValidatePassword(Password);
 
             await _authService.LoginAsync(new LoginUserDto { Email = Email, Password = Password });
         }
