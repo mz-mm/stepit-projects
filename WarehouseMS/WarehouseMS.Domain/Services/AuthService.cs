@@ -1,6 +1,7 @@
 ﻿using System.Security.Authentication;
 using WarehouseMS.Domain.Dtos.UserDtos;
 using WarehouseMS.Domain.Enums;
+using WarehouseMS.Domain.EventArgs;
 using WarehouseMS.Domain.Exceptions;
 using WarehouseMS.Domain.Interfaces;
 
@@ -8,8 +9,9 @@ namespace WarehouseMS.Domain.Services;
 
 public class AuthService : IAuthService
 {
-    private GetUserDto? _userIdentity;
+    public GetUserDto? UserIdentity { get; private set; }
     private readonly IUserService _userService;
+    private EventHandler<UserLoggedInEventArgs>? _userLoggedIn;
 
     public AuthService(IUserService userService)
     {
@@ -26,14 +28,15 @@ public class AuthService : IAuthService
         if (BCrypt.Net.BCrypt.Verify(user.Password, BCrypt.Net.BCrypt.HashPassword(userCredentials.Password)))
             throw new InvalidCredentialException("Incorrect email or password");
 
-        _userIdentity = user;
+        UserIdentity = user;
+        _userLoggedIn?.Invoke(this, new UserLoggedInEventArgs(UserIdentity));
 
         return true;
     }
 
     public bool IsAuthenticated()
     {
-        if (_userIdentity is null)
+        if (UserIdentity is null)
             throw new NotAuthenticatedException();
 
         return true;
@@ -41,19 +44,30 @@ public class AuthService : IAuthService
 
     public bool IsUserRole(UserRole userRole)
     {
-        if (_userIdentity is null)
+        if (UserIdentity is null)
             throw new NotAuthenticatedException();
 
         return userRole switch
         {
             UserRole.Any => true, // All users
-            UserRole.Admin => _userIdentity.Role is UserRole.Manager or UserRole.SystemAdmin, // Users of admin type
-            _ => _userIdentity.Role == userRole
+            UserRole.Admin => UserIdentity.Role is UserRole.Manager or UserRole.SystemAdmin, // Users of admin type
+            _ => UserIdentity.Role == userRole
         };
     }
 
     public void Logout()
     {
-        _userIdentity = null;
+        UserIdentity = null;
+        _userLoggedIn?.Invoke(this, new UserLoggedInEventArgs(null));
+    }
+
+    public void SubscribeUserLoggedIn(EventHandler<UserLoggedInEventArgs> handler)
+    {
+        _userLoggedIn += handler;
+    }
+
+    public void UnsubscribeUserLoggedIn(EventHandler<UserLoggedInEventArgs> handler)
+    {
+        _userLoggedIn -= handler;
     }
 }

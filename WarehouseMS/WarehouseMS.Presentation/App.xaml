@@ -21,6 +21,10 @@
                 <Views:SignupView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type ViewModels:HomeViewModel}">
+                <Views:HomeView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type ViewModels:OrdersViewModel}">
                 <Views:OrdersView/>
             </DataTemplate>

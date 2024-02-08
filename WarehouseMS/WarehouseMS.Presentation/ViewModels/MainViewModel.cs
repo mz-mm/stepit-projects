@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
+using WarehouseMS.Domain.EventArgs;
+using WarehouseMS.Domain.Interfaces;
 using WarehouseMS.Domain.Services;
 using WarehouseMS.Presentation.Interfaces;
 using WarehouseMS.Presentation.Messages;
@@ -22,7 +24,7 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public MainViewModel(IMessenger messenger, INavigationService navigationService)
+    public MainViewModel(IAuthService authService, IMessenger messenger, INavigationService navigationService)
     {
         _messenger = messenger;
         _navigationService = navigationService;
@@ -33,5 +35,20 @@ public class MainViewModel : ViewModelBase
         {
             CurrentView = message.ViewModelType;
         });
+
+        authService.SubscribeUserLoggedIn(AuthService_UserLoggedIn);
     }
+
+    private void AuthService_UserLoggedIn(object? sender, UserLoggedInEventArgs e)
+    {
+        if (e.User != null)
+        {
+            _navigationService.NavigateTo<HomeViewModel>();
+        }
+        else
+        {
+            _navigationService.NavigateTo<LoginViewModel>();
+        }
+    }
+
 }

@@ -1,6 +1,8 @@
-﻿namespace WarehouseMS.Presentation.ViewModels;
+﻿using GalaSoft.MvvmLight;
 
-public class OrdersViewModel
+namespace WarehouseMS.Presentation.ViewModels;
+
+public class OrdersViewModel : ViewModelBase
 {
     
 }
