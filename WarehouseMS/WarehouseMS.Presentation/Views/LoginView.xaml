@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WarehouseMS.Presentation.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1200">
+             d:DesignHeight="1024" d:DesignWidth="1440">
     <Grid >
 
         <StackPanel Width="300" VerticalAlignment="Center">

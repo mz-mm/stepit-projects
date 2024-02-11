@@ -108,6 +108,7 @@ public class SignupViewModel : ViewModelBase
                 Password = Password,
             });
 
+            // Authenticate user upon sign up
             await _authService.LoginAsync(new LoginUserDto { Email = Email, Password = Password });
         }
         catch (Exception ex)

@@ -46,6 +46,7 @@ public class UserService : IUserService
     {
         var userEntity = _mapper.Map<User>(user);
         userEntity.Role = UserRole.Customer.ToString();
+        userEntity.Password = BCrypt.Net.BCrypt.HashPassword(userEntity.Password);
         var result = await _userRepository.InsertAsync(userEntity);
 
         return _mapper.Map<GetUserDto>(result);

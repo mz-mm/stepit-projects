@@ -1,9 +1,9 @@
-﻿using System.Security.Authentication;
+﻿using GalaSoft.MvvmLight.Messaging;
 using WarehouseMS.Domain.Dtos.UserDtos;
 using WarehouseMS.Domain.Enums;
-using WarehouseMS.Domain.EventArgs;
 using WarehouseMS.Domain.Exceptions;
 using WarehouseMS.Domain.Interfaces;
+using WarehouseMS.Domain.Messages;
 
 namespace WarehouseMS.Domain.Services;
 
@@ -11,25 +11,32 @@ public class AuthService : IAuthService
 {
     public GetUserDto? UserIdentity { get; private set; }
     private readonly IUserService _userService;
-    private EventHandler<UserLoggedInEventArgs>? _userLoggedIn;
+    private readonly IMessenger _messenger;
+    public string IconName { get; set; }
 
-    public AuthService(IUserService userService)
+    public AuthService(IUserService userService, IMessenger messenger)
     {
         _userService = userService;
+        _messenger = messenger;
     }
 
     public async Task<bool> LoginAsync(LoginUserDto userCredentials)
     {
-        var user = await _userService.GetUserByEmailAsync(userCredentials.Email);
+        //var user = await _userService.GetUserByEmailAsync(userCredentials.Email);
 
-        if (user is null)
-            throw new InvalidCredentialException("Incorrect email or password");
+        //if (user is null)
+        //    throw new InvalidCredentialException("Incorrect email or password");
 
-        if (BCrypt.Net.BCrypt.Verify(user.Password, BCrypt.Net.BCrypt.HashPassword(userCredentials.Password)))
-            throw new InvalidCredentialException("Incorrect email or password");
+        //if (BCrypt.Net.BCrypt.Verify(user.Password, BCrypt.Net.BCrypt.HashPassword(userCredentials.Password)))
+        //    throw new InvalidCredentialException("Incorrect email or password");
 
-        UserIdentity = user;
-        _userLoggedIn?.Invoke(this, new UserLoggedInEventArgs(UserIdentity));
+        //UserIdentity = user;
+        UserIdentity = new();
+
+        _messenger.Send(new UserLoginMessage
+        {
+            User = UserIdentity
+        });
 
         return true;
     }
@@ -58,16 +65,10 @@ public class AuthService : IAuthService
     public void Logout()
     {
         UserIdentity = null;
-        _userLoggedIn?.Invoke(this, new UserLoggedInEventArgs(null));
-    }
 
-    public void SubscribeUserLoggedIn(EventHandler<UserLoggedInEventArgs> handler)
-    {
-        _userLoggedIn += handler;
-    }
-
-    public void UnsubscribeUserLoggedIn(EventHandler<UserLoggedInEventArgs> handler)
-    {
-        _userLoggedIn -= handler;
+        _messenger.Send(new UserLoginMessage
+        {
+            User = UserIdentity
+        });
     }
 }

@@ -65,6 +65,9 @@ public partial class App : Application
                 services.AddTransient<HomeView>();
                 services.AddTransient<HomeViewModel>();
 
+                services.AddTransient<ProductsView>();
+                services.AddTransient<ProductsViewModel>();
+
                 services.AddTransient<OrdersView>();
                 services.AddTransient<OrdersViewModel>();
             })

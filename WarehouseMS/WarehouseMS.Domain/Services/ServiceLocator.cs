@@ -11,7 +11,7 @@ public class ServiceLocator
     {
         _host = host;
     }
-
+    
     public static T GetService<T>()
     {
         if (_host is null)

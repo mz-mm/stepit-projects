@@ -11,10 +11,10 @@
         Background="Transparent"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
-        Title="Warehouse Management System" Height="850" Width="1200">
+        Title="Warehouse Management System" Height="1024" Width="1440">
 
     <Grid>
-        <Border Background="White" CornerRadius="20" Width="1200" HorizontalAlignment="Right">
+        <Border Background="White" CornerRadius="20" Width="1440" HorizontalAlignment="Right">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
