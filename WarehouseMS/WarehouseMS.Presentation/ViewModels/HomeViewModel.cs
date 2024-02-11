@@ -2,7 +2,6 @@
 using System.Linq;
 using GalaSoft.MvvmLight;
 using WarehouseMS.Presentation.Models;
-using WarehouseMS.Presentation.Services;
 
 namespace WarehouseMS.Presentation.ViewModels;
 
@@ -21,11 +20,16 @@ public class HomeViewModel : ViewModelBase
     public ViewInfo SelectedView
     {
         get => _selectedView;
-        set => Set(ref _selectedView, value);
+        set
+        {
+            Set(ref _selectedView, value);
+            CurrentView = SelectedView.View;
+        }
     }
 
 
     private ViewModelBase _currentView;
+
     public ViewModelBase CurrentView
     {
         get => _currentView;
@@ -40,6 +44,4 @@ public class HomeViewModel : ViewModelBase
 
         CurrentView = Views.First().View;
     }
-
-    public RelayCommand NavigateSelectedViewCommand => new(() => { CurrentView = SelectedView.View; });
 }

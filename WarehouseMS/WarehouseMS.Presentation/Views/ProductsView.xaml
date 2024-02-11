@@ -5,16 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WarehouseMS.Presentation.Views"
              mc:Ignorable="d"
-             d:DesignHeight="1020" d:DesignWidth="1449">
-    <Grid>
+             d:DesignHeight="1020" d:DesignWidth="1240">
+    <Grid Background="#F1F1F1">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-    <Grid Grid.Row="0" >
-            <Label Margin="8" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="24">Products</Label>
-            <Button Margin="8" VerticalAlignment="Center" HorizontalAlignment="Right" >Add product</Button>
-    </Grid>
+        <DockPanel Margin="24" Grid.Row="0">
+            <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="24">Products</Label>
+            <Button VerticalAlignment="Center" HorizontalAlignment="Right">Add product</Button>
+        </DockPanel>
+
+        <Border Margin="24" BorderThickness="1" BorderBrush="#DBDBDB" CornerRadius="12" Grid.Row="1">
+        <StackPanel Margin="12">
+            <StackPanel Orientation="Horizontal">
+                <Button >All</Button>
+                <Button>Active</Button>
+                <Button>Archived</Button>
+            </StackPanel>
+        </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

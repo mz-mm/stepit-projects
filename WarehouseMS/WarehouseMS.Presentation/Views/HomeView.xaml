@@ -11,14 +11,12 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="11*" />
+            <ColumnDefinition Width="240 " />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
             <StackPanel HorizontalAlignment="Left">
-                <Image HorizontalAlignment="Left" Stretch="UniformToFill" Width="71" Height="54" Margin="0 4 0 0"
-                       Source="/Images/Logo.png" />
                 <Border Height="1.5" Width="40" Background="Gray" CornerRadius="4" Margin="0 12 0 0" />
 
                 <ListBox
@@ -26,7 +24,7 @@
                     HorizontalAlignment="Left"
                     FocusVisualStyle="{x:Null}"
                     Padding="0"
-                    SelectedItem="{Binding SelectedView }"
+                    SelectedItem="{Binding SelectedView}"
                     ItemsSource="{Binding Views}">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
@@ -41,15 +39,12 @@
                     </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Button
-                                Command="{Binding ElementName=ViewsListBox, Path=DataContext.NavigateSelectedViewCommand}"
-
-                                Margin="2">
-                                <StackPanel Orientation="Horizontal">
-                                    <md:PackIcon Width="24" Height="24" Kind="{Binding Icon}" Margin="0 0 8 0" />
-                                    <Label Content="{Binding Name}" />
-                                </StackPanel>
-                            </Button>
+                        <Border Margin="12">
+                            <StackPanel Margin="4" Orientation="Horizontal">
+                                <md:PackIcon Width="24" Height="24" Kind="{Binding Icon}" Margin="0 0 8 0" />
+                                <Label Content="{Binding Name}" />
+                            </StackPanel>
+                        </Border>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
@@ -59,6 +54,5 @@
         <Grid Grid.Column="1">
             <UserControl Content="{Binding CurrentView, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
-
     </Grid>
 </UserControl>

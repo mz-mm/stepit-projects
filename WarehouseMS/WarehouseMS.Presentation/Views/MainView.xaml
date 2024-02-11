@@ -11,38 +11,46 @@
         Background="Transparent"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
-        Title="Warehouse Management System" Height="1024" Width="1440">
+        Title="Warehouse Management System" Height="768" Width="1024">
 
     <Grid>
-        <Border Background="White" CornerRadius="20" Width="1440" HorizontalAlignment="Right">
+        <Border Background="White" CornerRadius="20" Width="1024" HorizontalAlignment="Right">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="40" />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <Border MouseDown="Border_MouseDown" Grid.Row="0" Background="#FAFAFA" CornerRadius="20,20,0,0">
-                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,16,0">
 
-                        <Button 
-                            Click="Minimize_Click"
-                            Name="Minimize"
-                            Style="{DynamicResource MaterialDesignFlatButton}"
-                            Foreground="Black">
-                            <md:PackIcon Kind="Minimize"/>
-                        </Button>
+                    <Grid>
+                        <Image HorizontalAlignment="Left" Stretch="UniformToFill" Width="71" Height="54"
+                               Margin="0 4 0 0"
+                               Source="/Images/Logo.png" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,16,0">
 
-                        <Button 
-                            Click="Close_Click"
-                            Name="Close"
-                            Style="{DynamicResource MaterialDesignFlatButton}"
-                            Foreground="Black">
-                            <md:PackIcon Kind="Close"/>
-                        </Button>
-                    </StackPanel>
+
+                            <Button
+                                Click="Minimize_Click"
+                                Name="Minimize"
+                                Style="{DynamicResource MaterialDesignFlatButton}"
+                                Foreground="Black">
+                                <md:PackIcon Kind="Minimize" />
+                            </Button>
+
+                            <Button
+                                Click="Close_Click"
+                                Name="Close"
+                                Style="{DynamicResource MaterialDesignFlatButton}"
+                                Foreground="Black">
+                                <md:PackIcon Kind="Close" />
+                            </Button>
+                        </StackPanel>
+
+                    </Grid>
                 </Border>
 
-                <UserControl Grid.Row="1" Content="{Binding CurrentView, UpdateSourceTrigger=PropertyChanged}"/>
+                <UserControl Grid.Row="1" Content="{Binding CurrentView, UpdateSourceTrigger=PropertyChanged}" />
                 <Grid Grid.Row="1" Margin="120,0,120,0">
                 </Grid>
             </Grid>

@@ -5,7 +5,7 @@ using WarehouseMS.Infrastructure.Interfaces;
 
 namespace WarehouseMS.Infrastructure.Repositories;
 
-public class Repository<T> : IRepository<T> where T : BaseEntity
+public abstract class Repository<T> : IRepository<T> where T : BaseEntity
 {
     private readonly AppDbContext _context;
     protected readonly DbSet<T> _entities;
