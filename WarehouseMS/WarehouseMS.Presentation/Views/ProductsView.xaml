@@ -5,26 +5,37 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WarehouseMS.Presentation.Views"
              mc:Ignorable="d"
-             d:DesignHeight="1020" d:DesignWidth="1240">
+             d:DesignHeight="768" d:DesignWidth="1240">
     <Grid Background="#F1F1F1">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <DockPanel Margin="24" Grid.Row="0">
+        <DockPanel Margin="24 12 24 0 " Grid.Row="0">
             <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="24">Products</Label>
             <Button VerticalAlignment="Center" HorizontalAlignment="Right">Add product</Button>
         </DockPanel>
 
-        <Border Margin="24" BorderThickness="1" BorderBrush="#DBDBDB" CornerRadius="12" Grid.Row="1">
-        <StackPanel Margin="12">
-            <StackPanel Orientation="Horizontal">
-                <Button >All</Button>
-                <Button>Active</Button>
-                <Button>Archived</Button>
+        <Border Margin="24 12 24 12" BorderThickness="1" BorderBrush="#F7F7F7" CornerRadius="12" Grid.Row="1">
+            <StackPanel Margin="12">
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="2">All</Button>
+                    <Button Margin="2">Active</Button>
+                    <Button Margin="2">Archived</Button>
+                </StackPanel>
+                <Border BorderThickness="1" BorderBrush="#E2E2E2">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Margin="4" />
+                        <Label Margin="4" VerticalAlignment="Center">Product</Label>
+                        <Label Margin="4" VerticalAlignment="Center">Product</Label>
+                        <Label Margin="4" VerticalAlignment="Center">Status</Label>
+                        <Label Margin="4" VerticalAlignment="Center">Inventory</Label>
+                        <Label Margin="4" VerticalAlignment="Center">Category</Label>
+
+                    </StackPanel>
+                </Border>
             </StackPanel>
-        </StackPanel>
         </Border>
     </Grid>
 </UserControl>

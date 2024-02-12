@@ -6,19 +6,17 @@
              xmlns:local="clr-namespace:WarehouseMS.Presentation.Views"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
-             d:DesignHeight="1024" d:DesignWidth="1440">
+             d:DesignHeight="768" d:DesignWidth="1240">
 
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="240 " />
+            <ColumnDefinition Width="140 " />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="0" Margin="0 12 0 0">
             <StackPanel HorizontalAlignment="Left">
-                <Border Height="1.5" Width="40" Background="Gray" CornerRadius="4" Margin="0 12 0 0" />
-
                 <ListBox
                     Name="ViewsListBox"
                     HorizontalAlignment="Left"
@@ -39,10 +37,10 @@
                     </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                        <Border Margin="12">
+                        <Border Margin="4">
                             <StackPanel Margin="4" Orientation="Horizontal">
-                                <md:PackIcon Width="24" Height="24" Kind="{Binding Icon}" Margin="0 0 8 0" />
-                                <Label Content="{Binding Name}" />
+                                <md:PackIcon Width="18" Height="18" Kind="{Binding Icon}" Margin="0 0 8 0" />
+                                <Label Foreground="Black" FontWeight="Normal" Content="{Binding Name}" />
                             </StackPanel>
                         </Border>
                         </DataTemplate>

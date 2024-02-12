@@ -24,8 +24,8 @@
                 <Border MouseDown="Border_MouseDown" Grid.Row="0" Background="#FAFAFA" CornerRadius="20,20,0,0">
 
                     <Grid>
-                        <Image HorizontalAlignment="Left" Stretch="UniformToFill" Width="71" Height="54"
-                               Margin="0 4 0 0"
+                        <Image HorizontalAlignment="Left"  Width="51" Height="34"
+                               Margin="16 4 0 4"
                                Source="/Images/Logo.png" />
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,16,0">
 
