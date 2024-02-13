@@ -14,7 +14,7 @@
         Title="Warehouse Management System" Height="768" Width="1024">
 
     <Grid>
-        <Border Background="White" CornerRadius="20" Width="1024" HorizontalAlignment="Right">
+        <Border Background="White" CornerRadius="20 20 0 0" Width="1024" HorizontalAlignment="Right">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
@@ -24,11 +24,10 @@
                 <Border MouseDown="Border_MouseDown" Grid.Row="0" Background="#FAFAFA" CornerRadius="20,20,0,0">
 
                     <Grid>
-                        <Image HorizontalAlignment="Left"  Width="51" Height="34"
+                        <Image HorizontalAlignment="Left" Width="51" Height="34"
                                Margin="16 4 0 4"
                                Source="/Images/Logo.png" />
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,16,0">
-
 
                             <Button
                                 Click="Minimize_Click"
@@ -51,8 +50,6 @@
                 </Border>
 
                 <UserControl Grid.Row="1" Content="{Binding CurrentView, UpdateSourceTrigger=PropertyChanged}" />
-                <Grid Grid.Row="1" Margin="120,0,120,0">
-                </Grid>
             </Grid>
         </Border>
     </Grid>

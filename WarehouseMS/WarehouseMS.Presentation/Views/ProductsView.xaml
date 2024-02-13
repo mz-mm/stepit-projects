@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:WarehouseMS.Presentation.Views"
              mc:Ignorable="d"
              d:DesignHeight="768" d:DesignWidth="1240">
@@ -16,26 +17,61 @@
             <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="24">Products</Label>
             <Button VerticalAlignment="Center" HorizontalAlignment="Right">Add product</Button>
         </DockPanel>
-
-        <Border Margin="24 12 24 12" BorderThickness="1" BorderBrush="#F7F7F7" CornerRadius="12" Grid.Row="1">
-            <StackPanel Margin="12">
-                <StackPanel Orientation="Horizontal">
-                    <Button Margin="2">All</Button>
-                    <Button Margin="2">Active</Button>
-                    <Button Margin="2">Archived</Button>
+        <Border VerticalAlignment="Top" Margin="24 12 24 12" Background="White" BorderThickness="1"
+                BorderBrush="#E2E2E2"
+                CornerRadius="12" Grid.Row="1" Padding="12">
+            <StackPanel HorizontalAlignment="Stretch">
+                <StackPanel Margin="0 0 0 12" Orientation="Horizontal">
+                    <Button Margin="4">All</Button>
+                    <Button Margin="4">Active</Button>
+                    <Button Margin="4">Archived</Button>
+                    <Button Margin="4" BorderThickness="1">
+                        <md:PackIcon Kind="Plus" />
+                    </Button>
                 </StackPanel>
-                <Border BorderThickness="1" BorderBrush="#E2E2E2">
-                    <StackPanel Orientation="Horizontal">
-                        <CheckBox Margin="4" />
-                        <Label Margin="4" VerticalAlignment="Center">Product</Label>
-                        <Label Margin="4" VerticalAlignment="Center">Product</Label>
-                        <Label Margin="4" VerticalAlignment="Center">Status</Label>
-                        <Label Margin="4" VerticalAlignment="Center">Inventory</Label>
-                        <Label Margin="4" VerticalAlignment="Center">Category</Label>
 
-                    </StackPanel>
+                <Border Background="#F7F7F7" Margin="-12 0 -12 0" BorderThickness="0 1 0 1" BorderBrush="#E2E2E2"
+                        Padding="4 0 4 0">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.15*" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Grid.Column="0" Margin="4 0 4 0" />
+                        <Label Grid.Column="1" Margin="4 0 4 0" VerticalAlignment="Center">Product</Label>
+                        <Label Grid.Column="2" Margin="4 0 4 0" VerticalAlignment="Center">Status</Label>
+                        <Label Grid.Column="3" Margin="4 0 4 0" VerticalAlignment="Center">Inventory</Label>
+                        <Label Grid.Column="4" Margin="4 0 4 0" VerticalAlignment="Center">Category</Label>
+                    </Grid>
                 </Border>
+
+                <ListBox>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox Grid.Column="0" Margin="4 0 4 0" />
+                                <Label Grid.Column="1" Margin="4 0 4 0" VerticalAlignment="Center">Product</Label>
+                                <Label Grid.Column="2" Margin="4 0 4 0" VerticalAlignment="Center">Status</Label>
+                                <Label Grid.Column="3" Margin="4 0 4 0" VerticalAlignment="Center">Inventory</Label>
+                                <Label Grid.Column="4" Margin="4 0 4 0" VerticalAlignment="Center">Category</Label>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </StackPanel>
         </Border>
+
     </Grid>
 </UserControl>
