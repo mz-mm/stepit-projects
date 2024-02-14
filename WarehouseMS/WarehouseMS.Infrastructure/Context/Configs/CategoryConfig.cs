@@ -4,7 +4,7 @@ using WarehouseMS.Infrastructure.Context.Entities;
 
 namespace WarehouseMS.Infrastructure.Context.Configs;
 
-public  class CategoryConfig : IEntityTypeConfiguration<Category>
+public class CategoryConfig : IEntityTypeConfiguration<Category>
 {
     public void Configure(EntityTypeBuilder<Category> builder)
     {

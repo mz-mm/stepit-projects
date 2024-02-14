@@ -8,34 +8,39 @@ public class ProductConfig : IEntityTypeConfiguration<Product>
 {
     public void Configure(EntityTypeBuilder<Product> builder)
     {
-        builder.Property(p => p.Name)
+        builder.Property(x => x.Name)
             .HasMaxLength(100)
             .IsRequired();
 
-        builder.Property(p => p.Description)
+        builder.Property(x => x.Description)
             .HasMaxLength(250);
 
-        builder.Property(p => p.Price)
+        builder.Property(x => x.Price)
             .HasColumnType("decimal(14,2)");
 
-        builder.Property(p => p.StockQuantity)
+        builder.Property(x => x.StockQuantity)
             .IsRequired();
 
-        builder.Property(p => p.CategoryId)
+        builder.Property(x => x.CategoryId)
             .IsRequired();
 
-        builder.Property(p => p.CreatedAt)
+        builder.Property(x => x.CreatedAt)
             .HasDefaultValue(DateTime.UtcNow)
             .IsRequired();
 
-        builder.HasOne(p => p.Category)
+        builder.HasOne(x => x.Category)
             .WithMany()
-            .HasForeignKey(p => p.CategoryId)
+            .HasForeignKey(x => x.CategoryId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasMany(p => p.Orders)
-            .WithOne(w => w.Product)
-            .HasForeignKey(w => w.ProductId)
+        builder.HasOne(x => x.Status)
+            .WithMany(x => x.Products)
+            .HasForeignKey(x => x.StatusId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasMany(x => x.Orders)
+            .WithOne(x => x.Product)
+            .HasForeignKey(x => x.ProductId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }
