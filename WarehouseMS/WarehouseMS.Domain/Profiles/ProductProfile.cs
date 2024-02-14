@@ -11,5 +11,4 @@ public class ProductProfile : Profile
         CreateMap<Product, GetProductDto>();
         CreateMap<CreateProductDto, Product>();
     }
-
 }
