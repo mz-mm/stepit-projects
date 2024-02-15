@@ -33,7 +33,7 @@ public class AuthService : IAuthService
 
         _messenger.Send(new UserLoginMessage
         {
-            User = UserIdentity
+            User = user
         });
 
         return true;

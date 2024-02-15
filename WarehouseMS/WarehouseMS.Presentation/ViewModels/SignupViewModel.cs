@@ -109,7 +109,7 @@ public class SignupViewModel : ViewModelBase
             });
 
             // Authenticate user upon sign up
-            await _authService.LoginAsync(new LoginUserDto { Email = user.Email, Password = user.Password });
+            await _authService.LoginAsync(new LoginUserDto { Email = user.Email, Password = Password });
         }
         catch (Exception ex)
         {

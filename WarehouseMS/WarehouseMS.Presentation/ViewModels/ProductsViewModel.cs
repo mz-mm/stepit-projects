@@ -34,7 +34,7 @@ public class ProductsViewModel : ViewModelBase
         Products.Add(new GetProductDto
         {
             Id = 1,
-            Name = "Shampoo",
+            Name = "Product 1",
             Description = "Description",
             Price = 200,
             StockQuantity = 21,
@@ -45,7 +45,7 @@ public class ProductsViewModel : ViewModelBase
         Products.Add(new GetProductDto
         {
             Id = 2,
-            Name = "Kex",
+            Name = "Product 2",
             Description = "Description",
             Price = 200,
             StockQuantity = 21,
@@ -55,7 +55,7 @@ public class ProductsViewModel : ViewModelBase
         Products.Add(new GetProductDto
         {
             Id = 2,
-            Name = "Water bottle",
+            Name = "Product 3",
             Description = "Description",
             Price = 200,
             StockQuantity = 21,
