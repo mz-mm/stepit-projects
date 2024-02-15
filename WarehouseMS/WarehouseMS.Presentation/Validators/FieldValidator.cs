@@ -19,7 +19,7 @@ public class FieldValidator
 
     public static bool ValidatePassword(string password, string exMessage = "Incorrect email or password")
     {
-        if (!string.IsNullOrWhiteSpace(password) && password.Length >= 8)
+        if (!string.IsNullOrWhiteSpace(password) && password.Length >= 1)
             return true;
 
         throw new InvalidCredentialException(exMessage);

@@ -34,7 +34,7 @@ public partial class App : Application
             {
                 services.AddDbContext<AppDbContext>(options =>
                 {
-                    options.UseSqlServer(hostContext.Configuration.GetConnectionString("DefaultConnection"));
+                    options.UseNpgsql(hostContext.Configuration.GetConnectionString("DefaultConnection"));
                 });
 
                 services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -46,12 +46,14 @@ public partial class App : Application
                 services.AddScoped<IProductRepository, ProductRepository>();
                 services.AddScoped<IOrderRepository, OrderRepository>();
                 services.AddScoped<ICategoryRepository, CategoryRepository>();
+                services.AddScoped<IStatusRepository, StatusRepository>();
 
                 services.AddScoped<IAuthService, AuthService>();
                 services.AddScoped<IUserService, UserService>();
                 services.AddScoped<IProductService, ProductService>();
                 services.AddScoped<IOrderService, OrderService>();
                 services.AddScoped<ICategoryService, CategoryService>();
+                services.AddScoped<IStatusService, StatusService>();
 
                 services.AddTransient<MainView>();
                 services.AddTransient<MainViewModel>();

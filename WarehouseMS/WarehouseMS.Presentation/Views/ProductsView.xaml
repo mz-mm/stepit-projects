@@ -14,7 +14,10 @@
         </Grid.RowDefinitions>
 
         <DockPanel Margin="24 12 24 0 " Grid.Row="0">
-            <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="24">Products</Label>
+            <Label VerticalAlignment="Center" Foreground="#1C1C1C" HorizontalAlignment="Left" FontSize="24"
+                   FontFamily="{StaticResource InterFont}">
+                Products
+            </Label>
             <Button VerticalAlignment="Center" HorizontalAlignment="Right">Add product</Button>
         </DockPanel>
         <Border VerticalAlignment="Top" Margin="24 12 24 12" Background="White" BorderThickness="1"
@@ -22,9 +25,9 @@
                 CornerRadius="12" Grid.Row="1" Padding="12">
             <StackPanel HorizontalAlignment="Stretch">
                 <StackPanel Margin="0 0 0 12" Orientation="Horizontal">
-                    <Button Margin="4">All</Button>
-                    <Button Margin="4">Active</Button>
-                    <Button Margin="4">Archived</Button>
+                    <Button FontFamily="{StaticResource InterFont}" Margin="4">All</Button>
+                    <Button FontFamily="{StaticResource InterFont}" Margin="4">Active</Button>
+                    <Button FontFamily="{StaticResource InterFont}" Margin="4">Archived</Button>
                     <Button Margin="4" BorderThickness="1">
                         <md:PackIcon Kind="Plus" />
                     </Button>
@@ -32,7 +35,7 @@
 
                 <Border Background="#F7F7F7" Margin="-12 0 -12 0" BorderThickness="0 1 0 1" BorderBrush="#E2E2E2"
                         Padding="4 0 4 0">
-                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="12, 4, 12, 4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.15*" />
                             <ColumnDefinition />
@@ -41,31 +44,60 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <CheckBox Grid.Column="0" Margin="4 0 4 0" />
-                        <Label Grid.Column="1" Margin="4 0 4 0" VerticalAlignment="Center">Product</Label>
-                        <Label Grid.Column="2" Margin="4 0 4 0" VerticalAlignment="Center">Status</Label>
-                        <Label Grid.Column="3" Margin="4 0 4 0" VerticalAlignment="Center">Inventory</Label>
-                        <Label Grid.Column="4" Margin="4 0 4 0" VerticalAlignment="Center">Category</Label>
+                        <CheckBox VerticalAlignment="Center" Grid.Column="0" Margin="0 0 4 0" />
+                        <Label Grid.Column="1" Margin="4 0 4 0" VerticalAlignment="Center"
+                               Foreground="#1C1C1C" FontFamily="{StaticResource InterFont}">
+                            Product
+                        </Label>
+                        <Label Grid.Column="2" Margin="4 0 4 0" VerticalAlignment="Center"
+                               Foreground="#1C1C1C" FontFamily="{StaticResource InterFont}">
+                            Status
+                        </Label>
+                        <Label Grid.Column="3" Margin="4 0 4 0" VerticalAlignment="Center"
+                               Foreground="#1C1C1C" FontFamily="{StaticResource InterFont}">
+                            Inventory
+                        </Label>
+                        <Label Grid.Column="4" Margin="4 0 4 0" VerticalAlignment="Center"
+                               Foreground="#1C1C1C" FontFamily="{StaticResource InterFont}">
+                            Category
+                        </Label>
                     </Grid>
                 </Border>
 
-                <ListBox>
+                <ListBox ItemsSource="{Binding Products}" Margin="4, 4, 4, 0" Padding="0" FocusVisualStyle="{x:Null}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="0.15*" />
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox Grid.Column="0" Margin="4 0 4 0" />
-                                <Label Grid.Column="1" Margin="4 0 4 0" VerticalAlignment="Center">Product</Label>
-                                <Label Grid.Column="2" Margin="4 0 4 0" VerticalAlignment="Center">Status</Label>
-                                <Label Grid.Column="3" Margin="4 0 4 0" VerticalAlignment="Center">Inventory</Label>
-                                <Label Grid.Column="4" Margin="4 0 4 0" VerticalAlignment="Center">Category</Label>
+                                <CheckBox Grid.Column="0" Margin="0 0 4 0" />
+                                <Label Grid.Column="1" Margin="4 0 4 0" VerticalAlignment="Center"
+                                       FontFamily="{StaticResource InterFont}" Foreground="#1C1C1C"
+                                       Content="{Binding Name}" />
+                                <Label Grid.Column="2" Margin="4 0 4 0" VerticalAlignment="Center"
+                                       FontFamily="{StaticResource InterFont}" Foreground="#1C1C1C" />
+                                <Label Grid.Column="3" Margin="4 0 4 0" VerticalAlignment="Center"
+                                       FontFamily="{StaticResource InterFont}"
+                                       Content="{Binding StockQuantity}" Foreground="#1C1C1C" />
+                                <Label Grid.Column="4" Margin="4 0 0 0" VerticalAlignment="Center"
+                                       FontFamily="{StaticResource InterFont}" Foreground="#1C1C1C" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

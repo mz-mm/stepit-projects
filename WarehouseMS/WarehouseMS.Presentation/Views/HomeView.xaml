@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:WarehouseMS.Presentation.Views"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
-             d:DesignHeight="768" d:DesignWidth="1240">
+             d:DesignHeight="768" d:DesignWidth="1024">
 
     <Grid>
 
@@ -16,37 +16,38 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0" Margin="0 12 0 0">
-            <StackPanel HorizontalAlignment="Left">
-                <ListBox
-                    Name="ViewsListBox"
-                    HorizontalAlignment="Left"
-                    FocusVisualStyle="{x:Null}"
-                    Padding="0"
-                    SelectedItem="{Binding SelectedView}"
-                    ItemsSource="{Binding Views}">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="ListBoxItem">
-                                        <ContentPresenter />
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                        <Border Margin="4">
-                            <StackPanel Margin="4" Orientation="Horizontal">
-                                <md:PackIcon Width="18" Height="18" Kind="{Binding Icon}" Margin="0 0 8 0" />
-                                <Label Foreground="Black" FontWeight="Normal" Content="{Binding Name}" />
+            <ListBox
+                Name="ViewsListBox"
+                HorizontalAlignment="Left"
+                FocusVisualStyle="{x:Null}"
+                Padding="0"
+                SelectedItem="{Binding SelectedView}"
+                ItemsSource="{Binding Views}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="4 0 0 4" Padding="4">
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon VerticalAlignment="Center" Foreground="#1B1B1B" Width="22" Height="22"
+                                             Kind="{Binding Icon}" Margin="0 0 8 0" />
+                                <Label VerticalAlignment="Center" Foreground="#1B1B1B" FontSize="16"
+                                       FontWeight="Normal" FontFamily="{StaticResource InterFont}"
+                                       Content="{Binding Name}" />
                             </StackPanel>
                         </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
 
         <Grid Grid.Column="1">

@@ -15,9 +15,7 @@ public class SignupViewModel : ViewModelBase
     private readonly IUserService _userService;
     private readonly IAuthService _authService;
 
-
     private string _email;
-
     public string Email
     {
         get => _email;
@@ -85,7 +83,9 @@ public class SignupViewModel : ViewModelBase
                 !string.IsNullOrWhiteSpace(Email) &&
                 !string.IsNullOrWhiteSpace(Password) &&
                 !string.IsNullOrWhiteSpace(FirstName) &&
-                !string.IsNullOrWhiteSpace(LastName)
+                !string.IsNullOrWhiteSpace(LastName) &&
+                !string.IsNullOrWhiteSpace(Password) &&
+                !string.IsNullOrWhiteSpace(ConfirmPassword)
         );
 
     private async void SignupAuthUser()
@@ -100,7 +100,7 @@ public class SignupViewModel : ViewModelBase
             FieldValidator.ValidateName(FirstName, exMessage: "Invalid First Name");
             FieldValidator.ValidateName(LastName, exMessage: "Invalid Last Name");
 
-            await _userService.CreateUserAsync(new CreateUserDto
+            var user = await _userService.CreateUserAsync(new CreateUserDto
             {
                 Email = Email,
                 FirstName = FirstName,
@@ -109,7 +109,7 @@ public class SignupViewModel : ViewModelBase
             });
 
             // Authenticate user upon sign up
-            await _authService.LoginAsync(new LoginUserDto { Email = Email, Password = Password });
+            await _authService.LoginAsync(new LoginUserDto { Email = user.Email, Password = user.Password });
         }
         catch (Exception ex)
         {

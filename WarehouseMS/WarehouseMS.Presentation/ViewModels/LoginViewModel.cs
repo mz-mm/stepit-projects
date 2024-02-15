@@ -26,10 +26,7 @@ public class LoginViewModel : ViewModelBase
     public string Password
     {
         get => _password;
-        set
-        { 
-            Set(ref _password, value);
-        }
+        set => Set(ref _password, value);
     }
 
     private string _error;
@@ -64,8 +61,8 @@ public class LoginViewModel : ViewModelBase
     {
         try
         {
-            FieldValidator.ValidateEmail(Email);
-            FieldValidator.ValidatePassword(Password);
+            //FieldValidator.ValidateEmail(Email);
+            //FieldValidator.ValidatePassword(Password);
 
             await _authService.LoginAsync(new LoginUserDto { Email = Email, Password = Password });
         }

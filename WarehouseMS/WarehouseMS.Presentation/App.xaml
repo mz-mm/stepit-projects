@@ -9,6 +9,12 @@
     <Application.Resources>
         <ResourceDictionary>
 
+            <FontFamily x:Key="InterFont">/WarehouseMS.Presentation;component/Fonts/#Inter</FontFamily>
+
+            <Style TargetType="Control">
+                <Setter Property="FontFamily" Value="{StaticResource InterFont}" />
+            </Style>
+
             <DataTemplate DataType="{x:Type ViewModels:MainViewModel}">
                 <Views:MainView/>
             </DataTemplate>
@@ -41,6 +47,7 @@
 
                 <ui:ThemesDictionary Theme="Light" />
                 <ui:ControlsDictionary />
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

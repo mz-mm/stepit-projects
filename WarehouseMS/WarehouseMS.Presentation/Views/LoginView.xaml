@@ -10,14 +10,14 @@
 
         <StackPanel Width="300" VerticalAlignment="Center">
 
-            <Label Foreground="Black" FontSize="32" HorizontalAlignment="Center" Margin="0 0 0 -2">Login</Label>
-            <Label Foreground="Black" FontSize="18" HorizontalAlignment="Center" Margin="0 0 0 24">Enter your credentials to login</Label>
+            <Label Foreground="Black" FontSize="32" FontFamily="{StaticResource InterFont}" HorizontalAlignment="Center" Margin="0 0 0 -2">Login</Label>
+            <Label Foreground="Black" FontSize="18" FontFamily="{StaticResource InterFont}" HorizontalAlignment="Center" Margin="0 0 0 24">Enter your credentials to login</Label>
 
             <Label Content="{Binding Error}" Visibility="{Binding ErrorVisibility}" Foreground="LightCoral" Margin="0 0 0 6"/>
 
             <Grid Margin="0 0 0 12">
                 <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" x:Name="EmailTextBox" />
-                <TextBlock IsHitTestVisible="False" Text="Email" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="14,0,0,0" Foreground="DarkGray">
+                <TextBlock IsHitTestVisible="False" Text="Email" FontFamily="{StaticResource InterFont}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="14,0,0,0" Foreground="DarkGray">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -33,14 +33,14 @@
 
             <Grid Margin="0 0 0 12">
                 <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" x:Name="PasswordBox"/>
-                <Label VerticalAlignment="Center" x:Name="PlaceholderLabel" Content="Password" Foreground="DarkGray" IsHitTestVisible="False" Margin="14 0 0 0 "/>
+                <Label FontFamily="{StaticResource InterFont}" VerticalAlignment="Center" x:Name="PlaceholderLabel" Content="Password" Foreground="DarkGray" IsHitTestVisible="False" Margin="14 0 0 0 "/>
             </Grid>
 
-            <Button Command="{Binding LoginCommand}" Style="{StaticResource {x:Type Button}}" Margin="0 0 0 24" Width="300" Background="#1199FF">Continue</Button>
+            <Button Command="{Binding LoginCommand}" Style="{StaticResource {x:Type Button}}" Margin="0 0 0 24" Width="300" FontFamily="{StaticResource InterFont}" Background="#1199FF">Continue</Button>
 
             <Border Height="1" Background="#242222" Margin="0 0 0 12"/>
 
-            <Button Command="{Binding SignupCommand}" Background="Transparent" BorderBrush="Transparent" FontSize="12"  HorizontalAlignment="Center" Margin="0 0 0 14">Not a member? Sign up</Button>
+            <Button Command="{Binding SignupCommand}" Background="Transparent" BorderBrush="Transparent" FontSize="12" FontFamily="{StaticResource InterFont}"  HorizontalAlignment="Center" Margin="0 0 0 14">Not a member? Sign up</Button>
         </StackPanel>
     </Grid>
 </UserControl>

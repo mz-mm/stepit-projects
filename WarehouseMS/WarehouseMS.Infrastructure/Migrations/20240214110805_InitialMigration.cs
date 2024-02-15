@@ -19,7 +19,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     Name = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     Icon = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     Color = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 7, 29, 8, 632, DateTimeKind.Utc).AddTicks(5576))
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 11, 8, 5, 656, DateTimeKind.Utc).AddTicks(4277))
                 },
                 constraints: table =>
                 {
@@ -35,7 +35,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     Name = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     Description = table.Column<string>(type: "character varying(120)", maxLength: 120, nullable: false),
                     Color = table.Column<string>(type: "text", nullable: false),
-                    CretedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 7, 29, 8, 633, DateTimeKind.Utc).AddTicks(5047))
+                    CretedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 11, 8, 5, 663, DateTimeKind.Utc).AddTicks(9665))
                 },
                 constraints: table =>
                 {
@@ -53,7 +53,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Role = table.Column<string>(type: "text", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 7, 29, 8, 633, DateTimeKind.Utc).AddTicks(5755))
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 11, 8, 5, 664, DateTimeKind.Utc).AddTicks(1333))
                 },
                 constraints: table =>
                 {
@@ -73,8 +73,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     StockQuantity = table.Column<int>(type: "integer", nullable: false),
                     CategoryId = table.Column<int>(type: "integer", nullable: false),
                     StatusId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 7, 29, 8, 632, DateTimeKind.Utc).AddTicks(8501)),
-                    CategoryId1 = table.Column<int>(type: "integer", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 11, 8, 5, 656, DateTimeKind.Utc).AddTicks(7608))
                 },
                 constraints: table =>
                 {
@@ -85,11 +84,6 @@ namespace WarehouseMS.Infrastructure.Migrations
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId1",
-                        column: x => x.CategoryId1,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Products_Status_StatusId",
                         column: x => x.StatusId,
@@ -110,7 +104,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     OrderStatus = table.Column<string>(type: "text", nullable: false),
                     OrderSendDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     OrderRecievedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 7, 29, 8, 632, DateTimeKind.Utc).AddTicks(6205))
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 11, 8, 5, 656, DateTimeKind.Utc).AddTicks(4981))
                 },
                 constraints: table =>
                 {
@@ -134,14 +128,15 @@ namespace WarehouseMS.Infrastructure.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId1",
-                table: "Products",
-                column: "CategoryId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Products_StatusId",
                 table: "Products",
                 column: "StatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Warehouses_ProductId",

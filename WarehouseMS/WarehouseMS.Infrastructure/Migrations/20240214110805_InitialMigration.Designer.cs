@@ -12,7 +12,7 @@ using WarehouseMS.Infrastructure.Context;
 namespace WarehouseMS.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240214072908_InitialMigration")]
+    [Migration("20240214110805_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,7 +40,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 2, 14, 7, 29, 8, 632, DateTimeKind.Utc).AddTicks(5576));
+                        .HasDefaultValue(new DateTime(2024, 2, 14, 11, 8, 5, 656, DateTimeKind.Utc).AddTicks(4277));
 
                     b.Property<string>("Icon")
                         .IsRequired()
@@ -68,7 +68,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 2, 14, 7, 29, 8, 632, DateTimeKind.Utc).AddTicks(6205));
+                        .HasDefaultValue(new DateTime(2024, 2, 14, 11, 8, 5, 656, DateTimeKind.Utc).AddTicks(4981));
 
                     b.Property<DateTime>("OrderRecievedDate")
                         .HasColumnType("timestamp with time zone");
@@ -109,13 +109,10 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("CategoryId1")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 2, 14, 7, 29, 8, 632, DateTimeKind.Utc).AddTicks(8501));
+                        .HasDefaultValue(new DateTime(2024, 2, 14, 11, 8, 5, 656, DateTimeKind.Utc).AddTicks(7608));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -144,8 +141,6 @@ namespace WarehouseMS.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("CategoryId1");
-
                     b.HasIndex("StatusId");
 
                     b.ToTable("Products");
@@ -166,7 +161,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.Property<DateTime>("CretedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 2, 14, 7, 29, 8, 633, DateTimeKind.Utc).AddTicks(5047));
+                        .HasDefaultValue(new DateTime(2024, 2, 14, 11, 8, 5, 663, DateTimeKind.Utc).AddTicks(9665));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -194,7 +189,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 2, 14, 7, 29, 8, 633, DateTimeKind.Utc).AddTicks(5755));
+                        .HasDefaultValue(new DateTime(2024, 2, 14, 11, 8, 5, 664, DateTimeKind.Utc).AddTicks(1333));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -219,6 +214,9 @@ namespace WarehouseMS.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -245,14 +243,10 @@ namespace WarehouseMS.Infrastructure.Migrations
             modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.Product", b =>
                 {
                     b.HasOne("WarehouseMS.Infrastructure.Context.Entities.Category", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("WarehouseMS.Infrastructure.Context.Entities.Category", null)
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId1");
 
                     b.HasOne("WarehouseMS.Infrastructure.Context.Entities.Status", "Status")
                         .WithMany("Products")
