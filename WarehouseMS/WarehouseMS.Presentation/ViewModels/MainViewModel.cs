@@ -9,10 +9,9 @@ namespace WarehouseMS.Presentation.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
+    private ViewModelBase _currentView;
     private readonly IMessenger _messenger;
     private readonly INavigationService _navigationService;
-
-    private ViewModelBase _currentView;
 
     public ViewModelBase CurrentView
     {
@@ -24,7 +23,6 @@ public class MainViewModel : ViewModelBase
     {
         _messenger = messenger;
         _navigationService = navigationService;
-
         CurrentView = ServiceLocator.GetService<LoginViewModel>();
 
         _messenger.Register<NavigationMessage>(this, message => { CurrentView = message.ViewModelType; });

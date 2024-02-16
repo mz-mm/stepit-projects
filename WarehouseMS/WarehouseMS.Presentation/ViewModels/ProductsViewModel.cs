@@ -1,12 +1,19 @@
 ﻿using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 using WarehouseMS.Domain.Dtos.ProductDtos;
+using WarehouseMS.Domain.Dtos.StatusDtos;
 using WarehouseMS.Domain.Interfaces;
+using WarehouseMS.Presentation.Interfaces;
+using WarehouseMS.Presentation.Services;
 
 namespace WarehouseMS.Presentation.ViewModels;
 
 public class ProductsViewModel : ViewModelBase
 {
+    private readonly INavigationService _navigationService;
+    private readonly IProductService _productService;
+    private readonly IStatusService _statusService;
+
     private ObservableCollection<GetProductDto> _products = new();
 
     public ObservableCollection<GetProductDto> Products
@@ -23,43 +30,41 @@ public class ProductsViewModel : ViewModelBase
         set => Set(ref _selectedProducts, value);
     }
 
+    private ObservableCollection<GetStatusDto> _statuses = new();
 
-    public ProductsViewModel(IProductService productService)
+    public ObservableCollection<GetStatusDto> Statuses
     {
-        //Task.Run(async () =>
-        //{
-        //    var productsEx = await productService.GetAllProductsAsync();
-        //    Products = new ObservableCollection<GetProductDto>(productsEx);
-        //});
-        Products.Add(new GetProductDto
-        {
-            Id = 1,
-            Name = "Product 1",
-            Description = "Description",
-            Price = 200,
-            StockQuantity = 21,
-            CategoryId = 1
-        });
-
-
-        Products.Add(new GetProductDto
-        {
-            Id = 2,
-            Name = "Product 2",
-            Description = "Description",
-            Price = 200,
-            StockQuantity = 21,
-            CategoryId = 1
-        });
-
-        Products.Add(new GetProductDto
-        {
-            Id = 2,
-            Name = "Product 3",
-            Description = "Description",
-            Price = 200,
-            StockQuantity = 21,
-            CategoryId = 1
-        });
+        get => _statuses;
+        set => Set(ref _statuses, value);
     }
-}
+
+    private GetStatusDto _selectedStatus;
+
+    public GetStatusDto SelectedStatus
+    {
+        get => _selectedStatus;
+        set => Set(ref _selectedStatus, value);
+    }
+
+    public ProductsViewModel(IProductService productService, INavigationService navigationService, IStatusService statusService)
+    {
+        _productService = productService;
+        _navigationService = navigationService;
+        _statusService = statusService;
+        InitilizeAsync();
+    }
+
+    private async void InitilizeAsync()
+    {
+        var products = await _productService.GetAllProductsAsync();
+        Products = new ObservableCollection<GetProductDto>(products);
+
+        var statuses = await _statusService.GetAllStatusAsync();
+        Statuses = new ObservableCollection<GetStatusDto>(statuses);
+    }
+
+    public RelayCommand AddProductCommand() =>
+        new(() => { _navigationService.HomeNavigateTo<AddProductViewModel>(); });
+
+    public RelayCommand AddStatusCommand() =>
+        new(() => { _navigationService.HomeNavigateTo<AddStatusViewModel>(); }); }

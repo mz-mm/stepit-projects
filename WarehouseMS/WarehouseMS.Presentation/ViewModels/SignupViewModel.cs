@@ -16,6 +16,7 @@ public class SignupViewModel : ViewModelBase
     private readonly IAuthService _authService;
 
     private string _email;
+
     public string Email
     {
         get => _email;
@@ -113,6 +114,7 @@ public class SignupViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
+            _authService.Logout();
             ErrorVisibility = "Visible";
             Error = ex.Message;
         }

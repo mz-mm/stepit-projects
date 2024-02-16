@@ -25,7 +25,7 @@ public partial class App : Application
     public App()
     {
         AppHost = Host.CreateDefaultBuilder()
-            .ConfigureAppConfiguration((config) =>
+            .ConfigureAppConfiguration(config =>
             {
                 config.SetBasePath(Directory.GetCurrentDirectory());
                 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
@@ -40,7 +40,7 @@ public partial class App : Application
                 services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
                 services.AddSingleton<IMessenger, Messenger>();
-                services.AddScoped<INavigationService, NavigationService>();
+                services.AddSingleton<INavigationService, NavigationService>();
 
                 services.AddScoped<IUserRepository, UserRepository>();
                 services.AddScoped<IProductRepository, ProductRepository>();
@@ -69,6 +69,12 @@ public partial class App : Application
 
                 services.AddTransient<ProductsView>();
                 services.AddTransient<ProductsViewModel>();
+
+                services.AddTransient<AddStatusView>();
+                services.AddTransient<AddStatusViewModel>();
+
+                services.AddTransient<AddProductView>();
+                services.AddTransient<AddProductViewModel>();
 
                 services.AddTransient<OrdersView>();
                 services.AddTransient<OrdersViewModel>();

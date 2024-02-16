@@ -50,7 +50,7 @@
             </ListBox>
         </Grid>
 
-        <Grid Grid.Column="1">
+        <Grid Background="#F1F1F1" Grid.Column="1">
             <UserControl Content="{Binding CurrentView, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
     </Grid>

@@ -31,8 +31,16 @@
                 <Views:HomeView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type ViewModels:AddStatusViewModel}">
+                <Views:AddStatusView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type ViewModels:ProductsViewModel}">
                 <Views:ProductsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:AddProductViewModel}">
+                <Views:AddProductView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type ViewModels:OrdersViewModel}">

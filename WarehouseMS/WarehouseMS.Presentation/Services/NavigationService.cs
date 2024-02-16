@@ -22,4 +22,12 @@ public class NavigationService : INavigationService
             ViewModelType = ServiceLocator.GetService<T>()
         });
     }
+
+    public void HomeNavigateTo<T>() where T : ViewModelBase
+    {
+        _messenger.Send(new HomeNavigationMessage
+        {
+            ViewModelType = ServiceLocator.GetService<T>()
+        });
+    }
 }

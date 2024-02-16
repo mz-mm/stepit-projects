@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:WarehouseMS.Presentation.Views"
              mc:Ignorable="d"
              d:DesignHeight="768" d:DesignWidth="1240">
-    <Grid Background="#F1F1F1">
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" />
             <RowDefinition />
@@ -18,7 +18,7 @@
                    FontFamily="{StaticResource InterFont}">
                 Products
             </Label>
-            <Button VerticalAlignment="Center" HorizontalAlignment="Right">Add product</Button>
+            <Button Command="{Binding AddProductCommand}" VerticalAlignment="Center" HorizontalAlignment="Right">Add product</Button>
         </DockPanel>
         <Border VerticalAlignment="Top" Margin="24 12 24 12" Background="White" BorderThickness="1"
                 BorderBrush="#E2E2E2"
@@ -26,11 +26,34 @@
             <StackPanel HorizontalAlignment="Stretch">
                 <StackPanel Margin="0 0 0 12" Orientation="Horizontal">
                     <Button FontFamily="{StaticResource InterFont}" Margin="4">All</Button>
-                    <Button FontFamily="{StaticResource InterFont}" Margin="4">Active</Button>
-                    <Button FontFamily="{StaticResource InterFont}" Margin="4">Archived</Button>
-                    <Button Margin="4" BorderThickness="1">
-                        <md:PackIcon Kind="Plus" />
-                    </Button>
+                    <ListBox ItemsSource="{Binding Statuses}" SelectedItem="{Binding SelectedStatus}"
+                             FocusVisualStyle="{x:Null}" Padding="0">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Button FontFamily="{StaticResource InterFont}" Margin="4" Content="{Binding Name}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Button Command="{Binding AddStatusCommand}" Margin="4" BorderThickness="1" Content="{md:PackIcon Plus}"/>
                 </StackPanel>
 
                 <Border Background="#F7F7F7" Margin="-12 0 -12 0" BorderThickness="0 1 0 1" BorderBrush="#E2E2E2"

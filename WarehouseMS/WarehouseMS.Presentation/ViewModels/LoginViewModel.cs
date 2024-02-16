@@ -61,15 +61,17 @@ public class LoginViewModel : ViewModelBase
     {
         try
         {
-            //FieldValidator.ValidateEmail(Email);
-            //FieldValidator.ValidatePassword(Password);
+            ErrorVisibility = "Hidden";
+
+            FieldValidator.ValidateEmail(Email);
+            FieldValidator.ValidatePassword(Password);
 
             await _authService.LoginAsync(new LoginUserDto { Email = Email, Password = Password });
         }
         catch (Exception ex)
         {
             Error = ex.Message;
-            _errorVisibility = "Visible";
+            ErrorVisibility = "Visible";
         }
     }
 
