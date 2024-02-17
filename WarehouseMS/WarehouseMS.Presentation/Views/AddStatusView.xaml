@@ -8,17 +8,37 @@
              mc:Ignorable="d"
              d:DesignHeight="768" d:DesignWidth="1024">
     <Grid Width="800" Margin="12">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Command="{Binding NavigatProductCommand}" Background="Transparent" BorderThickness=" 0" Foreground="#1C1C1C" VerticalAlignment="Center" Margin="4" Content="{md:PackIcon ArrowLeft}" />
-            <Label Margin="0 4 4 4" VerticalAlignment="Center" Foreground="#1C1C1C" HorizontalAlignment="Left" FontSize="24"
-                   FontFamily="{StaticResource InterFont}">
-                Add Status
-            </Label>
-        </StackPanel>
+        <Border Width="300" VerticalAlignment="Center" Background="White" CornerRadius="12" BorderThickness="1"
+                BorderBrush="#E2E2E2">
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30px" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Border Background="#F3F3F3" Padding="12 0 12 0" CornerRadius="12 12 0 0" Grid.Row="0">
+                    <DockPanel VerticalAlignment="Center">
+                        <Label VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#1C1C1C"
+                               FontWeight="Medium" FontFamily="{StaticResource InterFont}">
+                            Create new view
+                        </Label>
+                        <Button HorizontalAlignment="Right" BorderThickness="0" Padding="2"
+                                Content="{md:PackIcon Close}" />
+                    </DockPanel>
+                </Border>
+
+                <StackPanel Margin="12" Grid.Row="1">
+                    <StackPanel Margin="0 0 0 12">
+                        <Label FontFamily="{StaticResource InterFont}">Name</Label>
+                        <TextBox FontSize="12" FontFamily="{StaticResource InterFont}"
+                                 Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" x:Name="NameTextBox" />
+                    </StackPanel>
+
+                    <Button HorizontalAlignment="Right" FontFamily="{StaticResource InterFont}" FontSize="12">Create View</Button>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

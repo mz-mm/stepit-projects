@@ -21,8 +21,7 @@
             <Button Command="{Binding AddProductCommand}" VerticalAlignment="Center" HorizontalAlignment="Right">Add product</Button>
         </DockPanel>
         <Border VerticalAlignment="Top" Margin="24 12 24 12" Background="White" BorderThickness="1"
-                BorderBrush="#E2E2E2"
-                CornerRadius="12" Grid.Row="1" Padding="12">
+                BorderBrush="#E2E2E2" CornerRadius="12" Grid.Row="1" Padding="12">
             <StackPanel HorizontalAlignment="Stretch">
                 <StackPanel Margin="0 0 0 12" Orientation="Horizontal">
                     <Button FontFamily="{StaticResource InterFont}" Margin="4">All</Button>

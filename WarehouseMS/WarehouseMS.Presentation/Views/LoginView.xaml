@@ -16,7 +16,7 @@
             <Label Content="{Binding Error}" Visibility="{Binding ErrorVisibility}" Foreground="LightCoral" Margin="0 0 0 6"/>
 
             <Grid Margin="0 0 0 12">
-                <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" x:Name="EmailTextBox" />
+                <TextBox FontFamily="{StaticResource InterFont}" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" x:Name="EmailTextBox" />
                 <TextBlock IsHitTestVisible="False" Text="Email" FontFamily="{StaticResource InterFont}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="14,0,0,0" Foreground="DarkGray">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
