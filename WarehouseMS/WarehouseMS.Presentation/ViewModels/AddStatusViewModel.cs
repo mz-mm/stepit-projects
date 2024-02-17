@@ -13,5 +13,5 @@ public class AddStatusViewModel : ViewModelBase
         _navigationService = navigationService;
     }
 
-    public RelayCommand NavigatProductCommand() => new(() => _navigationService.HomeNavigateTo<ProductsViewModel>());
+    public RelayCommand NavigatProductCommand => new(() => _navigationService.HomeNavigateTo<ProductsViewModel>());
 }

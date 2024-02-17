@@ -10,8 +10,8 @@ public class RelayCommand : ICommand
 
     public event EventHandler? CanExecuteChanged
     {
-        add { CommandManager.RequerySuggested += value; }
-        remove { CommandManager.RequerySuggested -= value; }
+        add => CommandManager.RequerySuggested += value; 
+        remove => CommandManager.RequerySuggested -= value;
     }
 
     public RelayCommand(Action funcToExecute)

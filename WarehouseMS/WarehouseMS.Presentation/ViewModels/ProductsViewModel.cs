@@ -46,7 +46,8 @@ public class ProductsViewModel : ViewModelBase
         set => Set(ref _selectedStatus, value);
     }
 
-    public ProductsViewModel(IProductService productService, INavigationService navigationService, IStatusService statusService)
+    public ProductsViewModel(IProductService productService, INavigationService navigationService,
+        IStatusService statusService)
     {
         _productService = productService;
         _navigationService = navigationService;
@@ -63,8 +64,10 @@ public class ProductsViewModel : ViewModelBase
         Statuses = new ObservableCollection<GetStatusDto>(statuses);
     }
 
-    public RelayCommand AddProductCommand() =>
+    public RelayCommand AddProductCommand =>
         new(() => { _navigationService.HomeNavigateTo<AddProductViewModel>(); });
 
-    public RelayCommand AddStatusCommand() =>
-        new(() => { _navigationService.HomeNavigateTo<AddStatusViewModel>(); }); }
+    public RelayCommand AddStatusCommand =>
+        new(() => { _navigationService.HomeNavigateTo<AddStatusViewModel>(); });
+
+}
