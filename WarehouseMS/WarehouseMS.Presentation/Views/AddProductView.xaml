@@ -83,12 +83,12 @@
 
                                 <Button Command="{Binding RemoveCommand}" FontFamily="{StaticResource InterFont}"
                                         Visibility="{Binding IsImageUploaded, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                        HorizontalAlignment="Right" VerticalAlignment="Top" Background="#E85D69">
+                                        HorizontalAlignment="Right" VerticalAlignment="Top" Background="#E85D69" Panel.ZIndex="10">
                                     Remove
                                 </Button>
-                                <Image Width="Auto" Height="Auto"
+                                <Image Width="Auto" Height="Auto" Stretch="Uniform"
                                        Visibility="{Binding IsImageUploaded, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                       Source="{Binding ImagePath}" />
+                                       Source="{Binding ProductImageSource}" />
                             </Grid>
                         </Border>
                     </StackPanel>

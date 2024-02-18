@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using Microsoft.Win32;
 using WarehouseMS.Domain.Interfaces;
@@ -28,12 +31,12 @@ public class AddProductViewModel : ViewModelBase
         set => Set(ref _description, value);
     }
 
-    private string _imagePath;
+    private BitmapImage _produtImageSource = new();
 
-    public string ImagePath
+    public BitmapImage ProductImageSource
     {
-        get => _imagePath;
-        set => Set(ref _imagePath, value);
+        get => _produtImageSource;
+        set => Set(ref _produtImageSource, value);
     }
 
     private string _price;
@@ -113,28 +116,19 @@ public class AddProductViewModel : ViewModelBase
             {
                 var imagePath = openFileDialog.FileName;
 
-                var fileName = Path.GetFileName(imagePath);
-                var destinationPath = Path.Combine("Images", fileName);
+                ProductImageSource = new BitmapImage(new Uri(imagePath));
 
-                if (!File.Exists(destinationPath))
-                {
-                    File.Copy(imagePath, destinationPath);
-                }
-
-                ImagePath = destinationPath;
                 IsImageUploaded = true;
                 IsButtonVisible = false;
             }
         });
 
+
     public RelayCommand RemoveCommand =>
         new(() =>
         {
-            ImagePath = null;
+            ProductImageSource = null;
             IsImageUploaded = false;
             IsButtonVisible = true;
         });
-
-    public RelayCommand SaveCommad =>
-        new(() => { });
 }
