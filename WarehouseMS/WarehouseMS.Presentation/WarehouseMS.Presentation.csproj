@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="appsettings" />
     <None Remove="Fonts\Inter-VariableFont_slnt,wght.ttf" />
     <None Remove="Settings1.settings" />
   </ItemGroup>
@@ -53,6 +54,10 @@
     <Resource Include="Fonts\Inter-VariableFont_slnt,wght.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectCapability Remove="appsettings" />
   </ItemGroup>
 
 </Project>

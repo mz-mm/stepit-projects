@@ -12,7 +12,7 @@ using WarehouseMS.Infrastructure.Context;
 namespace WarehouseMS.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240214110805_InitialMigration")]
+    [Migration("20240218062507_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,7 +40,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 2, 14, 11, 8, 5, 656, DateTimeKind.Utc).AddTicks(4277));
+                        .HasDefaultValueSql("NOW()");
 
                     b.Property<string>("Icon")
                         .IsRequired()
@@ -68,9 +68,9 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 2, 14, 11, 8, 5, 656, DateTimeKind.Utc).AddTicks(4981));
+                        .HasDefaultValueSql("NOW()");
 
-                    b.Property<DateTime>("OrderRecievedDate")
+                    b.Property<DateTime>("OrderReceivedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("OrderSendDate")
@@ -112,7 +112,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 2, 14, 11, 8, 5, 656, DateTimeKind.Utc).AddTicks(7608));
+                        .HasDefaultValueSql("NOW()");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -146,7 +146,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.Status", b =>
+            modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.StatusView", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -155,18 +155,13 @@ namespace WarehouseMS.Infrastructure.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
 
-                    b.Property<DateTime>("CretedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 2, 14, 11, 8, 5, 663, DateTimeKind.Utc).AddTicks(9665));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(120)
-                        .HasColumnType("character varying(120)");
+                        .HasDefaultValueSql("NOW()");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -175,7 +170,7 @@ namespace WarehouseMS.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Status");
+                    b.ToTable("StatusView");
                 });
 
             modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.User", b =>
@@ -189,7 +184,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 2, 14, 11, 8, 5, 664, DateTimeKind.Utc).AddTicks(1333));
+                        .HasDefaultValueSql("NOW()");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -248,7 +243,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("WarehouseMS.Infrastructure.Context.Entities.Status", "Status")
+                    b.HasOne("WarehouseMS.Infrastructure.Context.Entities.StatusView", "StatusView")
                         .WithMany("Products")
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -256,7 +251,7 @@ namespace WarehouseMS.Infrastructure.Migrations
 
                     b.Navigation("Category");
 
-                    b.Navigation("Status");
+                    b.Navigation("StatusView");
                 });
 
             modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.Category", b =>
@@ -269,7 +264,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.Status", b =>
+            modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.StatusView", b =>
                 {
                     b.Navigation("Products");
                 });

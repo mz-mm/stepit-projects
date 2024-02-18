@@ -19,7 +19,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     Name = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     Icon = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     Color = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 11, 8, 5, 656, DateTimeKind.Utc).AddTicks(4277))
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
                 constraints: table =>
                 {
@@ -27,19 +27,18 @@ namespace WarehouseMS.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Status",
+                name: "StatusView",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    Description = table.Column<string>(type: "character varying(120)", maxLength: 120, nullable: false),
-                    Color = table.Column<string>(type: "text", nullable: false),
-                    CretedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 11, 8, 5, 663, DateTimeKind.Utc).AddTicks(9665))
+                    Color = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Status", x => x.Id);
+                    table.PrimaryKey("PK_StatusView", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,7 +52,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Role = table.Column<string>(type: "text", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 11, 8, 5, 664, DateTimeKind.Utc).AddTicks(1333))
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
                 constraints: table =>
                 {
@@ -73,7 +72,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                     StockQuantity = table.Column<int>(type: "integer", nullable: false),
                     CategoryId = table.Column<int>(type: "integer", nullable: false),
                     StatusId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 11, 8, 5, 656, DateTimeKind.Utc).AddTicks(7608))
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
                 constraints: table =>
                 {
@@ -85,9 +84,9 @@ namespace WarehouseMS.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Products_Status_StatusId",
+                        name: "FK_Products_StatusView_StatusId",
                         column: x => x.StatusId,
-                        principalTable: "Status",
+                        principalTable: "StatusView",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -103,8 +102,8 @@ namespace WarehouseMS.Infrastructure.Migrations
                     TrackingId = table.Column<int>(type: "integer", nullable: false),
                     OrderStatus = table.Column<string>(type: "text", nullable: false),
                     OrderSendDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    OrderRecievedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 2, 14, 11, 8, 5, 656, DateTimeKind.Utc).AddTicks(4981))
+                    OrderReceivedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
                 constraints: table =>
                 {
@@ -164,7 +163,7 @@ namespace WarehouseMS.Infrastructure.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Status");
+                name: "StatusView");
         }
     }
 }

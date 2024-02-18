@@ -2,6 +2,6 @@
 
 namespace WarehouseMS.Infrastructure.Interfaces;
 
-public interface IStatusRepository : IRepository<Status>
+public interface IStatusViewRepository : IRepository<StatusView>
 {
 }

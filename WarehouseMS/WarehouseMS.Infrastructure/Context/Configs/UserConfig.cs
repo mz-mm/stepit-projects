@@ -29,7 +29,7 @@ public class UserConfig : IEntityTypeConfiguration<User>
             .IsRequired();
 
         builder.Property(x => x.CreatedAt)
-            .HasDefaultValue(DateTime.UtcNow);
+            .HasDefaultValueSql("NOW()");
 
         builder.HasMany(x => x.Orders)
             .WithOne(x => x.User)

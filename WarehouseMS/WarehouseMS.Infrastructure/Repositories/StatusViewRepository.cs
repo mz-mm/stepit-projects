@@ -4,9 +4,9 @@ using WarehouseMS.Infrastructure.Interfaces;
 
 namespace WarehouseMS.Infrastructure.Repositories;
 
-public class StatusRepository : Repository<Status>, IStatusRepository
+public class StatusViewRepository : Repository<StatusView>, IStatusViewRepository
 {
-    public StatusRepository(AppDbContext context) : base(context)
+    public StatusViewRepository(AppDbContext context) : base(context)
     {
     }
 }

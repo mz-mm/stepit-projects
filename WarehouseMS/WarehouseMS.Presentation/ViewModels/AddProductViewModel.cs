@@ -13,5 +13,5 @@ public class AddProductViewModel : ViewModelBase
         _navigationService = navigationService;
     }
 
-    public RelayCommand NavigatProductCommand => new(() => _navigationService.HomeNavigateTo<ProductsViewModel>());
+    public RelayCommand NavigateProductCommand => new(() => _navigationService.HomeNavigateTo<ProductsViewModel>());
 }

@@ -14,7 +14,7 @@
         Title="Warehouse Management System" Height="768" Width="1024">
 
     <Grid>
-        <Border Background="White" CornerRadius="20 20 0 0" Width="1024" HorizontalAlignment="Right">
+        <Border Background="White" CornerRadius="20 20 0 0" Width="1024" BorderThickness="2" BorderBrush="#E2E2E2"  HorizontalAlignment="Right">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />

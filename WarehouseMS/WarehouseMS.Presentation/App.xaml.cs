@@ -46,14 +46,14 @@ public partial class App : Application
                 services.AddScoped<IProductRepository, ProductRepository>();
                 services.AddScoped<IOrderRepository, OrderRepository>();
                 services.AddScoped<ICategoryRepository, CategoryRepository>();
-                services.AddScoped<IStatusRepository, StatusRepository>();
+                services.AddScoped<IStatusViewRepository, StatusViewRepository>();
 
                 services.AddScoped<IAuthService, AuthService>();
                 services.AddScoped<IUserService, UserService>();
                 services.AddScoped<IProductService, ProductService>();
                 services.AddScoped<IOrderService, OrderService>();
                 services.AddScoped<ICategoryService, CategoryService>();
-                services.AddScoped<IStatusService, StatusService>();
+                services.AddScoped<IStatusViewService, StatusViewService>();
 
                 services.AddTransient<MainView>();
                 services.AddTransient<MainViewModel>();

@@ -8,29 +8,29 @@ public class OrderConfig : IEntityTypeConfiguration<Order>
 {
     public void Configure(EntityTypeBuilder<Order> builder)
     {
-        builder.Property(w => w.UserId)
+        builder.Property(x => x.UserId)
             .IsRequired();
 
-        builder.Property(w => w.ProductId)
+        builder.Property(x => x.ProductId)
             .IsRequired();
 
-        builder.Property(w => w.TrackingId)
+        builder.Property(x => x.TrackingId)
             .IsRequired();
 
-        builder.Property(w => w.OrderStatus)
+        builder.Property(x => x.OrderStatus)
             .IsRequired();
 
-        builder.Property(w => w.CreatedAt)
-            .HasDefaultValue(DateTime.UtcNow);
+        builder.Property(x => x.CreatedAt)
+            .HasDefaultValueSql("NOW()");
 
-        builder.HasOne(w => w.User)
-            .WithMany(u => u.Orders)
-            .HasForeignKey(w => w.UserId)
+        builder.HasOne(x => x.User)
+            .WithMany(x => x.Orders)
+            .HasForeignKey(x => x.UserId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasOne(w => w.Product)
-            .WithMany(p => p.Orders)
-            .HasForeignKey(w => w.ProductId)
+        builder.HasOne(x => x.Product)
+            .WithMany(x => x.Orders)
+            .HasForeignKey(x => x.ProductId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

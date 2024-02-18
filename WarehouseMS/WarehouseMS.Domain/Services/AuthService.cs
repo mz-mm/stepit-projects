@@ -18,6 +18,11 @@ public class AuthService : IAuthService
     {
         _userService = userService;
         _messenger = messenger;
+
+        _messenger.Send(new UserLoginMessage
+        {
+            User = null
+        });
     }
 
     public async Task<bool> LoginAsync(LoginUserDto userCredentials)

@@ -23,7 +23,7 @@ public class MainViewModel : ViewModelBase
     {
         _messenger = messenger;
         _navigationService = navigationService;
-        CurrentView = ServiceLocator.GetService<LoginViewModel>();
+        CurrentView = ServiceLocator.GetService<HomeViewModel>();
 
         _messenger.Register<NavigationMessage>(this, message => { CurrentView = message.ViewModelType; });
 

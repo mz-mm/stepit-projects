@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 using WarehouseMS.Domain.Dtos.ProductDtos;
 using WarehouseMS.Domain.Dtos.StatusDtos;
 using WarehouseMS.Domain.Interfaces;
+using WarehouseMS.Domain.Messages;
 using WarehouseMS.Presentation.Interfaces;
 using WarehouseMS.Presentation.Services;
 
@@ -12,7 +14,10 @@ public class ProductsViewModel : ViewModelBase
 {
     private readonly INavigationService _navigationService;
     private readonly IProductService _productService;
-    private readonly IStatusService _statusService;
+    private readonly IStatusViewService _statusViewService;
+    private readonly IMessenger _messenger;
+
+    public AddStatusViewModel AddStatusViewModel { get; set; }
 
     private ObservableCollection<GetProductDto> _products = new();
 
@@ -30,44 +35,48 @@ public class ProductsViewModel : ViewModelBase
         set => Set(ref _selectedProducts, value);
     }
 
-    private ObservableCollection<GetStatusDto> _statuses = new();
+    private ObservableCollection<GetStatusViewDto> _statusViews = new();
 
-    public ObservableCollection<GetStatusDto> Statuses
+    public ObservableCollection<GetStatusViewDto> StatusViews
     {
-        get => _statuses;
-        set => Set(ref _statuses, value);
+        get => _statusViews;
+        set => Set(ref _statusViews, value);
     }
 
-    private GetStatusDto _selectedStatus;
+    private GetStatusViewDto _selectedStatusView;
 
-    public GetStatusDto SelectedStatus
+    public GetStatusViewDto SelectedStatusView
     {
-        get => _selectedStatus;
-        set => Set(ref _selectedStatus, value);
+        get => _selectedStatusView;
+        set => Set(ref _selectedStatusView, value);
     }
 
     public ProductsViewModel(IProductService productService, INavigationService navigationService,
-        IStatusService statusService)
+        IStatusViewService statusViewService, AddStatusViewModel addStatusViewModel, IMessenger messenger)
     {
         _productService = productService;
         _navigationService = navigationService;
-        _statusService = statusService;
-        InitilizeAsync();
+        _statusViewService = statusViewService;
+        _messenger = messenger;
+
+        _messenger.Register<AddStatusViewMessage>(this, message => { StatusViews.Add(message.StatusView); });
+
+        AddStatusViewModel = addStatusViewModel;
+        InitializeAsync();
     }
 
-    private async void InitilizeAsync()
+    private async void InitializeAsync()
     {
         var products = await _productService.GetAllProductsAsync();
         Products = new ObservableCollection<GetProductDto>(products);
 
-        var statuses = await _statusService.GetAllStatusAsync();
-        Statuses = new ObservableCollection<GetStatusDto>(statuses);
+        var statuses = await _statusViewService.GetAllStatusAsync();
+        StatusViews = new ObservableCollection<GetStatusViewDto>(statuses);
     }
 
     public RelayCommand AddProductCommand =>
         new(() => { _navigationService.HomeNavigateTo<AddProductViewModel>(); });
 
     public RelayCommand AddStatusCommand =>
-        new(() => { _navigationService.HomeNavigateTo<AddStatusViewModel>(); });
-
+        new(() => { AddStatusViewModel.IsOpen = true; });
 }

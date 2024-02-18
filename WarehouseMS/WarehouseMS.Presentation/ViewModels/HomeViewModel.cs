@@ -12,6 +12,7 @@ public class HomeViewModel : ViewModelBase
 {
     private IMessenger _messenger;
     private INavigationService _navigationService;
+
     private ObservableCollection<ViewInfo> _views = new();
 
     public ObservableCollection<ViewInfo> Views
@@ -47,7 +48,7 @@ public class HomeViewModel : ViewModelBase
 
         _messenger.Register<HomeNavigationMessage>(this, message => { CurrentView = message.ViewModelType; });
 
-        Views.Add(new ViewInfo("Products", "Tag", () =>  _navigationService.HomeNavigateTo<ProductsViewModel>()));
+        Views.Add(new ViewInfo("Products", "Tag", () => _navigationService.HomeNavigateTo<ProductsViewModel>()));
         Views.Add(new ViewInfo("Orders", "Inbox", () => _navigationService.HomeNavigateTo<OrdersViewModel>()));
 
         Views.First().NavigateTo();

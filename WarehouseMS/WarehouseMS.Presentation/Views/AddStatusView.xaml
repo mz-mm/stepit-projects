@@ -11,6 +11,10 @@
 
         <Border Width="300" VerticalAlignment="Center" Background="White" CornerRadius="12" BorderThickness="1"
                 BorderBrush="#E2E2E2">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Direction="270" ShadowDepth="7"
+                                  Opacity="0.5" />
+            </Border.Effect>
             <Grid>
 
                 <Grid.RowDefinitions>
@@ -24,19 +28,21 @@
                                FontWeight="Medium" FontFamily="{StaticResource InterFont}">
                             Create new view
                         </Label>
-                        <Button HorizontalAlignment="Right" BorderThickness="0" Padding="2"
+                        <Button Command="{Binding CancelCommand}" HorizontalAlignment="Right" BorderThickness="0" Padding="2"
                                 Content="{md:PackIcon Close}" />
                     </DockPanel>
                 </Border>
 
                 <StackPanel Margin="12" Grid.Row="1">
+                    <Label Content="{Binding Error}" Visibility="{Binding ErrorVisibility}" Foreground="LightCoral" Margin="0 0 0 6"/>
+
                     <StackPanel Margin="0 0 0 12">
                         <Label FontFamily="{StaticResource InterFont}">Name</Label>
-                        <TextBox FontSize="12" FontFamily="{StaticResource InterFont}"
-                                 Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" x:Name="NameTextBox" />
+                        <TextBox  FontSize="12" FontFamily="{StaticResource InterFont}"
+                                 Text="{Binding ViewName, UpdateSourceTrigger=PropertyChanged}" x:Name="NameTextBox" />
                     </StackPanel>
 
-                    <Button HorizontalAlignment="Right" FontFamily="{StaticResource InterFont}" FontSize="12">Create View</Button>
+                    <Button Command="{Binding AddViewCommand}" HorizontalAlignment="Right" FontFamily="{StaticResource InterFont}" FontSize="12">Create View</Button>
                 </StackPanel>
             </Grid>
         </Border>

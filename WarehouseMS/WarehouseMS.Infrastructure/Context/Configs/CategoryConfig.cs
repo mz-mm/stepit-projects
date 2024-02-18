@@ -17,10 +17,9 @@ public class CategoryConfig : IEntityTypeConfiguration<Category>
             .IsRequired();
 
         builder.Property(x => x.Color)
-            .HasMaxLength(30)
-            .IsRequired();
+            .HasMaxLength(30);
 
         builder.Property(x => x.CreatedAt)
-            .HasDefaultValue(DateTime.UtcNow);
+            .HasDefaultValueSql("NOW()");
     }
 }
