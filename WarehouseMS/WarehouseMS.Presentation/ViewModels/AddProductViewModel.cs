@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using Microsoft.Win32;
+using WarehouseMS.Domain.Dtos.ProductDtos;
+using WarehouseMS.Domain.Dtos.StatusDtos;
 using WarehouseMS.Domain.Interfaces;
 using WarehouseMS.Presentation.Interfaces;
 using WarehouseMS.Presentation.Services;
@@ -14,6 +20,40 @@ public class AddProductViewModel : ViewModelBase
 {
     private INavigationService _navigationService;
     private IProductService _productService;
+    private IStatusViewService _statusViewService;
+
+    private List<GetStatusViewDto> _statusViewDtos;
+    private List<string> _statusViews;
+
+    public List<string> StatusViews
+    {
+        get => _statusViews;
+        set => Set(ref _statusViews, value);
+    }
+
+    private string _selectedStatusView;
+
+    public string SelectedStatusView
+    {
+        get => _selectedStatusView;
+        set => Set(ref _selectedStatusView, value);
+    }
+
+    private string _error;
+
+    public string Error
+    {
+        get => _error;
+        set => Set(ref _error, value);
+    }
+
+    private string _errorVisibility;
+
+    public string ErrorVisibility
+    {
+        get => _errorVisibility;
+        set => Set(ref _errorVisibility, value);
+    }
 
     private string _titile;
 
@@ -97,10 +137,23 @@ public class AddProductViewModel : ViewModelBase
     }
 
 
-    public AddProductViewModel(INavigationService navigationService, IProductService productService)
+    public AddProductViewModel(INavigationService navigationService, IProductService productService,
+        IStatusViewService statusViewService)
     {
         _navigationService = navigationService;
         _productService = productService;
+        _statusViewService = statusViewService;
+        InitialiseAsync();
+    }
+
+    public async void InitialiseAsync()
+    {
+        var statusViews = await _statusViewService.GetAllStatusAsync();
+
+        _statusViewDtos = new List<GetStatusViewDto>(statusViews);
+
+        StatusViews = new List<string>(statusViews.Select(status => status.Name));
+        SelectedStatusView = StatusViews.First();
     }
 
     public RelayCommand NavigateProductCommand => new(() => _navigationService.HomeNavigateTo<ProductsViewModel>());
@@ -131,4 +184,30 @@ public class AddProductViewModel : ViewModelBase
             IsImageUploaded = false;
             IsButtonVisible = true;
         });
+
+    public RelayCommand SaveCommand => new(async () =>
+        {
+            try
+            {
+                ErrorVisibility = "Hidden";
+                await _productService.CreateProductAsync(new CreateProductDto
+                {
+                    Name = Title,
+                    Description = Description,
+                    ImageUrl = ProductImageSource.UriSource.ToString(),
+                    StockQuantity = int.Parse(StockQuantity),
+                    Price = int.Parse(Price),
+                    StatusId = _statusViewDtos.FirstOrDefault(statusViews => statusViews.Name == SelectedStatusView)!.Id
+                });
+
+                _navigationService.HomeNavigateTo<ProductsViewModel>();
+            }
+            catch (Exception ex)
+            {
+                ErrorVisibility = "Visible";
+                Error = ex.Message;
+            }
+        },
+        () => !string.IsNullOrWhiteSpace(Title) && !string.IsNullOrWhiteSpace(Price)
+    );
 }

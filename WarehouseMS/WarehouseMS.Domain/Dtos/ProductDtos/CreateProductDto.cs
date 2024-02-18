@@ -9,6 +9,5 @@ public class CreateProductDto
     public string ImageUrl { get; set; }
     public double Price { get; set; }
     public int StockQuantity { get; set; }
-    public int CategoryId { get; set; }
     public int StatusId { get; set; }
 }

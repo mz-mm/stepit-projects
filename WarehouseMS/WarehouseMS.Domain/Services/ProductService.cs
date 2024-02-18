@@ -25,12 +25,6 @@ public class ProductService : IProductService
         return _mapper.Map<IEnumerable<GetProductDto>>(products);
     }
 
-    public async Task<IEnumerable<GetProductDto>> GetAllProductsByCategoryAsync(int categoryId)
-    {
-        var products = (await _productRepository.GetAllAsync()).Where(product => product.CategoryId == categoryId);
-        return _mapper.Map<IEnumerable<GetProductDto>>(products);
-    }
-
     public async Task<IEnumerable<GetProductDto>> GetAllProductsByNameAsync(string productName)
     {
         var products = (await _productRepository.GetAllAsync()).Where(product => product.Name == productName);

@@ -44,6 +44,7 @@
 
             <StackPanel Grid.Column="0">
                 <Label Content="{Binding Error}" Visibility="{Binding ErrorVisibility}" Foreground="LightCoral" />
+
                 <Border Background="White" Margin="12" CornerRadius="12" Padding="12" BorderBrush="#E2E2E2"
                         BorderThickness="1">
                     <StackPanel>

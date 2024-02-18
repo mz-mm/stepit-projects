@@ -21,16 +21,8 @@ public class ProductConfig : IEntityTypeConfiguration<Product>
         builder.Property(x => x.StockQuantity)
             .IsRequired();
 
-        builder.Property(x => x.CategoryId)
-            .IsRequired();
-
         builder.Property(x => x.CreatedAt)
             .HasDefaultValueSql("NOW()");
-
-        builder.HasOne(x => x.Category)
-            .WithMany(x => x.Products)
-            .HasForeignKey(x => x.CategoryId)
-            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(x => x.StatusView)
             .WithMany(x => x.Products)
