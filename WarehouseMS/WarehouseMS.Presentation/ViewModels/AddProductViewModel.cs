@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.AccessControl;
 using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using Microsoft.Win32;
@@ -147,13 +146,10 @@ public class AddProductViewModel : ViewModelBase
                 var fileName = Path.GetFileName(imagePath);
                 var destinationPath = Path.Combine("Images", fileName);
 
-                // Copy the image file to the destination directory
                 File.Copy(imagePath, destinationPath, overwrite: true);
 
-                // Set the image URL as the relative path to the image file
                 var imageUrl = new Uri(destinationPath, UriKind.Relative);
 
-                // Set the ProductImageSource and ImageUrl properties
                 ProductImageSource = new BitmapImage(new Uri(imagePath));
                 _imageUrl = imageUrl.ToString();
 

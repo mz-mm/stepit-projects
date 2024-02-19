@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using WarehouseMS.Domain.Dtos.ProductDtos;
@@ -19,6 +21,7 @@ public class ProductsViewModel : ViewModelBase
 
     public AddStatusViewModel AddStatusViewModel { get; set; }
 
+    private IEnumerable<GetProductWithStatusDto> _allProducts;
     private ObservableCollection<GetProductWithStatusDto> _products = new();
 
     public ObservableCollection<GetProductWithStatusDto> Products
@@ -48,7 +51,13 @@ public class ProductsViewModel : ViewModelBase
     public GetStatusViewDto SelectedStatusView
     {
         get => _selectedStatusView;
-        set => Set(ref _selectedStatusView, value);
+        set
+        {
+            Set(ref _selectedStatusView, value);
+
+            Products = new ObservableCollection<GetProductWithStatusDto>(_allProducts.Where(product =>
+                product.StatusName == _selectedStatusView.Name));
+        }
     }
 
     public ProductsViewModel(IProductService productService, INavigationService navigationService,
@@ -66,13 +75,17 @@ public class ProductsViewModel : ViewModelBase
     }
 
     private async void InitializeAsync()
-        {
-        var products = await _productService.GetAllProductsWithStatusAsync();
-        Products = new ObservableCollection<GetProductWithStatusDto>(products);
+    {
+        _allProducts = await _productService.GetAllProductsWithStatusAsync();
+        Products = new ObservableCollection<GetProductWithStatusDto>(_allProducts);
 
         var statuses = await _statusViewService.GetAllStatusAsync();
         StatusViews = new ObservableCollection<GetStatusViewDto>(statuses);
     }
+
+
+    public RelayCommand AllCommand =>
+        new(() => { Products = new ObservableCollection<GetProductWithStatusDto>(_allProducts); });
 
     public RelayCommand AddProductCommand =>
         new(() => { _navigationService.HomeNavigateTo<AddProductViewModel>(); });
