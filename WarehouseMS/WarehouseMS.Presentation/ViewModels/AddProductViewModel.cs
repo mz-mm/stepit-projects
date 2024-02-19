@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Windows.Media;
+using System.Security.AccessControl;
 using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using Microsoft.Win32;
@@ -71,6 +69,8 @@ public class AddProductViewModel : ViewModelBase
         set => Set(ref _description, value);
     }
 
+    private string _imageUrl;
+
     private BitmapImage _produtImageSource = new();
 
     public BitmapImage ProductImageSource
@@ -85,30 +85,6 @@ public class AddProductViewModel : ViewModelBase
     {
         get => _price;
         set => Set(ref _price, value);
-    }
-
-    private string _costPerItem;
-
-    public string CostPerItem
-    {
-        get => _costPerItem;
-        set => Set(ref _costPerItem, value);
-    }
-
-    private string _profit;
-
-    public string Profit
-    {
-        get => _profit;
-        set => Set(ref _profit, value);
-    }
-
-    private string _margin;
-
-    public string Margin
-    {
-        get => _margin;
-        set => Set(ref _margin, value);
     }
 
     private string _stockQuantity;
@@ -168,8 +144,18 @@ public class AddProductViewModel : ViewModelBase
             if (openFileDialog.ShowDialog() == true)
             {
                 var imagePath = openFileDialog.FileName;
+                var fileName = Path.GetFileName(imagePath);
+                var destinationPath = Path.Combine("Images", fileName);
 
+                // Copy the image file to the destination directory
+                File.Copy(imagePath, destinationPath, overwrite: true);
+
+                // Set the image URL as the relative path to the image file
+                var imageUrl = new Uri(destinationPath, UriKind.Relative);
+
+                // Set the ProductImageSource and ImageUrl properties
                 ProductImageSource = new BitmapImage(new Uri(imagePath));
+                _imageUrl = imageUrl.ToString();
 
                 IsImageUploaded = true;
                 IsButtonVisible = false;
@@ -194,7 +180,7 @@ public class AddProductViewModel : ViewModelBase
                 {
                     Name = Title,
                     Description = Description,
-                    ImageUrl = ProductImageSource.UriSource.ToString(),
+                    ImageUrl = _imageUrl,
                     StockQuantity = int.Parse(StockQuantity),
                     Price = int.Parse(Price),
                     StatusId = _statusViewDtos.FirstOrDefault(statusViews => statusViews.Name == SelectedStatusView)!.Id

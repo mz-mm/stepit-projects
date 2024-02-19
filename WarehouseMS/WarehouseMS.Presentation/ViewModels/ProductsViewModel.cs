@@ -19,17 +19,17 @@ public class ProductsViewModel : ViewModelBase
 
     public AddStatusViewModel AddStatusViewModel { get; set; }
 
-    private ObservableCollection<GetProductDto> _products = new();
+    private ObservableCollection<GetProductWithStatusDto> _products = new();
 
-    public ObservableCollection<GetProductDto> Products
+    public ObservableCollection<GetProductWithStatusDto> Products
     {
         get => _products;
         set => Set(ref _products, value);
     }
 
-    private GetProductDto _selectedProducts = new();
+    private GetProductWithStatusDto _selectedProducts = new();
 
-    public GetProductDto SelectedProducts
+    public GetProductWithStatusDto SelectedProducts
     {
         get => _selectedProducts;
         set => Set(ref _selectedProducts, value);
@@ -66,9 +66,9 @@ public class ProductsViewModel : ViewModelBase
     }
 
     private async void InitializeAsync()
-    {
-        var products = await _productService.GetAllProductsAsync();
-        Products = new ObservableCollection<GetProductDto>(products);
+        {
+        var products = await _productService.GetAllProductsWithStatusAsync();
+        Products = new ObservableCollection<GetProductWithStatusDto>(products);
 
         var statuses = await _statusViewService.GetAllStatusAsync();
         StatusViews = new ObservableCollection<GetStatusViewDto>(statuses);
