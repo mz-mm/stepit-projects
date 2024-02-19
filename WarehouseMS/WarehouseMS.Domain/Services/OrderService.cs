@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using WarehouseMS.Domain.Attributes;
 using WarehouseMS.Domain.Dtos.OrderDtos;
-using WarehouseMS.Domain.Enums;
 using WarehouseMS.Domain.Interfaces;
 using WarehouseMS.Infrastructure.Context.Entities;
 using WarehouseMS.Infrastructure.Interfaces;
@@ -11,19 +9,26 @@ namespace WarehouseMS.Domain.Services;
 public class OrderService : IOrderService
 {
     private readonly IOrderRepository _orderRepository;
+    private readonly IStatusViewService _statusViewService;
     private readonly IMapper _mapper;
 
-    public OrderService(IOrderRepository orderRepository, IMapper mapper)
+    public OrderService(IOrderRepository orderRepository, IMapper mapper, IStatusViewService statusViewService)
     {
         _orderRepository = orderRepository;
         _mapper = mapper;
+        _statusViewService = statusViewService;
     }
 
-    [RequireRole(UserRole.Admin)]
     public async Task<IEnumerable<GetOrderDto>> GetAllOrdersAsync()
     {
         var orders = await _orderRepository.GetAllAsync();
         return _mapper.Map<IEnumerable<GetOrderDto>>(orders);
+    }
+
+    public async Task<IEnumerable<GetOrdersWithStatusAndProductAndUserDto>> GetAllOrdersWithStatusAndProductsAsync()
+    {
+        var orders = await _orderRepository.GetAllWithOrderStatusAndProductsAndUserAsync();
+        return _mapper.Map<IEnumerable<GetOrdersWithStatusAndProductAndUserDto>>(orders);
     }
 
     public async Task<IEnumerable<GetOrderDto>> GetUserOrdersAsync(int userId)
@@ -51,15 +56,19 @@ public class OrderService : IOrderService
 
         return _mapper.Map<GetOrderDto>(result);
     }
-    
-    public async Task<bool> UpdateOrderStatusAsync(int orderId, OrderStatus newStatus)
+
+    public async Task<bool> UpdateOrderStatusAsync(int orderId, int statusId)
     {
         var order = await _orderRepository.GetByIdAsync(orderId);
+        var status = await _statusViewService.GetStatusByIdAsync(statusId);
 
         if (order is null)
             throw new ArgumentNullException(nameof(order));
 
-        order.OrderStatus = newStatus.ToString();
+        if (status is null)
+            throw new ArgumentNullException(nameof(status));
+
+        order.OrderStatusId = status.Id;
 
         var result = await _orderRepository.UpdateAsync(order);
 

@@ -11,9 +11,6 @@ public class OrderConfig : IEntityTypeConfiguration<Order>
         builder.Property(x => x.UserId)
             .IsRequired();
 
-        builder.Property(x => x.ProductId)
-            .IsRequired();
-
         builder.Property(x => x.TrackingId)
             .IsRequired();
 
@@ -28,9 +25,14 @@ public class OrderConfig : IEntityTypeConfiguration<Order>
             .HasForeignKey(x => x.UserId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasOne(x => x.Product)
+        builder.HasOne(x => x.OrderStatus)
             .WithMany(x => x.Orders)
-            .HasForeignKey(x => x.ProductId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .HasForeignKey(x => x.OrderStatusId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        builder.HasMany(x => x.OrderProducts)
+            .WithOne(x => x.Order)
+            .HasForeignKey(x => x.OrderId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

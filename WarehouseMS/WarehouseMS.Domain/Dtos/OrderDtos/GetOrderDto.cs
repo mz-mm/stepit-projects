@@ -8,8 +8,6 @@ public class GetOrderDto
     public int UserId { get; set; }
     public int ProductId { get; set; }
     public int TrackingId { get; set; }
-    public OrderStatus OrderStatus { get; set; }
-    public DateTime OrderSendDate { get; set; }
-    public DateTime OrderRecievedDate { get; set; }
-
+    public int OrderStatusId { get; set; }
+    public DateTime Date { get; set; }
 }

@@ -29,9 +29,9 @@ public class ProductConfig : IEntityTypeConfiguration<Product>
             .HasForeignKey(x => x.StatusId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasMany(x => x.Orders)
+        builder.HasMany(x => x.OrderProducts)
             .WithOne(x => x.Product)
             .HasForeignKey(x => x.ProductId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }

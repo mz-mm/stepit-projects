@@ -11,5 +11,5 @@ public class Product : BaseEntity
     public DateTime CreatedAt { get; set; }
 
     public StatusView StatusView { get; set; }
-    public ICollection<Order> Orders { get; set; }
+    public ICollection<OrderProduct> OrderProducts { get; set; }
 }
