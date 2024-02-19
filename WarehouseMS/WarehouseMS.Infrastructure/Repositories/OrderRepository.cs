@@ -21,7 +21,7 @@ public class OrderRepository : Repository<Order>, IOrderRepository
     public async Task<IEnumerable<Order>> GetAllWithOrderStatusAndProductsAndUserAsync() =>
         await _entities
             .AsNoTracking()
-            .Include(order => order.OrderStatus)
+            .Include(order => order.Status)
             .Include(x => x.User)
             .Include(order => order.OrderProducts)
             .ThenInclude(orderProduct => orderProduct.Product)

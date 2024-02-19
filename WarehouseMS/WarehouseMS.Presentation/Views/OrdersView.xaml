@@ -164,7 +164,7 @@
 
                                     <Label Grid.Column="4" Margin="4 0 4 0" VerticalAlignment="Center"
                                            FontFamily="{StaticResource InterFont}" Foreground="#1C1C1C"
-                                           Content="{Binding OrderStatus}" />
+                                           Content="{Binding Status}" />
 
                                 </Grid>
                             </DataTemplate>

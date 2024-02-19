@@ -8,7 +8,7 @@ public class Order : BaseEntity
     public DateTime Date { get; set; }
     public DateTime CreatedAt { get; set; }
 
-    public OrderStatus OrderStatus { get; set; }
+    public OrderStatus Status { get; set; }
     public User User { get; set; }
     public ICollection<OrderProduct> OrderProducts { get; set; }
 }

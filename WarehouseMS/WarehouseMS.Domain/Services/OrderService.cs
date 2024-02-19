@@ -10,13 +10,18 @@ public class OrderService : IOrderService
 {
     private readonly IOrderRepository _orderRepository;
     private readonly IStatusViewService _statusViewService;
+    private readonly IProductService _productService;
+    private readonly IOrderProductRepository _orderProductRepository;
     private readonly IMapper _mapper;
 
-    public OrderService(IOrderRepository orderRepository, IMapper mapper, IStatusViewService statusViewService)
+    public OrderService(IOrderRepository orderRepository, IStatusViewService statusViewService,
+        IProductService productService, IOrderProductRepository orderProductRepository, IMapper mapper)
     {
         _orderRepository = orderRepository;
-        _mapper = mapper;
         _statusViewService = statusViewService;
+        _productService = productService;
+        _orderProductRepository = orderProductRepository;
+        _mapper = mapper;
     }
 
     public async Task<IEnumerable<GetOrderDto>> GetAllOrdersAsync()
@@ -52,6 +57,12 @@ public class OrderService : IOrderService
     public async Task<GetOrderDto> CreateOrderAsync(CreateOrderDto orderDetails)
     {
         var orderEntity = _mapper.Map<Order>(orderDetails);
+
+        foreach (var orderId in orderDetails.ProductIds)
+        {
+            await _orderProductRepository.InsertOrderPorductAsync(orderEntity.Id, orderId);
+        }
+
         var result = await _orderRepository.InsertAsync(orderEntity);
 
         return _mapper.Map<GetOrderDto>(result);

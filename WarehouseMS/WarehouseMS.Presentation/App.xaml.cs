@@ -18,7 +18,7 @@ using WarehouseMS.Presentation.Views;
 
 namespace WarehouseMS.Presentation;
 
-public partial class App : Application
+public partial class App
 {
     public static IHost? AppHost { get; private set; }
 
@@ -47,6 +47,7 @@ public partial class App : Application
                 services.AddScoped<IOrderRepository, OrderRepository>();
                 services.AddScoped<IStatusViewRepository, StatusViewRepository>();
 
+                services.AddScoped<IOrderProductRepository, OrderProductRepository>();
                 services.AddScoped<IAuthService, AuthService>();
                 services.AddScoped<IUserService, UserService>();
                 services.AddScoped<IProductService, ProductService>();

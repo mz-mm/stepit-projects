@@ -14,9 +14,6 @@ public class OrderConfig : IEntityTypeConfiguration<Order>
         builder.Property(x => x.TrackingId)
             .IsRequired();
 
-        builder.Property(x => x.OrderStatus)
-            .IsRequired();
-
         builder.Property(x => x.CreatedAt)
             .HasDefaultValueSql("NOW()");
 
@@ -25,7 +22,7 @@ public class OrderConfig : IEntityTypeConfiguration<Order>
             .HasForeignKey(x => x.UserId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasOne(x => x.OrderStatus)
+        builder.HasOne(x => x.Status)
             .WithMany(x => x.Orders)
             .HasForeignKey(x => x.OrderStatusId)
             .OnDelete(DeleteBehavior.NoAction);
