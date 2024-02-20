@@ -3,6 +3,5 @@
 public class CreateOrderDto
 {
     public int UserId { get; set; }
-    public int TrackingId { get; set; }
     public IEnumerable<int> ProductIds { get; set; }
 }

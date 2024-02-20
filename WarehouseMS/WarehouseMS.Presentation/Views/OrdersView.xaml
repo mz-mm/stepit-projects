@@ -18,7 +18,7 @@
                    FontFamily="{StaticResource InterFont}">
                 Orders
             </Label>
-            <Button Command="{Binding AddProductCommand}" VerticalAlignment="Center" HorizontalAlignment="Right">Create order</Button>
+            <Button Command="{Binding CreateOrderCommand}" VerticalAlignment="Center" HorizontalAlignment="Right">Create order</Button>
         </DockPanel>
         <Border VerticalAlignment="Top" Margin="24 12 24 12" Background="White" BorderThickness="1"
                 BorderBrush="#E2E2E2" CornerRadius="12" Grid.Row="1" Padding="12">
@@ -164,7 +164,7 @@
 
                                     <Label Grid.Column="4" Margin="4 0 4 0" VerticalAlignment="Center"
                                            FontFamily="{StaticResource InterFont}" Foreground="#1C1C1C"
-                                           Content="{Binding Status}" />
+                                           Content="{Binding OrderStatus}" />
 
                                 </Grid>
                             </DataTemplate>

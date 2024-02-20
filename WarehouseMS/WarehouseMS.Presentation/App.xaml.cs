@@ -77,6 +77,9 @@ public partial class App
 
                 services.AddTransient<OrdersView>();
                 services.AddTransient<OrdersViewModel>();
+
+                services.AddTransient<AddOrderView>();
+                services.AddTransient<AddOrderViewModel>();
             })
             .Build();
     }

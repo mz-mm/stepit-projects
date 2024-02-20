@@ -84,7 +84,8 @@
 
                                 <Button Command="{Binding RemoveCommand}" FontFamily="{StaticResource InterFont}"
                                         Visibility="{Binding IsImageUploaded, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                        HorizontalAlignment="Right" VerticalAlignment="Top" Background="#E85D69" Panel.ZIndex="10">
+                                        HorizontalAlignment="Right" VerticalAlignment="Top" Background="#E85D69"
+                                        Panel.ZIndex="10">
                                     Remove
                                 </Button>
                                 <Image Width="Auto" Height="Auto" Stretch="Uniform"
@@ -135,9 +136,7 @@
                         </Grid>
                     </StackPanel>
                 </Border>
-
             </StackPanel>
-
         </Grid>
     </Grid>
 </UserControl>

@@ -33,7 +33,17 @@ public class OrderService : IOrderService
     public async Task<IEnumerable<GetOrdersWithStatusAndProductAndUserDto>> GetAllOrdersWithStatusAndProductsAsync()
     {
         var orders = await _orderRepository.GetAllWithOrderStatusAndProductsAndUserAsync();
-        return _mapper.Map<IEnumerable<GetOrdersWithStatusAndProductAndUserDto>>(orders);
+        var orderEntities = _mapper.Map<IEnumerable<GetOrdersWithStatusAndProductAndUserDto>>(orders);
+
+        var getOrdersWithStatusAndProductAndUserDtos =
+            orderEntities as GetOrdersWithStatusAndProductAndUserDto[] ?? orderEntities.ToArray();
+
+        foreach (var orderEntity in getOrdersWithStatusAndProductAndUserDtos)
+        {
+            orderEntity.ItemsCount = orderEntity.Products.Count;
+        }
+
+        return getOrdersWithStatusAndProductAndUserDtos;
     }
 
     public async Task<IEnumerable<GetOrderDto>> GetUserOrdersAsync(int userId)

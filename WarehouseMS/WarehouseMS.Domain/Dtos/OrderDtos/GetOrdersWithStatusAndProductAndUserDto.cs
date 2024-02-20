@@ -12,5 +12,6 @@ public class GetOrdersWithStatusAndProductAndUserDto
     public string LastName { get; set; }
     public string OrderStatus { get; set; }
     public List<GetProductDto> Products { get; set; }
+    public int ItemsCount { get; set; }
     public DateTime Date { get; set; }
 }
