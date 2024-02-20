@@ -22,11 +22,11 @@
                 <Label Margin="0 4 4 4" VerticalAlignment="Center" Foreground="#1C1C1C" HorizontalAlignment="Left"
                        FontSize="24"
                        FontFamily="{StaticResource InterFont}">
-                    Add Product
+                    Add Order
                 </Label>
                 <Grid HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal">
-                        <Button Command="{Binding NavigateProductCommand}" Background="#303030" Foreground="White"
+                        <Button Command="{Binding DiscardCommand}" Background="#303030" Foreground="White"
                                 FontFamily="{StaticResource InterFont}" Margin="0 0 12 0">
                             Discard
                         </Button>
@@ -45,7 +45,7 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0">
-                    <Label Content="{Binding Error}" Visibility="{Binding ErrorVisibility}" Foreground="LightCoral" />
+                    <TextBlock Text="{Binding Error}" TextWrapping="Wrap" Visibility="{Binding ErrorVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="LightCoral" />
 
                     <Border Background="White" Margin="12" CornerRadius="12" Padding="12" BorderBrush="#E2E2E2"
                             BorderThickness="1">
@@ -61,7 +61,11 @@
                                                Content="{Binding SelectedUser.LastName}" />
                                     </StackPanel>
                                 </Border>
-                                <Button FontSize="12" FontFamily="{StaticResource InterFont}">Add Customer</Button>
+                                <Button Command="{Binding ShowAddUser}"
+                                        Visibility="{Binding AddCustomerBtnVisibility, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        FontSize="12" FontFamily="{StaticResource InterFont}">
+                                    Add Customer
+                                </Button>
                             </StackPanel>
                         </StackPanel>
                     </Border>
@@ -88,14 +92,17 @@
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid>
-                                                <Label Content="{Binding Name}"/>
+                                                    <Label Content="{Binding Name}" />
                                                 </Grid>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
 
                                     </ListBox>
                                 </Border>
-                                <Button Command="{Binding ShowAddProduct}" FontSize="12" FontFamily="{StaticResource InterFont}">Add Product</Button>
+                                <Button Command="{Binding ShowAddProduct}" FontSize="12"
+                                        FontFamily="{StaticResource InterFont}">
+                                    Add Product
+                                </Button>
                             </StackPanel>
                         </StackPanel>
                     </Border>
@@ -110,7 +117,7 @@
                                 <Label FontWeight="Medium" Foreground="#1C1C1C" FontFamily="{StaticResource InterFont}">Total</Label>
                                 <Border Padding="12" BorderThickness="1" BorderBrush="LightGray" CornerRadius="2">
                                     <Label FontSize="14" FontFamily="{StaticResource InterFont}"
-                                           Content="{Binding SelectedUser.LastName}" />
+                                           Content="{Binding Total, UpdateSourceTrigger=PropertyChanged}" />
                                 </Border>
                             </StackPanel>
                         </StackPanel>
@@ -118,7 +125,8 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        <Border Visibility="Hidden" Width="300" VerticalAlignment="Center" Background="White" CornerRadius="12"
+        <Border Visibility="{Binding AddUserVisibility, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Width="300" VerticalAlignment="Center" Background="White" CornerRadius="12"
                 BorderThickness="1"
                 BorderBrush="#E2E2E2">
             <Border.Effect>
@@ -127,30 +135,28 @@
             </Border.Effect>
             <Grid>
                 <StackPanel Margin="12">
-                    <Label Content="{Binding Error}" Visibility="{Binding ErrorVisibility}" Foreground="LightCoral"
-                           Margin="0 0 0 6" />
-
                     <StackPanel Margin="0 0 0 12">
-                        <Label FontFamily="{StaticResource InterFont}">Customer</Label>
-                        <ComboBox ItemsSource="{Binding Users.FirstName}" FontSize="12"
-                                  FontFamily="{StaticResource InterFont}" />
+                        <Label FontFamily="{StaticResource InterFont}">User</Label>
+                        <ComboBox ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}"
+                                  FontSize="12"
+                                  FontFamily="{StaticResource InterFont}" DisplayMemberPath="FirstName" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Margin="0 0 12 0" Command="{Binding AddViewCommand}"
+                        <Button Margin="0 0 12 0" Command="{Binding CancelUserAddCommand}"
                                 FontFamily="{StaticResource InterFont}" FontSize="12">
                             Cancel
                         </Button>
-                        <Button Command="{Binding AddViewCommand}"
+                        <Button Command="{Binding AddUserCommand}"
                                 FontFamily="{StaticResource InterFont}" FontSize="12">
                             Add
                         </Button>
                     </StackPanel>
-
                 </StackPanel>
             </Grid>
         </Border>
-        <Border Visibility="{Binding AddProductVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" Width="300" VerticalAlignment="Center" Background="White" CornerRadius="12"
+        <Border Visibility="{Binding AddProductVisibility, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Width="300" VerticalAlignment="Center" Background="White" CornerRadius="12"
                 BorderThickness="1"
                 BorderBrush="#E2E2E2">
             <Border.Effect>
@@ -159,9 +165,6 @@
             </Border.Effect>
             <Grid>
                 <StackPanel Margin="12">
-                    <Label Content="{Binding Error}" Visibility="{Binding ErrorVisibility}" Foreground="LightCoral"
-                           Margin="0 0 0 6" />
-
                     <StackPanel Margin="0 0 0 12">
                         <Label FontFamily="{StaticResource InterFont}">Product</Label>
                         <ComboBox ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}"

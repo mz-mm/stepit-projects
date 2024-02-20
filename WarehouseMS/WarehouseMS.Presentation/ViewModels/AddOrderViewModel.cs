@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using GalaSoft.MvvmLight;
+using WarehouseMS.Domain.Dtos.OrderDtos;
 using WarehouseMS.Domain.Dtos.ProductDtos;
 using WarehouseMS.Domain.Dtos.UserDtos;
 using WarehouseMS.Domain.Interfaces;
@@ -67,12 +70,44 @@ public class AddOrderViewModel : ViewModelBase
         set => Set(ref _addProductVisibility, value);
     }
 
-    private int _total;
+    public bool _addUserVisibility;
 
-    public int Total
+    public bool AddUserVisibility
+    {
+        get => _addUserVisibility;
+        set => Set(ref _addUserVisibility, value);
+    }
+
+    public bool _addCustomerBtnVisibility = true;
+
+    public bool AddCustomerBtnVisibility
+    {
+        get => _addCustomerBtnVisibility;
+        set => Set(ref _addCustomerBtnVisibility, value);
+    }
+
+    private double _total = 0.00;
+
+    public double Total
     {
         get => _total;
         set => Set(ref _total, value);
+    }
+
+    private string _error;
+
+    public string Error
+    {
+        get => _error;
+        set => Set(ref _error, value);
+    }
+
+    private bool _errorVisibility;
+
+    public bool ErrorVisibility
+    {
+        get => _errorVisibility;
+        set => Set(ref _errorVisibility, value);
     }
 
     public AddOrderViewModel(IOrderService orderService, IProductService productService, IUserService userService,
@@ -96,14 +131,17 @@ public class AddOrderViewModel : ViewModelBase
     }
 
 
-    public RelayCommand AddProductCommand => new(() =>
-    {
-        if (!SelectedProducts.Contains(SelectedProduct))
+    public RelayCommand AddProductCommand => new(
+        () =>
         {
             SelectedProducts.Add(SelectedProduct);
+            Total = SelectedProducts.Sum(sp => sp.Price);
             AddProductVisibility = false;
-        }
-    });
+            ErrorVisibility = false;
+        },
+        () => !SelectedProducts.Contains(SelectedProduct));
+
+    public RelayCommand AddUserCommand => new(() => { AddUserVisibility = false; });
 
     public RelayCommand CancelProductAddCommand => new(() =>
     {
@@ -111,7 +149,29 @@ public class AddOrderViewModel : ViewModelBase
         SelectedProduct = null;
     });
 
+    public RelayCommand DiscardCommand => new(() => _navigationService.HomeNavigateTo<OrdersViewModel>());
+    public RelayCommand CancelUserAddCommand => new(() => { AddUserVisibility = false; });
     public RelayCommand ShowAddProduct => new(() => { AddProductVisibility = true; });
+    public RelayCommand ShowAddUser => new(() => { AddUserVisibility = true; });
 
-    public RelayCommand SaveCommand => new(() => { });
+    public RelayCommand SaveCommand => new(async () =>
+    {
+        try
+        {
+            ErrorVisibility = false;
+
+            await _orderService.CreateOrderAsync(new CreateOrderDto
+            {
+                UserId = SelectedUser.Id,
+                ProductIds = SelectedProducts.Select(x => x.Id)
+            });
+
+            _navigationService.HomeNavigateTo<OrdersViewModel>();
+        }
+        catch (Exception ex)
+        {
+            ErrorVisibility = true;
+            Error = ex.Message;
+        }
+    });
 }

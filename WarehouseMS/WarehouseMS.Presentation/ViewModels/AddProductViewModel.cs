@@ -131,7 +131,7 @@ public class AddProductViewModel : ViewModelBase
         SelectedStatusView = StatusViews.First();
     }
 
-    public RelayCommand NavigateProductCommand => new(() => _navigationService.HomeNavigateTo<ProductsViewModel>());
+    public RelayCommand DiscardCommand => new(() => _navigationService.HomeNavigateTo<ProductsViewModel>());
 
     public RelayCommand UploadCommand =>
         new(() =>

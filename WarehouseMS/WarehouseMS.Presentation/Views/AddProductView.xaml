@@ -24,7 +24,7 @@
             </Label>
             <Grid HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal">
-                    <Button Command="{Binding NavigateProductCommand}" Background="#303030" Foreground="White"
+                    <Button Command="{Binding DiscardCommand}" Background="#303030" Foreground="White"
                             FontFamily="{StaticResource InterFont}" Margin="0 0 12 0">
                         Discard
                     </Button>
