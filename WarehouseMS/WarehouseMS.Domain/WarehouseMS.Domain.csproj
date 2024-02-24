@@ -22,4 +22,8 @@
     <ProjectReference Include="..\WarehouseMS.Infrastructure\WarehouseMS.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\OrderStatusDtos\" />
+  </ItemGroup>
+
 </Project>

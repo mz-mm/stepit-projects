@@ -50,4 +50,7 @@ public abstract class Repository<T> : IRepository<T> where T : BaseEntity
         await _context.SaveChangesAsync();
         return true;
     }
+
+    public virtual async Task<int> SaveChangesAsync() =>
+        await _context.SaveChangesAsync();
 }

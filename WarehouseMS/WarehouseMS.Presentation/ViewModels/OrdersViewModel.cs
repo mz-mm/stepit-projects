@@ -24,6 +24,8 @@ public class OrdersViewModel : ViewModelBase
     {
         _orderService = order;
         _navigationService = navigationService;
+
+        InitializeAsync();
     }
 
     private async void InitializeAsync()

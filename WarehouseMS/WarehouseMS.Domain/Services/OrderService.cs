@@ -12,16 +12,19 @@ public class OrderService : IOrderService
     private readonly IStatusViewService _statusViewService;
     private readonly IProductService _productService;
     private readonly IOrderProductRepository _orderProductRepository;
+    private readonly IOrderStatusRepository _orderStatusRepository;
     private readonly IMapper _mapper;
 
     public OrderService(IOrderRepository orderRepository, IStatusViewService statusViewService,
-        IProductService productService, IOrderProductRepository orderProductRepository, IMapper mapper)
+        IProductService productService, IOrderProductRepository orderProductRepository, IMapper mapper,
+        IOrderStatusRepository orderStatusRepository)
     {
         _orderRepository = orderRepository;
         _statusViewService = statusViewService;
         _productService = productService;
         _orderProductRepository = orderProductRepository;
         _mapper = mapper;
+        _orderStatusRepository = orderStatusRepository;
     }
 
     public async Task<IEnumerable<GetOrderDto>> GetAllOrdersAsync()
@@ -35,15 +38,13 @@ public class OrderService : IOrderService
         var orders = await _orderRepository.GetAllWithOrderStatusAndProductsAndUserAsync();
         var orderEntities = _mapper.Map<IEnumerable<GetOrdersWithStatusAndProductAndUserDto>>(orders);
 
-        var getOrdersWithStatusAndProductAndUserDtos =
-            orderEntities as GetOrdersWithStatusAndProductAndUserDto[] ?? orderEntities.ToArray();
-
-        foreach (var orderEntity in getOrdersWithStatusAndProductAndUserDtos)
+        foreach (var orderEntity in orderEntities)
         {
             orderEntity.ItemsCount = orderEntity.Products.Count;
+            orderEntity.Total += orderEntity.Products.Sum(p => p.Price);
         }
 
-        return getOrdersWithStatusAndProductAndUserDtos;
+        return orderEntities;
     }
 
     public async Task<IEnumerable<GetOrderDto>> GetUserOrdersAsync(int userId)
@@ -67,13 +68,14 @@ public class OrderService : IOrderService
     public async Task<GetOrderDto> CreateOrderAsync(CreateOrderDto orderDetails)
     {
         var orderEntity = _mapper.Map<Order>(orderDetails);
+        orderEntity.OrderStatusId = 1;
+
+        var result = await _orderRepository.InsertAsync(orderEntity);
 
         foreach (var orderId in orderDetails.ProductIds)
         {
-            await _orderProductRepository.InsertOrderPorductAsync(orderEntity.Id, orderId);
+            await _orderProductRepository.InsertOrderProductAsync(result.Id, orderId);
         }
-
-        var result = await _orderRepository.InsertAsync(orderEntity);
 
         return _mapper.Map<GetOrderDto>(result);
     }

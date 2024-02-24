@@ -17,7 +17,7 @@ public class OrderProductRepository : Repository<OrderProduct>, IOrderProductRep
             .Include(op => op.Product)
             .ToListAsync();
 
-    public async Task<bool> InsertOrderPorductAsync(int orderId, int productId)
+    public async Task<bool> InsertOrderProductAsync(int orderId, int productId)
     {
         var orderProduct = new OrderProduct
         {
@@ -26,6 +26,7 @@ public class OrderProductRepository : Repository<OrderProduct>, IOrderProductRep
         };
 
         await _entities.AddAsync(orderProduct);
+        await base.SaveChangesAsync();
 
         return true;
     }

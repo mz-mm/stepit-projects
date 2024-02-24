@@ -53,7 +53,7 @@ namespace WarehouseMS.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Warehouses");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.OrderProduct", b =>
@@ -71,7 +71,7 @@ namespace WarehouseMS.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderProduct");
+                    b.ToTable("OrderProducts");
                 });
 
             modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.OrderStatus", b =>
@@ -162,7 +162,7 @@ namespace WarehouseMS.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StatusView");
+                    b.ToTable("StatusViews");
                 });
 
             modelBuilder.Entity("WarehouseMS.Infrastructure.Context.Entities.User", b =>

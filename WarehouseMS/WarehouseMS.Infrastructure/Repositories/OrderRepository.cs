@@ -17,7 +17,6 @@ public class OrderRepository : Repository<Order>, IOrderRepository
             .Where(order => order.UserId == userId)
             .ToListAsync();
 
-
     public async Task<IEnumerable<Order>> GetAllWithOrderStatusAndProductsAndUserAsync() =>
         await _entities
             .AsNoTracking()

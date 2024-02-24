@@ -7,8 +7,10 @@ public class AppDbContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<Product> Products { get; set; }
-    public DbSet<Order> Warehouses { get; set; }
-
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderProduct> OrderProducts { get; set; }
+    public DbSet<OrderStatus> OrderStatus { get; set; }
+    public DbSet<StatusView> StatusViews { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {

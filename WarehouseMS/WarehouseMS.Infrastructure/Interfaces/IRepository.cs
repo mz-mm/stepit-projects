@@ -9,4 +9,5 @@ public interface IRepository<T> where T : BaseEntity
     public Task<T> InsertAsync(T entity);
     public Task<bool> UpdateAsync(T entity);
     public Task<bool> DeleteAsync(T entity);
+    public Task<int> SaveChangesAsync();
 }

@@ -10,6 +10,7 @@ public class GetOrdersWithStatusAndProductAndUserDto
     public int TrackingId { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
+    public double Total { get; set; }
     public string OrderStatus { get; set; }
     public List<GetProductDto> Products { get; set; }
     public int ItemsCount { get; set; }

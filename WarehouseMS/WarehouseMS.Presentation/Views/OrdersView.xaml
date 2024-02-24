@@ -104,7 +104,7 @@
 
                 <ScrollViewer MaxHeight="550" VerticalScrollBarVisibility="Auto"
                               PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-                    <ListBox ItemsSource="{Binding Products}" Margin="4, 4, 4, 0" Padding="0"
+                    <ListBox ItemsSource="{Binding OrderDetails}" Margin="4, 4, 4, 0" Padding="0"
                              FocusVisualStyle="{x:Null}">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
@@ -146,10 +146,10 @@
                                            Content="{Binding Date}" />
 
                                     <StackPanel Grid.Column="3" Orientation="Horizontal">
-                                        <Label Margin="4 0 4 0" VerticalAlignment="Center"
+                                        <Label Margin="0 0 4 0" VerticalAlignment="Center"
                                                FontFamily="{StaticResource InterFont}" Foreground="#1C1C1C"
                                                Content="{Binding FirstName}" />
-                                        <Label Margin="4 0 4 0" VerticalAlignment="Center"
+                                        <Label Margin="0 0 4 0" VerticalAlignment="Center"
                                                FontFamily="{StaticResource InterFont}" Foreground="#1C1C1C"
                                                Content="{Binding LastName}" />
                                     </StackPanel>
@@ -158,11 +158,11 @@
                                            FontFamily="{StaticResource InterFont}" Foreground="#1C1C1C"
                                            Content="{Binding Total}" />
 
-                                    <Label Grid.Column="4" Margin="4 0 4 0" VerticalAlignment="Center"
+                                    <Label Grid.Column="5" Margin="4 0 4 0" VerticalAlignment="Center"
                                            FontFamily="{StaticResource InterFont}" Foreground="#1C1C1C"
                                            Content="{Binding ItemsCount}" />
 
-                                    <Label Grid.Column="4" Margin="4 0 4 0" VerticalAlignment="Center"
+                                    <Label Grid.Column="6" Margin="4 0 4 0" VerticalAlignment="Center"
                                            FontFamily="{StaticResource InterFont}" Foreground="#1C1C1C"
                                            Content="{Binding OrderStatus}" />
 

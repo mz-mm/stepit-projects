@@ -19,9 +19,6 @@ public class AddOrderViewModel : ViewModelBase
     private readonly IUserService _userService;
     private readonly IProductService _productService;
 
-    private int _userId;
-    private List<int> _productIds { get; set; }
-
     private GetUserDto _selectedUser;
 
     public GetUserDto SelectedUser
