@@ -23,40 +23,47 @@
         <Border VerticalAlignment="Top" Margin="24 12 24 12" Background="White" BorderThickness="1"
                 BorderBrush="#E2E2E2" CornerRadius="12" Grid.Row="1" Padding="12">
             <StackPanel HorizontalAlignment="Stretch">
-                <StackPanel Margin="0 0 0 12" Orientation="Horizontal">
-                    <Button Command="{Binding AllCommand}" FontFamily="{StaticResource InterFont}" Margin="4">All</Button>
-                    <ListBox ItemsSource="{Binding StatusViews}" SelectedItem="{Binding SelectedStatusView}"
-                             FocusVisualStyle="{x:Null}" Padding="0">
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ListBoxItem">
-                                            <ContentPresenter />
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Button IsEnabled="False" FontFamily="{StaticResource InterFont}" Margin="4"
-                                            Content="{Binding Name}" />
+                <Grid Margin="0 0 0 12">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button Command="{Binding AllCommand}" FontFamily="{StaticResource InterFont}" Margin="4">All</Button>
+                        <ListBox ItemsSource="{Binding StatusViews}" SelectedItem="{Binding SelectedStatusView}"
+                                 FocusVisualStyle="{x:Null}" Padding="0">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <ContentPresenter />
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Button IsEnabled="False" FontFamily="{StaticResource InterFont}" Margin="4"
+                                                Content="{Binding Name}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
 
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-
-                    <Button Command="{Binding AddStatusCommand}" Margin="4" BorderThickness="1"
-                            Content="{md:PackIcon Plus}" />
-                </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Button
+                            Command="{Binding UpdateSelectedStatusCommand}"
+                            Visibility="{Binding IsUpdateStatusVisible, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                            FontFamily="{StaticResource InterFont}">
+                            Update status
+                        </Button>
+                    </StackPanel>
+                </Grid>
 
                 <Border Background="#F7F7F7" Margin="-12 0 -12 0" BorderThickness="0 1 0 1" BorderBrush="#E2E2E2"
                         Padding="4 0 4 0">
@@ -130,7 +137,8 @@
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
 
-                                    <CheckBox Grid.Column="0" />
+                                    <CheckBox Grid.Column="0"
+                                        IsChecked="{Binding IsChecked}" />
 
                                     <StackPanel Grid.Column="1" Orientation="Horizontal">
                                         <Label Margin="4 0 4 0" VerticalAlignment="Center"
@@ -165,7 +173,6 @@
                                     <Label Grid.Column="6" Margin="4 0 4 0" VerticalAlignment="Center"
                                            FontFamily="{StaticResource InterFont}" Foreground="#1C1C1C"
                                            Content="{Binding OrderStatus}" />
-
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

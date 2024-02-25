@@ -20,7 +20,7 @@
             <Label Margin="0 4 4 4" VerticalAlignment="Center" Foreground="#1C1C1C" HorizontalAlignment="Left"
                    FontSize="24"
                    FontFamily="{StaticResource InterFont}">
-                Add Product
+                Add Order
             </Label>
             <Grid HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal">
@@ -104,7 +104,7 @@
                         <StackPanel Margin="0 0 0 16">
                             <Label FontWeight="Medium" Foreground="#1C1C1C" FontFamily="{StaticResource InterFont}">Status</Label>
                             <ComboBox ItemsSource="{Binding StatusViews}" SelectedItem="{Binding SelectedStatusView}"
-                                      FontFamily="{StaticResource InterFont}" />
+                                      SelectedIndex="0" FontFamily="{StaticResource InterFont}" />
                         </StackPanel>
                     </StackPanel>
                 </Border>

@@ -17,10 +17,10 @@ public class OrderRepository : Repository<Order>, IOrderRepository
             .Where(order => order.UserId == userId)
             .ToListAsync();
 
-    public async Task<IEnumerable<Order>> GetAllWithOrderStatusAndProductsAndUserAsync() =>
+    public async Task<IEnumerable<Order>> GetAllWithProductsAndUserAsync() =>
         await _entities
             .AsNoTracking()
-            .Include(order => order.Status)
+            .Include(x => x.Status)
             .Include(x => x.User)
             .Include(order => order.OrderProducts)
             .ThenInclude(orderProduct => orderProduct.Product)

@@ -101,7 +101,7 @@
                                 </Border>
                                 <Button Command="{Binding ShowAddProduct}" FontSize="12"
                                         FontFamily="{StaticResource InterFont}">
-                                    Add Product
+                                    Add Order
                                 </Button>
                             </StackPanel>
                         </StackPanel>
@@ -136,7 +136,7 @@
             <Grid>
                 <StackPanel Margin="12">
                     <StackPanel Margin="0 0 0 12">
-                        <Label FontFamily="{StaticResource InterFont}">User</Label>
+                        <Label FontFamily="{StaticResource InterFont}">Users</Label>
                         <ComboBox ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}"
                                   FontSize="12"
                                   FontFamily="{StaticResource InterFont}" DisplayMemberPath="FirstName" />
@@ -166,7 +166,7 @@
             <Grid>
                 <StackPanel Margin="12">
                     <StackPanel Margin="0 0 0 12">
-                        <Label FontFamily="{StaticResource InterFont}">Product</Label>
+                        <Label FontFamily="{StaticResource InterFont}">Order</Label>
                         <ComboBox ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}"
                                   FontSize="12"
                                   FontFamily="{StaticResource InterFont}" DisplayMemberPath="Name" />

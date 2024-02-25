@@ -51,6 +51,14 @@
                 <Views:AddOrderView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type ViewModels:ManageUsersViewModel}">
+                <Views:ManageUsersView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:UserOrdersViewModel}">
+                <Views:UserOrdersView/>
+            </DataTemplate>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

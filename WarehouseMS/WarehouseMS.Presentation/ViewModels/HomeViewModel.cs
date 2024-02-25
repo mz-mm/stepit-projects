@@ -50,6 +50,7 @@ public class HomeViewModel : ViewModelBase
 
         Views.Add(new ViewInfo("Products", "Tag", () => _navigationService.HomeNavigateTo<ProductsViewModel>()));
         Views.Add(new ViewInfo("Orders", "Inbox", () => _navigationService.HomeNavigateTo<OrdersViewModel>()));
+        Views.Add(new ViewInfo("Users", "Users", () => _navigationService.HomeNavigateTo<ManageUsersViewModel>()));
 
         Views.First().NavigateTo();
     }

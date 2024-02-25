@@ -78,5 +78,11 @@ public class Startup
 
                 services.AddTransient<AddOrderView>();
                 services.AddTransient<AddOrderViewModel>();
+
+                services.AddTransient<ManageUsersView>();
+                services.AddTransient<ManageUsersViewModel>();
+
+                services.AddTransient<ManageUsersView>();
+                services.AddTransient<ManageUsersViewModel>();
             });
 }

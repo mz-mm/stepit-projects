@@ -25,7 +25,7 @@
                        FontFamily="{StaticResource InterFont}">
                     Products
                 </Label>
-                <Button Command="{Binding AddProductCommand}" VerticalAlignment="Center" HorizontalAlignment="Right">Add product</Button>
+                <Button Command="{Binding AddProductCommand}" VerticalAlignment="Center" HorizontalAlignment="Right">Add order</Button>
             </DockPanel>
             <Border VerticalAlignment="Top" Margin="24 12 24 12" Background="White" BorderThickness="1"
                     BorderBrush="#E2E2E2" CornerRadius="12" Grid.Row="1" Padding="12">
@@ -73,20 +73,25 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                                 <ColumnDefinition />
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
 
                             <CheckBox VerticalAlignment="Center" Grid.Column="0" Margin="0 0 4 0" />
                             <Label Grid.Column="1" Margin="4 0 4 0" VerticalAlignment="Center"
                                    Foreground="#1C1C1C" FontFamily="{StaticResource InterFont}">
-                                Product
+                                Order
                             </Label>
                             <Label Grid.Column="2" Margin="4 0 4 0" VerticalAlignment="Center"
                                    Foreground="#1C1C1C" FontFamily="{StaticResource InterFont}">
-                                Status
+                                Price
                             </Label>
                             <Label Grid.Column="3" Margin="4 0 4 0" VerticalAlignment="Center"
                                    Foreground="#1C1C1C" FontFamily="{StaticResource InterFont}">
                                 Inventory
+                            </Label>
+                            <Label Grid.Column="4" Margin="4 0 4 0" VerticalAlignment="Center"
+                                   Foreground="#1C1C1C" FontFamily="{StaticResource InterFont}">
+                                Status
                             </Label>
                         </Grid>
                     </Border>
@@ -114,6 +119,7 @@
                                             <ColumnDefinition />
                                             <ColumnDefinition />
                                             <ColumnDefinition />
+                                            <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
 
                                         <CheckBox Grid.Column="0" Margin="0 0 4 0" />
@@ -125,11 +131,14 @@
                                                    Content="{Binding Name}" />
                                         </StackPanel>
                                         <Label Grid.Column="2" Margin="4 0 4 0" VerticalAlignment="Center"
-                                               FontFamily="{StaticResource InterFont}" Foreground="#1C1C1C"
-                                               Content="{Binding StatusName}" />
+                                               FontFamily="{StaticResource InterFont}"
+                                               Content="{Binding Price}" Foreground="#1C1C1C" />
                                         <Label Grid.Column="3" Margin="4 0 4 0" VerticalAlignment="Center"
                                                FontFamily="{StaticResource InterFont}"
                                                Content="{Binding StockQuantity}" Foreground="#1C1C1C" />
+                                        <Label Grid.Column="4" Margin="4 0 4 0" VerticalAlignment="Center"
+                                               FontFamily="{StaticResource InterFont}" Foreground="#1C1C1C"
+                                               Content="{Binding StatusName}" />
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
