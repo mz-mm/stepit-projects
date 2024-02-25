@@ -17,6 +17,11 @@ public class RequireRoleAttribute : OnMethodBoundaryAspect
         _requiredRole = requiredRole;
     }
 
+    public bool IsRoleValidForUser(UserRole userRole)
+    {
+        return userRole == _requiredRole;
+    }
+
     public override void OnEntry(MethodExecutionArgs args)
     {
         var authService = ServiceLocator.GetService<IAuthService>();

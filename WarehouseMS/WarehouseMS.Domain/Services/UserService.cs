@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using WarehouseMS.Domain.Attributes;
 using WarehouseMS.Domain.Dtos.UserDtos;
 using WarehouseMS.Domain.Enums;
 using WarehouseMS.Domain.Interfaces;
